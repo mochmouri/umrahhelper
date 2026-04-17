@@ -12,6 +12,9 @@ export function useSwipe({ onSwipeLeft, onSwipeRight, minDelta = 50 }: UseSwipeO
 
   useEffect(() => {
     const onDown = (e: PointerEvent) => {
+      // Don't begin swipe tracking if the gesture starts on an interactive element
+      const target = e.target as Element
+      if (target.closest('button, a, input, select, textarea, label')) return
       startXRef.current = e.clientX
       startYRef.current = e.clientY
     }

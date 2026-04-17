@@ -20,9 +20,14 @@ export function Stage2AtMiqat() {
       <section className="mb-8">
         <h3 className="font-serif text-base font-semibold text-ink mb-1">Niyyah — The Intention</h3>
         <p className="font-sans text-sm text-muted mb-4 leading-relaxed">
-          Face the Qibla, put on your Ihram garments if not already wearing them, and make this intention with your heart. Say it aloud.
+          Face the Qibla (if possible), put on your Ihram garments if not already wearing them, and make this intention with your heart. Say it aloud.
         </p>
         <DuaBlock {...niyyah} />
+        <div className="mt-4 border-l-2 border-parchment-dark pl-4">
+          <p className="font-sans text-xs text-muted leading-relaxed">
+            There are several forms of declaring your intention. The benefit of this particular form is that if an obstacle prevents completion — such as illness, lack of funds, menstruation for women, or any other emergency — the person in Ihram may exit their Ihram and is not required to offer the sacrifice due for being prevented (<span className="italic">hady al-iḥṣār</span>), nor any expiatory sacrifice.
+          </p>
+        </div>
       </section>
 
       {/* Talbiyah */}
