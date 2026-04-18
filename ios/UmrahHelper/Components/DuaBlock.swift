@@ -1,0 +1,45 @@
+import SwiftUI
+
+struct DuaBlock: View {
+    let arabic: String
+    let transliteration: String
+    let meaning: String
+    var source: String? = nil
+    var compact: Bool = false
+
+    private var arabicSize: CGFloat { compact ? 18 : 22 }
+    private var transSize: CGFloat { compact ? 11 : 12 }
+    private var meaningSize: CGFloat { compact ? 12 : 13 }
+    private var spacing: CGFloat { compact ? 8 : 12 }
+    private var padding: CGFloat { compact ? 12 : 16 }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: spacing) {
+            Text(arabic)
+                .font(.system(size: arabicSize))
+                .foregroundColor(.ink)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .multilineTextAlignment(.trailing)
+                .environment(\.layoutDirection, .rightToLeft)
+                .lineSpacing(6)
+
+            Text(transliteration)
+                .font(.system(size: transSize, weight: .regular).italic())
+                .foregroundColor(.muted)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text(meaning)
+                .font(.system(size: meaningSize))
+                .foregroundColor(.inkLight)
+                .fixedSize(horizontal: false, vertical: true)
+
+            if let source {
+                Text(source)
+                    .font(.system(size: 10))
+                    .foregroundColor(.muted)
+            }
+        }
+        .padding(padding)
+        .background(Color.parchmentDark.opacity(0.4))
+    }
+}
