@@ -64,20 +64,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AA000000000000000000D000 /* = */ = {
+		AA000000000000000000D000 = {
 			isa = PBXGroup;
 			children = (
 				AA000000000000000000D001 /* UmrahHelper */,
 				AA000000000000000000D009 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		AA000000000000000000D009 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AA000000000000000000A000 /* UmrahHelper.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		AA000000000000000000D001 /* UmrahHelper */ = {
@@ -153,6 +145,14 @@
 				AA000000000000000000A013 /* SessionDetailView.swift */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000D009 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000A000 /* UmrahHelper.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,13 +373,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = ANR8H432FG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mochmouri.umrahhelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mostaphachmouri.umrahhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.9;
@@ -395,13 +396,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = ANR8H432FG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mochmouri.umrahhelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mostaphachmouri.umrahhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.9;
@@ -431,7 +433,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
 	};
 	rootObject = AA000000000000000000F000 /* Project object */;
 }

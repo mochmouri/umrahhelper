@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# Xcode
+ios/UmrahHelper.xcodeproj/xcuserdata/
+ios/UmrahHelper.xcodeproj/project.xcworkspace/xcuserdata/
+ios/build/
+*.xccheckout
+*.moved-aside
+DerivedData/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

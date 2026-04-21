@@ -78,7 +78,7 @@ struct SessionDetailView: View {
         .padding(.vertical, 8)
     }
 
-    private func breakdownSection(title: String, durations: [Double], rowLabel: (Int) -> String) -> some View {
+    private func breakdownSection(title: String, durations: [Double], rowLabel: @escaping (Int) -> String) -> some View {
         let total = durations.reduce(0, +)
         let avg = durations.isEmpty ? 0 : total / Double(durations.count)
 
