@@ -35,7 +35,7 @@ struct Stage3Tawaf: View {
     // MARK: — Pre-checklist
 
     @ViewBuilder
-    private var preChecklistSection: some View {
+    private var rpreChecklistSection: some View {
         let S = state.strings
         Text(S.beforeYouBegin)
             .font(.system(size: 15, weight: .semibold, design: .serif))
