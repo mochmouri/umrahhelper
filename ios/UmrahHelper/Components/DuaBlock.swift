@@ -20,9 +20,9 @@ struct DuaBlock: View {
             Text(arabic)
                 .font(.system(size: arabicSize))
                 .foregroundColor(.ink)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .multilineTextAlignment(.trailing)
                 .environment(\.layoutDirection, .rightToLeft)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .multilineTextAlignment(.leading)
                 .lineSpacing(6)
 
             Text(transliteration)

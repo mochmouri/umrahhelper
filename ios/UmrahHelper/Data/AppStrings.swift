@@ -85,7 +85,7 @@ struct AppStrings {
 
     var niyyahTitle: String { isArabic ? "النيّة" : "Niyyah — The Intention" }
     var niyyahBody: String  { isArabic
-        ? "استقبل القبلة إن أمكن، وارتدِ ثياب الإحرام إن لم تكن قد لبستها، ثم اعقد النيّة في قلبك أوانطق بها."
+        ? "استقبل القبلة إن أمكن، وارتدِ ثياب الإحرام إن لم تكن قد لبستها، ثم اعقد النيّة في قلبك أو انطق بها."
         : "Face the Qibla (if possible), put on your Ihram garments if not already wearing them, and make this intention with your heart or say it aloud."
     }
     // Arabic: one string. English: split around the italic word.
@@ -96,7 +96,7 @@ struct AppStrings {
 
     var talbiyahTitle: String      { isArabic ? "التلبية" : "Talbiyah" }
     var talbiyahBody: String       { isArabic
-        ? "ابدأ التلبية فور الإحرام. واستمرّ في ترديدها — بصوت عالٍ للرجال، وبصوت خافت للنساء — حتى تبدأ بالطواف."
+        ? "ابدأ بالتلبية فور الإحرام. واستمرّ في ترديدها — بصوت عالٍ للرجال، وبصوت خافت للنساء — حتى تبدأ بالطواف."
         : "Begin reciting the Talbiyah immediately after Niyyah. Continue reciting it — loudly for men, softly for women — until you begin Tawaf."
     }
     var talbiyahStarted: String    { isArabic ? "✓  بدأتُ بالتلبية"    : "✓  I have started reciting" }
