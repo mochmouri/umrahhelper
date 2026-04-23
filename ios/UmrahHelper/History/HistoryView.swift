@@ -6,6 +6,9 @@ struct HistoryView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var sessionToDelete: UmrahSession? = nil
 
+    @AppStorage("isArabic") private var isArabic = false
+    private var S: AppStrings { AppStrings(isArabic: isArabic) }
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -13,10 +16,10 @@ struct HistoryView: View {
 
                 if sessions.isEmpty {
                     VStack(spacing: 12) {
-                        Text("No Umrahs recorded yet.")
+                        Text(S.noUmrahsTitle)
                             .font(.system(size: 15, weight: .regular, design: .serif))
                             .foregroundColor(.inkLight)
-                        Text("Complete an Umrah using the guide to see your history here.")
+                        Text(S.noUmrahsBody)
                             .font(.system(size: 13))
                             .foregroundColor(.muted)
                             .multilineTextAlignment(.center)
@@ -39,10 +42,11 @@ struct HistoryView: View {
                     .scrollContentBackground(.hidden)
                 }
             }
-            .navigationTitle("History")
+            .navigationTitle(S.historyTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.parchment, for: .navigationBar)
         }
+        .environment(\.layoutDirection, isArabic ? .rightToLeft : .leftToRight)
     }
 
     private func sessionRow(_ session: UmrahSession) -> some View {
@@ -51,9 +55,9 @@ struct HistoryView: View {
                 .font(.system(size: 14, weight: .medium, design: .serif))
                 .foregroundColor(.ink)
             HStack(spacing: 16) {
-                metricPill(label: "Total", value: session.formatDuration(session.totalDuration))
-                metricPill(label: "Tawaf", value: session.formatDuration(session.tawafTotal))
-                metricPill(label: "Saʿi", value: session.formatDuration(session.saiTotal))
+                metricPill(label: S.totalPill, value: session.formatDuration(session.totalDuration))
+                metricPill(label: S.tawafLabel, value: session.formatDuration(session.tawafTotal))
+                metricPill(label: S.saiLabel, value: session.formatDuration(session.saiTotal))
             }
         }
         .padding(.vertical, 8)

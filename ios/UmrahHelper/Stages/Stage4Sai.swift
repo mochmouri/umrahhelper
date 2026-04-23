@@ -1,20 +1,5 @@
 import SwiftUI
 
-private let roundLabels = [
-    "Safa → Marwa", "Marwa → Safa", "Safa → Marwa", "Marwa → Safa",
-    "Safa → Marwa", "Marwa → Safa", "Safa → Marwa",
-]
-
-private let endpointLabels = [
-    "You have reached Marwa.",
-    "You have returned to Safa.",
-    "You have reached Marwa.",
-    "You have returned to Safa.",
-    "You have reached Marwa.",
-    "You have returned to Safa.",
-    "You have reached Marwa — Saʿi is complete.",
-]
-
 struct Stage4Sai: View {
     let state: UmrahState
 
@@ -24,9 +9,9 @@ struct Stage4Sai: View {
     }
 
     var body: some View {
+        let S = state.strings
         VStack(alignment: .leading, spacing: 0) {
-            StageHeader(number: "Stage 4", title: "Saʿi",
-                        subtitle: "Seven rounds between Safa and Marwa. One round = one direction. Begin at Safa.")
+            StageHeader(number: S.stage4Number, title: S.stage4Title, subtitle: S.stage4Subtitle)
 
             if !state.saiStarted {
                 atSafaSection
@@ -45,7 +30,8 @@ struct Stage4Sai: View {
 
     @ViewBuilder
     private var atSafaSection: some View {
-        Text("At Safa")
+        let S = state.strings
+        Text(S.atSafaTitle)
             .font(.system(size: 15, weight: .semibold, design: .serif))
             .foregroundColor(.ink)
             .padding(.bottom, 10)
@@ -54,10 +40,10 @@ struct Stage4Sai: View {
                  meaning: safaAyah.meaning, source: safaAyah.source)
             .padding(.bottom, 20)
 
-        (Text("Face the Ka'bah. Raise your hands. Say ") +
+        (Text(S.safaPre) +
          Text("الحمد لله").font(.system(size: 14)) +
-         Text(". Make personal dua. Then recite this ") +
-         Text("three times").bold().foregroundColor(.ink) + Text(":"))
+         Text(S.safaPost) +
+         Text(S.safaThreeTimes).bold().foregroundColor(.ink) + Text(":"))
             .font(.system(size: 13))
             .foregroundColor(.muted)
             .lineSpacing(3)
@@ -67,7 +53,7 @@ struct Stage4Sai: View {
                  meaning: safaDhikr.meaning)
             .padding(.bottom, 20)
 
-        Button("BEGIN SAʿI") { state.startSai() }
+        Button(S.beginSai) { state.startSai() }
             .primaryButton()
     }
 
@@ -75,8 +61,9 @@ struct Stage4Sai: View {
 
     @ViewBuilder
     private var activeSection: some View {
+        let S = state.strings
         VStack(spacing: 8) {
-            Text("Round")
+            Text(S.roundCounterLabel)
                 .font(.system(size: 10, weight: .regular))
                 .foregroundColor(.muted)
                 .tracking(2)
@@ -91,7 +78,7 @@ struct Stage4Sai: View {
                     .foregroundColor(.muted)
             }
 
-            Text(roundLabels[state.currentRound - 1])
+            Text(S.roundLabels[state.currentRound - 1])
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(.inkLight)
 
@@ -106,11 +93,11 @@ struct Stage4Sai: View {
             HStack(alignment: .top, spacing: 0) {
                 Rectangle().fill(Color.gold).frame(width: 2)
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("AT YOUR CURRENT ENDPOINT")
+                    Text(S.atCurrentEndpoint)
                         .font(.system(size: 9))
                         .foregroundColor(.muted)
                         .tracking(2)
-                    Text("\(endpointLabels[state.roundTimes.count - 1]) Face the Ka'bah and recite (×3):")
+                    Text("\(S.endpointLabels[state.roundTimes.count - 1])\(S.endpointDhikrBody)")
                         .font(.system(size: 12))
                         .foregroundColor(.inkLight)
                         .lineSpacing(3)
@@ -124,7 +111,7 @@ struct Stage4Sai: View {
 
         Rectangle().fill(Color.parchmentDark).frame(height: 1).padding(.bottom, 16)
 
-        Button("COMPLETE ROUND \(state.currentRound)") { state.completeRound() }
+        Button(S.completeRoundButton(state.currentRound)) { state.completeRound() }
             .primaryButton()
     }
 
@@ -146,13 +133,14 @@ struct Stage4Sai: View {
 
     @ViewBuilder
     private var completeSection: some View {
+        let S = state.strings
         VStack(spacing: 6) {
             Text("الله يتقبل")
                 .font(.system(size: 26))
                 .foregroundColor(.ink)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .environment(\.layoutDirection, .rightToLeft)
-            Text("Saʿi complete — may Allah accept it.")
+            Text(S.saiCompleteMessage)
                 .font(.system(size: 13))
                 .foregroundColor(.muted)
                 .frame(maxWidth: .infinity, alignment: .center)
@@ -162,11 +150,11 @@ struct Stage4Sai: View {
         .overlay(Rectangle().stroke(Color.parchmentDark, lineWidth: 1))
         .padding(.bottom, 24)
 
-        MetricsCard(title: "Saʿi times", metrics: state.saiMetrics(),
-                    rowLabel: { "Round \($0 + 1)" })
+        MetricsCard(title: S.saiTimesTitle, metrics: state.saiMetrics(),
+                    rowLabel: { S.roundLabel($0) })
             .padding(.bottom, 24)
 
-        Button("PROCEED TO TAHLEEL →") { state.goToStage(5) }
+        Button(S.proceedToTahleel) { state.goToStage(5) }
             .primaryButton()
     }
 }

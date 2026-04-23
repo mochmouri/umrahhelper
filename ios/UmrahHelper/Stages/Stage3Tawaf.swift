@@ -9,9 +9,9 @@ struct Stage3Tawaf: View {
     }
 
     var body: some View {
+        let S = state.strings
         VStack(alignment: .leading, spacing: 0) {
-            StageHeader(number: "Stage 3", title: "Tawaf",
-                        subtitle: "Seven anti-clockwise circuits around the Ka'bah, beginning and ending at the Black Stone.")
+            StageHeader(number: S.stage3Number, title: S.stage3Title, subtitle: S.stage3Subtitle)
 
             if !state.tawafStarted {
                 preChecklistSection
@@ -30,28 +30,29 @@ struct Stage3Tawaf: View {
 
     @ViewBuilder
     private var preChecklistSection: some View {
-        Text("Before You Begin")
+        let S = state.strings
+        Text(S.beforeYouBegin)
             .font(.system(size: 15, weight: .semibold, design: .serif))
             .foregroundColor(.ink)
             .padding(.bottom, 16)
 
         VStack(spacing: 16) {
-            ChecklistItem(label: "I am in a state of Wudu'",
+            ChecklistItem(label: S.checkWudu,
                           checked: state.wudu) { state.setWudu($0) }
-            ChecklistItem(label: "I have located the Black Stone corner (there should be green lights to your right)",
+            ChecklistItem(label: S.checkBlackStone,
                           checked: state.locatedBlackStone) { state.setLocatedBlackStone($0) }
-            ChecklistItem(label: "I have kissed the Black Stone (if possible) or raised my right hand towards it",
+            ChecklistItem(label: S.checkRaisedHand,
                           checked: state.raisedHand) { state.setRaisedHand($0) }
         }
         .padding(.bottom, 16)
 
         if state.allTawafChecked {
             VStack(alignment: .leading, spacing: 0) {
-                Text("Dua at the Black Stone")
+                Text(S.blackStoneDuaTitle)
                     .font(.system(size: 15, weight: .semibold, design: .serif))
                     .foregroundColor(.ink)
                     .padding(.bottom, 8)
-                Text("Say this when you reach or raise your right hand towards the Black Stone to begin each lap.")
+                Text(S.blackStoneDuaBody)
                     .font(.system(size: 13))
                     .foregroundColor(.muted)
                     .lineSpacing(3)
@@ -60,7 +61,7 @@ struct Stage3Tawaf: View {
                          meaning: blackStoneDua.meaning)
                     .padding(.bottom, 20)
 
-                Button("BEGIN TAWAF") { state.startTawaf() }
+                Button(S.beginTawaf) { state.startTawaf() }
                     .primaryButton()
             }
         }
@@ -70,9 +71,9 @@ struct Stage3Tawaf: View {
 
     @ViewBuilder
     private var activeTawafSection: some View {
-        // Lap counter
+        let S = state.strings
         VStack(spacing: 8) {
-            Text("Current lap")
+            Text(S.currentLapLabel)
                 .font(.system(size: 10, weight: .regular))
                 .foregroundColor(.muted)
                 .tracking(2)
@@ -94,15 +95,14 @@ struct Stage3Tawaf: View {
         .overlay(Rectangle().stroke(Color.parchmentDark, lineWidth: 1))
         .padding(.bottom, 20)
 
-        // Yemeni corner
         HStack(alignment: .top, spacing: 0) {
             Rectangle().fill(Color.gold).frame(width: 2)
             VStack(alignment: .leading, spacing: 6) {
-                Text("YEMENI CORNER REMINDER")
+                Text(S.yemeniCornerTitle)
                     .font(.system(size: 9, weight: .regular))
                     .foregroundColor(.muted)
                     .tracking(2)
-                Text("When you pass the Yemeni corner (the one before the Black Stone), begin reciting:")
+                Text(S.yemeniCornerBody)
                     .font(.system(size: 12))
                     .foregroundColor(.inkLight)
                     .lineSpacing(3)
@@ -113,10 +113,9 @@ struct Stage3Tawaf: View {
         }
         .padding(.bottom, 20)
 
-        // Rotating adhkar
         if !lapDuas.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
-                Text("RECOMMENDED DHIKR — LAP \(state.currentLap)")
+                Text("\(S.recommendedDhikrPrefix) \(state.currentLap)")
                     .font(.system(size: 9, weight: .regular))
                     .foregroundColor(.muted)
                     .tracking(2)
@@ -128,19 +127,18 @@ struct Stage3Tawaf: View {
             .padding(.bottom, 20)
         }
 
-        // Complete lap
         Rectangle().fill(Color.parchmentDark).frame(height: 1).padding(.bottom, 16)
 
         VStack(spacing: 10) {
-            (Text("At the Black Stone, raise your hand and say ") +
+            (Text(S.completeLapPromptPre) +
              Text("الله أكبر").font(.system(size: 14)) +
-             Text(", then tap when you have completed the circuit."))
+             Text(S.completeLapPromptPost))
                 .font(.system(size: 12))
                 .foregroundColor(.muted)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .center)
 
-            Button("COMPLETE LAP \(state.currentLap)") { state.completeLap() }
+            Button(S.completeLapButton(state.currentLap)) { state.completeLap() }
                 .primaryButton()
         }
     }
@@ -163,13 +161,14 @@ struct Stage3Tawaf: View {
 
     @ViewBuilder
     private var tawafCompleteSection: some View {
+        let S = state.strings
         VStack(spacing: 6) {
             Text("الله يتقبل")
                 .font(.system(size: 26))
                 .foregroundColor(.ink)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .environment(\.layoutDirection, .rightToLeft)
-            Text("Tawaf complete — may Allah accept it.")
+            Text(S.tawafCompleteMessage)
                 .font(.system(size: 13))
                 .foregroundColor(.muted)
                 .frame(maxWidth: .infinity, alignment: .center)
@@ -179,12 +178,11 @@ struct Stage3Tawaf: View {
         .overlay(Rectangle().stroke(Color.parchmentDark, lineWidth: 1))
         .padding(.bottom, 24)
 
-        MetricsCard(title: "Tawaf times", metrics: state.tawafMetrics(),
-                    rowLabel: { "Lap \($0 + 1)" })
+        MetricsCard(title: S.tawafTimesTitle, metrics: state.tawafMetrics(),
+                    rowLabel: { S.lapLabel($0) })
             .padding(.bottom, 24)
 
-        // Maqam Ibrahim
-        Text("Maqam Ibrahim")
+        Text(S.maqamTitle)
             .font(.system(size: 15, weight: .semibold, design: .serif))
             .foregroundColor(.ink)
             .padding(.bottom, 10)
@@ -193,25 +191,25 @@ struct Stage3Tawaf: View {
                  meaning: maqamIbrahimAyah.meaning, source: maqamIbrahimAyah.source)
             .padding(.bottom, 12)
 
-        Text("Pray two raka'ah behind Maqam Ibrahim — or anywhere behind it if it is crowded.")
+        Text(S.maqamBody)
             .font(.system(size: 13))
             .foregroundColor(.inkLight)
             .lineSpacing(3)
             .padding(.bottom, 10)
 
         VStack(alignment: .leading, spacing: 6) {
-            raka_row("First raka'ah: Al-Fatiha, then", surah: "Al-Kafirun (109)")
-            raka_row("Second raka'ah: Al-Fatiha, then", surah: "Al-Ikhlas (112)")
+            raka_row(S.raka1Pre, surah: S.raka1Surah)
+            raka_row(S.raka2Pre, surah: S.raka2Surah)
         }
         .padding(.bottom, 12)
 
-        Text("Then drink from Zamzam. Face the Ka'bah and make dua. This is Sunnah.")
+        Text(S.zamzamText)
             .font(.system(size: 13))
             .foregroundColor(.inkLight)
             .lineSpacing(3)
             .padding(.bottom, 24)
 
-        Button("PROCEED TO SAʿI →") { state.goToStage(4) }
+        Button(S.proceedToSai) { state.goToStage(4) }
             .primaryButton()
     }
 

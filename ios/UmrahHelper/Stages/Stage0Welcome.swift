@@ -1,12 +1,11 @@
 import SwiftUI
 
-private let stageLabels = ["Miqat Prep", "At Miqat", "Tawaf", "Saʿi", "Tahleel"]
-
 struct Stage0Welcome: View {
     let state: UmrahState
     @State private var jumpAlertStage: Int? = nil
 
     var body: some View {
+        let S = state.strings
         ZStack {
             Color.parchment.ignoresSafeArea()
 
@@ -21,7 +20,7 @@ struct Stage0Welcome: View {
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .environment(\.layoutDirection, .rightToLeft)
 
-                        Text("A step-by-step companion for your Umrah")
+                        Text(S.welcomeSubtitle)
                             .font(.system(size: 16, weight: .regular, design: .serif))
                             .italic()
                             .foregroundColor(.inkLight)
@@ -30,19 +29,19 @@ struct Stage0Welcome: View {
 
                     SectionDivider()
 
-                    Text("Umrah is the lesser pilgrimage to Makkah; it is a voluntary act of worship that may be performed at any time of the year. Though shorter than Hajj, it carries immense spiritual weight and is a profound opportunity for renewal and closeness to Allah. This guide walks you through each step, from putting on Ihram to the final cut of the hair, so your heart can remain in worship rather than in logistics.")
+                    Text(S.welcomeBody)
                         .font(.system(size: 14))
                         .foregroundColor(.inkLight)
                         .lineSpacing(4)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
-                    Button("BEGIN") {
+                    Button(S.beginButton) {
                         state.startUmrah()
                     }
                     .primaryButton()
 
                     VStack(spacing: 12) {
-                        Text("or jump to a step")
+                        Text(S.orJumpToStep)
                             .font(.system(size: 11))
                             .foregroundColor(.muted)
 
@@ -59,7 +58,7 @@ struct Stage0Welcome: View {
                                         Circle()
                                             .fill(s <= state.stage ? Color.gold : Color.parchmentDark)
                                             .frame(width: 7, height: 7)
-                                        Text(stageLabels[s - 1])
+                                        Text(S.stageLabels[s - 1])
                                             .font(.system(size: 9))
                                             .foregroundColor(s <= state.stage ? Color.gold : Color.muted)
                                             .multilineTextAlignment(.center)
@@ -77,17 +76,17 @@ struct Stage0Welcome: View {
                 .padding(.horizontal, 24)
             }
         }
-        .alert("Jump ahead?", isPresented: Binding(
+        .alert(S.jumpAheadTitle, isPresented: Binding(
             get: { jumpAlertStage != nil },
             set: { if !$0 { jumpAlertStage = nil } }
         )) {
-            Button("Jump ahead") {
+            Button(S.jumpAheadConfirm) {
                 if let s = jumpAlertStage { state.goToStage(s) }
                 jumpAlertStage = nil
             }
-            Button("Cancel", role: .cancel) { jumpAlertStage = nil }
+            Button(S.jumpAheadCancel, role: .cancel) { jumpAlertStage = nil }
         } message: {
-            Text("You haven't reached this step yet. Jump ahead anyway?")
+            Text(S.jumpAheadMessage)
         }
     }
 }

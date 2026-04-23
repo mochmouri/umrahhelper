@@ -3,13 +3,15 @@ import SwiftUI
 struct SessionDetailView: View {
     let session: UmrahSession
 
+    @AppStorage("isArabic") private var isArabic = false
+    private var S: AppStrings { AppStrings(isArabic: isArabic) }
+
     var body: some View {
         ZStack {
             Color.parchment.ignoresSafeArea()
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
-                    // Header
                     VStack(alignment: .leading, spacing: 4) {
                         Text(session.date.formatted(date: .complete, time: .omitted))
                             .font(.system(size: 20, weight: .semibold, design: .serif))
@@ -20,14 +22,13 @@ struct SessionDetailView: View {
                     }
                     .padding(.bottom, 24)
 
-                    // Summary totals
                     VStack(spacing: 0) {
-                        summaryRow("Tawaf", value: session.formatDuration(session.tawafTotal))
+                        summaryRow(S.tawafLabel, value: session.formatDuration(session.tawafTotal))
                         Rectangle().fill(Color.parchmentDark).frame(height: 1)
-                        summaryRow("Saʿi", value: session.formatDuration(session.saiTotal))
+                        summaryRow(S.saiLabel, value: session.formatDuration(session.saiTotal))
                         Rectangle().fill(Color.parchmentDark).frame(height: 1)
                         HStack {
-                            Text("Total Umrah")
+                            Text(S.totalUmrahLabel)
                                 .font(.system(size: 13, weight: .semibold))
                                 .foregroundColor(.ink)
                             Spacer()
@@ -41,22 +42,20 @@ struct SessionDetailView: View {
                     .background(Color.parchmentDark.opacity(0.35))
                     .padding(.bottom, 24)
 
-                    // Tawaf breakdown
                     if !session.lapDurations.isEmpty {
                         breakdownSection(
-                            title: "Tawaf — lap breakdown",
+                            title: S.tawafLapBreakdown,
                             durations: session.lapDurations,
-                            rowLabel: { "Lap \($0 + 1)" }
+                            rowLabel: { S.lapLabel($0) }
                         )
                         .padding(.bottom, 16)
                     }
 
-                    // Sa'i breakdown
                     if !session.roundDurations.isEmpty {
                         breakdownSection(
-                            title: "Saʿi — round breakdown",
+                            title: S.saiRoundBreakdown,
                             durations: session.roundDurations,
-                            rowLabel: { "Round \($0 + 1)" }
+                            rowLabel: { S.roundLabel($0) }
                         )
                     }
                 }
@@ -64,9 +63,10 @@ struct SessionDetailView: View {
                 .padding(.vertical, 24)
             }
         }
-        .navigationTitle("Session")
+        .navigationTitle(S.sessionTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(Color.parchment, for: .navigationBar)
+        .environment(\.layoutDirection, isArabic ? .rightToLeft : .leftToRight)
     }
 
     private func summaryRow(_ label: String, value: String) -> some View {
@@ -105,7 +105,7 @@ struct SessionDetailView: View {
             Rectangle().fill(Color.parchmentDark).frame(height: 1).padding(.top, 4)
 
             HStack {
-                Text("Average").font(.system(size: 12)).foregroundColor(.muted)
+                Text(S.averageLabel).font(.system(size: 12)).foregroundColor(.muted)
                 Spacer()
                 Text(session.formatDuration(avg))
                     .font(.system(size: 12).monospacedDigit()).foregroundColor(.inkLight)
@@ -113,7 +113,7 @@ struct SessionDetailView: View {
             .padding(.vertical, 5)
 
             HStack {
-                Text("Total").font(.system(size: 13, weight: .semibold)).foregroundColor(.ink)
+                Text(S.totalLabel).font(.system(size: 13, weight: .semibold)).foregroundColor(.ink)
                 Spacer()
                 Text(session.formatDuration(total))
                     .font(.system(size: 13, weight: .semibold).monospacedDigit()).foregroundColor(.ink)

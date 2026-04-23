@@ -3,6 +3,11 @@ import Foundation
 
 @Observable
 final class UmrahState {
+    var isArabic: Bool = false {
+        didSet { UserDefaults.standard.set(isArabic, forKey: "isArabic") }
+    }
+    var strings: AppStrings { AppStrings(isArabic: isArabic) }
+
     var stage: Int = 0
     var talbiyahStarted: Bool = false
     var wudu: Bool = false
@@ -23,7 +28,10 @@ final class UmrahState {
     var tawafComplete: Bool { currentLap == 8 }
     var saiComplete: Bool { currentRound == 8 }
 
-    init() { load() }
+    init() {
+        isArabic = UserDefaults.standard.bool(forKey: "isArabic")
+        load()
+    }
 
     // MARK: — Navigation
 

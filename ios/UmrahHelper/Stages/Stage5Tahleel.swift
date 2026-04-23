@@ -11,27 +11,24 @@ struct Stage5Tahleel: View {
     private var umrahTotal: TimeInterval? { state.umrahTotal() }
 
     var body: some View {
+        let S = state.strings
         VStack(alignment: .leading, spacing: 0) {
-            StageHeader(number: "Stage 5", title: "Tahleel",
-                        subtitle: "The final act — cutting the hair — marks the end of Ihram.")
+            StageHeader(number: S.stage5Number, title: S.stage5Title, subtitle: S.stage5Subtitle)
 
-            // Hair cutting
-            Text("Hair cutting")
+            Text(S.hairCuttingTitle)
                 .font(.system(size: 15, weight: .semibold, design: .serif))
                 .foregroundColor(.ink)
                 .padding(.bottom, 16)
 
             VStack(alignment: .leading, spacing: 16) {
-                genderRow(symbol: "♂", label: "Men",
-                    text: "The minimum is to cut a fingertip's length of hair from all parts of the head. The preferable act is to shave all the hair off (Halq). This is more virtuous than trimming (Taqseer).")
-                genderRow(symbol: "♀", label: "Women",
-                    text: "Gather a lock of hair and cut a fingertip's length from its end. Do not shave.")
+                genderRow(symbol: "♂", label: S.menLabel, text: S.menText)
+                genderRow(symbol: "♀", label: S.womenLabel, text: S.womenText)
             }
             .padding(.bottom, 16)
 
             HStack(alignment: .top, spacing: 0) {
                 Rectangle().fill(Color.gold).frame(width: 2)
-                Text("After cutting, Ihram is lifted. All restrictions are now removed.")
+                Text(S.ihramLiftedNote)
                     .font(.system(size: 13))
                     .foregroundColor(.inkLight)
                     .lineSpacing(3)
@@ -41,18 +38,17 @@ struct Stage5Tahleel: View {
 
             SectionDivider().padding(.bottom, 28)
 
-            // Congratulations
             VStack(spacing: 12) {
                 Text("الله يتقبل")
                     .font(.system(size: 40))
                     .foregroundColor(.ink)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .environment(\.layoutDirection, .rightToLeft)
-                Text("May Allah accept your Umrah.")
+                Text(S.congratsSubtitle)
                     .font(.system(size: 15, weight: .regular, design: .serif))
                     .italic()
                     .foregroundColor(.inkLight)
-                Text("You have completed your Umrah. May it be a source of forgiveness, mercy, and nearness to Allah.")
+                Text(S.congratsBody)
                     .font(.system(size: 13))
                     .foregroundColor(.muted)
                     .multilineTextAlignment(.center)
@@ -61,47 +57,47 @@ struct Stage5Tahleel: View {
             .frame(maxWidth: .infinity)
             .padding(.bottom, 28)
 
-            // Summary metrics
             if let total = umrahTotal {
                 summarySection(total: total)
                     .padding(.bottom, 24)
             }
 
-            Button("START OVER") { showResetConfirm = true }
+            Button(S.startOverButton) { showResetConfirm = true }
                 .ghostButton()
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 24)
         .padding(.bottom, 16)
         .onAppear { saveSessionIfNeeded() }
-        .alert("Start over?", isPresented: $showResetConfirm) {
-            Button("Reset", role: .destructive) {
+        .alert(state.strings.startOverTitle, isPresented: $showResetConfirm) {
+            Button(state.strings.resetButton, role: .destructive) {
                 state.reset()
             }
-            Button("Cancel", role: .cancel) {}
+            Button(state.strings.cancelButton, role: .cancel) {}
         } message: {
-            Text("This will clear all progress and timing data.")
+            Text(state.strings.startOverMessage)
         }
     }
 
     @ViewBuilder
     private func summarySection(total: TimeInterval) -> some View {
-        Text("Summary")
+        let S = state.strings
+        Text(S.summaryTitle)
             .font(.system(size: 15, weight: .semibold, design: .serif))
             .foregroundColor(.ink)
             .padding(.bottom, 12)
 
         VStack(spacing: 0) {
             if let t = tawafTotal, t > 0 {
-                summaryRow(label: "Tawaf", value: state.formatDuration(t))
+                summaryRow(label: S.tawafLabel, value: state.formatDuration(t))
                 Rectangle().fill(Color.parchmentDark).frame(height: 1)
             }
             if let t = saiTotal, t > 0 {
-                summaryRow(label: "Saʿi", value: state.formatDuration(t))
+                summaryRow(label: S.saiLabel, value: state.formatDuration(t))
                 Rectangle().fill(Color.parchmentDark).frame(height: 1)
             }
             HStack {
-                Text("Total Umrah")
+                Text(S.totalUmrahLabel)
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.ink)
                 Spacer()
@@ -116,13 +112,13 @@ struct Stage5Tahleel: View {
         .padding(.bottom, 16)
 
         if state.lapTimes.count == 7 {
-            MetricsCard(title: "Tawaf — lap breakdown", metrics: state.tawafMetrics(),
-                        rowLabel: { "Lap \($0 + 1)" })
+            MetricsCard(title: S.tawafLapBreakdown, metrics: state.tawafMetrics(),
+                        rowLabel: { S.lapLabel($0) })
                 .padding(.bottom, 12)
         }
         if state.roundTimes.count == 7 {
-            MetricsCard(title: "Saʿi — round breakdown", metrics: state.saiMetrics(),
-                        rowLabel: { "Round \($0 + 1)" })
+            MetricsCard(title: S.saiRoundBreakdown, metrics: state.saiMetrics(),
+                        rowLabel: { S.roundLabel($0) })
         }
     }
 

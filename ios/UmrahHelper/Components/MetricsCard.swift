@@ -5,6 +5,9 @@ struct MetricsCard: View {
     let metrics: UmrahState.SessionMetrics?
     var rowLabel: (Int) -> String = { "Lap \($0 + 1)" }
 
+    @AppStorage("isArabic") private var isArabic = false
+    private var S: AppStrings { AppStrings(isArabic: isArabic) }
+
     var body: some View {
         if let m = metrics {
             VStack(alignment: .leading, spacing: 0) {
@@ -33,7 +36,7 @@ struct MetricsCard: View {
                 Rectangle().fill(Color.parchmentDark).frame(height: 1).padding(.top, 4)
 
                 HStack {
-                    Text("Average")
+                    Text(S.averageLabel)
                         .font(.system(size: 12))
                         .foregroundColor(.muted)
                     Spacer()
@@ -44,7 +47,7 @@ struct MetricsCard: View {
                 .padding(.vertical, 5)
 
                 HStack {
-                    Text("Total")
+                    Text(S.totalLabel)
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(.ink)
                     Spacer()

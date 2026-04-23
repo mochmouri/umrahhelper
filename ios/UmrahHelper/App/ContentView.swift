@@ -9,13 +9,13 @@ struct ContentView: View {
         TabView(selection: $selectedTab) {
             guideTab
                 .tabItem {
-                    Label("Guide", systemImage: "book")
+                    Label(state.strings.tabGuide, systemImage: "book")
                 }
                 .tag(0)
 
             HistoryView()
                 .tabItem {
-                    Label("History", systemImage: "clock")
+                    Label(state.strings.tabHistory, systemImage: "clock")
                 }
                 .tag(1)
         }
@@ -28,17 +28,32 @@ struct ContentView: View {
 
             if state.stage == 0 {
                 Stage0Welcome(state: state)
+                    .environment(\.layoutDirection, state.isArabic ? .rightToLeft : .leftToRight)
             } else {
                 VStack(spacing: 0) {
                     UmrahProgressBar(currentStage: state.stage)
 
                     ScrollView {
                         stageContent
+                            .environment(\.layoutDirection, state.isArabic ? .rightToLeft : .leftToRight)
                             .frame(maxWidth: 480)
                             .frame(maxWidth: .infinity)
                     }
                 }
             }
+        }
+        .overlay(alignment: .topTrailing) {
+            Button { state.isArabic.toggle() } label: {
+                Text(state.isArabic ? "EN" : "عربي")
+                    .font(.system(size: 11))
+                    .foregroundColor(.muted)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 6)
+                    .background(Color.parchmentDark.opacity(0.6))
+            }
+            .buttonStyle(.plain)
+            .padding(.top, 8)
+            .padding(.trailing, 12)
         }
         .gesture(
             DragGesture(minimumDistance: 50)
@@ -58,13 +73,13 @@ struct ContentView: View {
                     }
                 }
         )
-        .alert("Go back?", isPresented: $showingBackConfirm) {
-            Button("Go back", role: .destructive) {
+        .alert(state.strings.goBackTitle, isPresented: $showingBackConfirm) {
+            Button(state.strings.goBackConfirm, role: .destructive) {
                 withAnimation(.easeInOut(duration: 0.2)) { state.goBack() }
             }
-            Button("Stay", role: .cancel) {}
+            Button(state.strings.goBackStay, role: .cancel) {}
         } message: {
-            Text("Your progress in this stage is saved and will be preserved.")
+            Text(state.strings.goBackMessage)
         }
     }
 
