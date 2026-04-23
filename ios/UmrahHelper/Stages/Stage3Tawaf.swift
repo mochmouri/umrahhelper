@@ -76,7 +76,33 @@ struct Stage3Tawaf: View {
         let S = state.strings
         let lapReady = state.yemeniCornerChecked && state.blackStonePassChecked
 
-        // 1. Counter
+        // 1. Black Stone — beginning of lap
+        HStack(alignment: .top, spacing: 0) {
+            Rectangle().fill(Color.gold).frame(width: 2)
+            VStack(alignment: .leading, spacing: 6) {
+                Text(S.blackStonePassTitle)
+                    .font(.system(size: 9 * CGFloat(ts), weight: .regular))
+                    .foregroundColor(.muted)
+                    .tracking(2)
+                Text(S.blackStonePassBody)
+                    .font(.system(size: 12 * CGFloat(ts)))
+                    .foregroundColor(.inkLight)
+                    .lineSpacing(3)
+                Text("الله أكبر")
+                    .font(.system(size: 18 * CGFloat(ts)))
+                    .foregroundColor(.ink)
+                    .environment(\.layoutDirection, .rightToLeft)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(.leading, 12)
+        }
+        .padding(.bottom, 10)
+
+        ChecklistItem(label: S.checkBlackStonePass,
+                      checked: state.blackStonePassChecked) { state.setBlackStonePassChecked($0) }
+            .padding(.bottom, 20)
+
+        // 2. Counter
         VStack(spacing: 8) {
             Text(S.currentLapLabel)
                 .font(.system(size: 10 * CGFloat(ts), weight: .regular))
@@ -133,33 +159,7 @@ struct Stage3Tawaf: View {
                       checked: state.yemeniCornerChecked) { state.setYemeniCornerChecked($0) }
             .padding(.bottom, 16)
 
-        // 3. Black Stone checkpoint + checkbox
-        HStack(alignment: .top, spacing: 0) {
-            Rectangle().fill(Color.gold).frame(width: 2)
-            VStack(alignment: .leading, spacing: 6) {
-                Text(S.blackStonePassTitle)
-                    .font(.system(size: 9 * CGFloat(ts), weight: .regular))
-                    .foregroundColor(.muted)
-                    .tracking(2)
-                Text(S.blackStonePassBody)
-                    .font(.system(size: 12 * CGFloat(ts)))
-                    .foregroundColor(.inkLight)
-                    .lineSpacing(3)
-                Text("الله أكبر")
-                    .font(.system(size: 18 * CGFloat(ts)))
-                    .foregroundColor(.ink)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .environment(\.layoutDirection, .rightToLeft)
-            }
-            .padding(.leading, 12)
-        }
-        .padding(.bottom, 10)
-
-        ChecklistItem(label: S.checkBlackStonePass,
-                      checked: state.blackStonePassChecked) { state.setBlackStonePassChecked($0) }
-            .padding(.bottom, 20)
-
-        // 4. Recommended dhikr for this lap
+        // 3. Recommended dhikr for this lap
         if !lapDuas.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
                 Text("\(S.recommendedDhikrPrefix) \(S.numeral(state.currentLap))")

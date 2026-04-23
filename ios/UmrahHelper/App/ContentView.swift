@@ -41,20 +41,13 @@ struct ContentView: View {
                 VStack(spacing: 0) {
                     UmrahProgressBar(currentStage: state.stage)
 
-                    ScrollViewReader { proxy in
-                        ScrollView {
-                            Color.clear.frame(height: 0).id("scrollTop")
-                            stageContent
-                                .environment(\.layoutDirection, state.isArabic ? .rightToLeft : .leftToRight)
-                                .frame(maxWidth: 480)
-                                .frame(maxWidth: .infinity)
-                        }
-                        .onChange(of: state.stage) { _, _ in
-                            withAnimation(.easeOut(duration: 0.25)) {
-                                proxy.scrollTo("scrollTop", anchor: .top)
-                            }
-                        }
+                    ScrollView {
+                        stageContent
+                            .environment(\.layoutDirection, state.isArabic ? .rightToLeft : .leftToRight)
+                            .frame(maxWidth: 480)
+                            .frame(maxWidth: .infinity)
                     }
+                    .id(state.stage)
 
                     if state.stage > 0 {
                         Button(state.strings.backButton) {
