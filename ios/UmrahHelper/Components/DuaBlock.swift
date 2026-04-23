@@ -29,11 +29,15 @@ struct DuaBlock: View {
                 .font(.system(size: transSize, weight: .regular).italic())
                 .foregroundColor(.muted)
                 .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .environment(\.layoutDirection, .leftToRight)
 
             Text(meaning)
                 .font(.system(size: meaningSize))
                 .foregroundColor(.inkLight)
                 .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .environment(\.layoutDirection, .leftToRight)
 
             if let source {
                 Text(source)

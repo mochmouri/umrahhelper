@@ -23,6 +23,8 @@ final class UmrahState {
     var tawafStartTime: Date? = nil
     var lapTimes: [Date] = []
     var currentLap: Int = 0
+    var yemeniCornerChecked: Bool = false
+    var blackStonePassChecked: Bool = false
     var saiStarted: Bool = false
     var saiStartTime: Date? = nil
     var roundTimes: [Date] = []
@@ -79,6 +81,8 @@ final class UmrahState {
     func setWudu(_ value: Bool) { wudu = value; persist() }
     func setLocatedBlackStone(_ value: Bool) { locatedBlackStone = value; persist() }
     func setRaisedHand(_ value: Bool) { raisedHand = value; persist() }
+    func setYemeniCornerChecked(_ value: Bool) { yemeniCornerChecked = value; persist() }
+    func setBlackStonePassChecked(_ value: Bool) { blackStonePassChecked = value; persist() }
 
     func startTawaf() {
         tawafStarted = true
@@ -90,6 +94,8 @@ final class UmrahState {
     func completeLap() {
         lapTimes.append(Date())
         currentLap = lapTimes.count < 7 ? lapTimes.count + 1 : 8
+        yemeniCornerChecked = false
+        blackStonePassChecked = false
         persist()
     }
 
@@ -181,6 +187,8 @@ final class UmrahState {
         if let t = tawafStartTime { d["tawafStartTime"] = t.timeIntervalSince1970 }
         d["lapTimes"] = lapTimes.map { $0.timeIntervalSince1970 }
         d["currentLap"] = currentLap
+        d["yemeniCornerChecked"] = yemeniCornerChecked
+        d["blackStonePassChecked"] = blackStonePassChecked
         d["saiStarted"] = saiStarted
         if let t = saiStartTime { d["saiStartTime"] = t.timeIntervalSince1970 }
         d["roundTimes"] = roundTimes.map { $0.timeIntervalSince1970 }
@@ -199,8 +207,10 @@ final class UmrahState {
         raisedHand           = d["raisedHand"] as? Bool ?? false
         tawafStarted         = d["tawafStarted"] as? Bool ?? false
         if let t = d["tawafStartTime"] as? Double { tawafStartTime = Date(timeIntervalSince1970: t) }
-        lapTimes   = (d["lapTimes"] as? [Double] ?? []).map { Date(timeIntervalSince1970: $0) }
-        currentLap = d["currentLap"] as? Int ?? 0
+        lapTimes              = (d["lapTimes"] as? [Double] ?? []).map { Date(timeIntervalSince1970: $0) }
+        currentLap            = d["currentLap"] as? Int ?? 0
+        yemeniCornerChecked   = d["yemeniCornerChecked"] as? Bool ?? false
+        blackStonePassChecked = d["blackStonePassChecked"] as? Bool ?? false
         saiStarted = d["saiStarted"] as? Bool ?? false
         if let t = d["saiStartTime"] as? Double { saiStartTime = Date(timeIntervalSince1970: t) }
         roundTimes   = (d["roundTimes"] as? [Double] ?? []).map { Date(timeIntervalSince1970: $0) }

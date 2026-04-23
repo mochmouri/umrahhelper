@@ -17,8 +17,7 @@ struct Stage0Welcome: View {
                         Text("دَلِيلُ الْعُمْرَة")
                             .font(.system(size: 44))
                             .foregroundColor(.ink)
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .environment(\.layoutDirection, .rightToLeft)
+                            .frame(maxWidth: .infinity, alignment: .center)
 
                         Text(S.welcomeSubtitle)
                             .font(.system(size: 16, weight: .regular, design: .serif))

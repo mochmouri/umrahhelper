@@ -32,6 +32,17 @@ struct Stage4Sai: View {
     @ViewBuilder
     private var atSafaSection: some View {
         let S = state.strings
+
+        HStack(alignment: .top, spacing: 0) {
+            Rectangle().fill(Color.parchmentDark).frame(width: 2)
+            Text(S.saiWuduNote)
+                .font(.system(size: 12 * CGFloat(ts)))
+                .foregroundColor(.muted)
+                .lineSpacing(3)
+                .padding(.leading, 12)
+        }
+        .padding(.bottom, 20)
+
         Text(S.atSafaTitle)
             .font(.system(size: 15, weight: .semibold, design: .serif))
             .foregroundColor(.ink)

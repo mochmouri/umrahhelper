@@ -14,7 +14,7 @@ struct AppStrings {
         : "A step-by-step companion for your Umrah"
     }
     var welcomeBody: String { isArabic
-        ? "العمرة هي الحجّ الأصغر إلى مكة المكرمة؛ وهي عبادة تطوّعية يمكن أداؤها في أي وقت من العام. وعلى الرغم من أنها أقصر من الحج، إلا أنها تحمل ثقلًا روحيًا عظيمًا، وفرصةً نفيسة للتجديد والتقرّب إلى الله. يرشدك هذا الدليل خلال كل خطوة — من لبس الإحرام حتى قصّ الشعر — لتبقى قلبك في العبادة لا في اللوجستيات."
+        ? "العمرة هي الحجّ الأصغر إلى مكة المكرمة؛ وهي عبادة تطوّعية يمكن أداؤها في أي وقت من العام. وعلى الرغم من أنها أقصر من الحج، إلا أنها تحمل ثقلًا روحيًا عظيمًا، وفرصةً نفيسة للتجديد والتقرّب إلى الله. يرشدك هذا الدليل خلال كل خطوة — من لبس الإحرام حتى قصّ الشعر — ليبقى قلبك في العبادة لا في اللوجستيات."
         : "Umrah is the lesser pilgrimage to Makkah; it is a voluntary act of worship that may be performed at any time of the year. Though shorter than Hajj, it carries immense spiritual weight and is a profound opportunity for renewal and closeness to Allah. This guide walks you through each step, from putting on Ihram to the final cut of the hair, so your heart can remain in worship rather than in logistics."
     }
     var beginButton: String     { isArabic ? "ابدأ"                 : "BEGIN" }
@@ -141,10 +141,23 @@ struct AppStrings {
         ? "عند مرورك بالركن اليماني (قبل الحجر الأسود مباشرة)، ابدأ بترديد:"
         : "When you pass the Yemeni corner (the one before the Black Stone), begin reciting:"
     }
+    var checkYemeniCorner: String  { isArabic
+        ? "مررتُ بالركن اليماني وقرأتُ الدعاء"
+        : "I have passed the Yemeni corner and recited the dua"
+    }
+    var blackStonePassTitle: String { isArabic ? "تذكير: الحجر الأسود" : "BLACK STONE CHECKPOINT" }
+    var blackStonePassBody: String  { isArabic
+        ? "عند العودة إلى الحجر الأسود، ارفع يمناك وقل:"
+        : "When you return to the Black Stone, raise your right hand and say:"
+    }
+    var checkBlackStonePass: String { isArabic
+        ? "مررتُ بالحجر الأسود ورفعتُ يمناي (أو استلمته)"
+        : "I have passed the Black Stone and raised my right hand (or kissed it)"
+    }
     var recommendedDhikrPrefix: String { isArabic ? "الأذكار المستحبة — الشوط" : "RECOMMENDED DHIKR — LAP" }
     var completeLapPromptPre: String   { isArabic ? "عند الحجر الأسود، ارفع يدك وقل "     : "At the Black Stone, raise your hand and say " }
     var completeLapPromptPost: String  { isArabic ? "، ثم اضغط عند إتمام الشوط."           : ", then tap when you have completed the circuit." }
-    func completeLapButton(_ n: Int) -> String { isArabic ? "إتمام الشوط \(n)" : "COMPLETE LAP \(n)" }
+    func completeLapButton(_ n: Int) -> String { isArabic ? "إتمام الشوط \(numeral(n))" : "COMPLETE LAP \(n)" }
 
     var tawafAdhkarNote: String { isArabic
         ? "هذه أذكار مستحبة. يمكنك أيضًا تلاوة القرآن الكريم، أو الدعاء، أو قول أي ذكر تشاء."
@@ -160,8 +173,16 @@ struct AppStrings {
 
     var tawafCompleteMessage: String { isArabic ? "اكتمل الطواف — تقبّل الله." : "Tawaf complete — may Allah accept it." }
     var tawafTimesTitle: String      { isArabic ? "أوقات الطواف"                : "Tawaf times" }
-    func lapLabel(_ i: Int) -> String { isArabic ? "الشوط \(i + 1)" : "Lap \(i + 1)" }
+    func lapLabel(_ i: Int) -> String { isArabic ? "الشوط \(numeral(i + 1))" : "Lap \(i + 1)" }
 
+    var maqamSunnahNote: String { isArabic
+        ? "صلاة ركعتين خلف مقام إبراهيم سنة مؤكدة."
+        : "Praying two raka'ah behind Maqam Ibrahim is a confirmed Sunnah."
+    }
+    var checkMaqam: String { isArabic
+        ? "صلّيتُ الركعتين خلف المقام (سنة)"
+        : "I have prayed two raka'ah behind Maqam Ibrahim (Sunnah)"
+    }
     var maqamTitle: String  { isArabic ? "مقام إبراهيم" : "Maqam Ibrahim" }
     var maqamBody: String   { isArabic
         ? "صلِّ ركعتين خلف مقام إبراهيم أو في أي مكان خلفه إن كان مزدحمًا."
@@ -203,13 +224,17 @@ struct AppStrings {
         : ["You have reached Marwa.", "You have returned to Safa.", "You have reached Marwa.", "You have returned to Safa.",
            "You have reached Marwa.", "You have returned to Safa.", "You have reached Marwa — Saʿi is complete."]
     }
-    var atCurrentEndpoint: String   { isArabic ? "عند نقطة وصولك الحالية"      : "AT YOUR CURRENT ENDPOINT" }
-    var endpointDhikrBody: String   { isArabic ? " استقبل القبلة وردّد (×٣):"   : " Face the Ka'bah and recite (×3):" }
-    func completeRoundButton(_ n: Int) -> String { isArabic ? "إتمام الشوط \(n)" : "COMPLETE ROUND \(n)" }
+    var atCurrentEndpoint: String   { isArabic ? "عند نقطتك الحالية"      : "AT YOUR CURRENT ENDPOINT" }
+    var endpointDhikrBody: String   { isArabic ? " استقبل القبلة وردّد (×٣): "   : " Face the Ka'bah and recite (×3):" }
+    func completeRoundButton(_ n: Int) -> String { isArabic ? "إتمام الشوط \(numeral(n))" : "COMPLETE ROUND \(n)" }
+    var saiWuduNote: String { isArabic
+        ? "يجوز السعي على غير طهارة، غير أن الطهارة مستحبة إذ قد ترغب في صلاة نوافل."
+        : "Being in a state of Wudu' is not required for Sa'i, but is recommended as you may wish to pray optional prayers."
+    }
 
     var saiCompleteMessage: String { isArabic ? "اكتمل السعي — تقبّل الله."  : "Saʿi complete — may Allah accept it." }
     var saiTimesTitle: String      { isArabic ? "أوقات السعي"                 : "Saʿi times" }
-    func roundLabel(_ i: Int) -> String { isArabic ? "الشوط \(i + 1)" : "Round \(i + 1)" }
+    func roundLabel(_ i: Int) -> String { isArabic ? "الشوط \(numeral(i + 1))" : "Round \(i + 1)" }
     var proceedToTahleel: String   { isArabic ? "متابعة إلى التحلّل ←" : "PROCEED TO TAHLEEL →" }
 
     // MARK: - Stage 5
@@ -290,7 +315,7 @@ struct AppStrings {
 
     // MARK: - Sa'i jogging note
     var saiJoggingNote: String  { isArabic
-        ? "ابحث عن الأضواء الخضراء على سقف المسعى. يُستحب للرجال الهرولة بينها في كل شوط. هذه سنة نبوية: أمر النبي ﷺ أصحابه بالإسراع هنا إظهارًا للقوة."
+        ? "ابحث عن الأضواء الخضراء على سقف المسعى. يُستحب للرجال الهرولة بينها في كل شوط. هذه سنة نبوية فقد أمر النبي ﷺ أصحابه بالإسراع هنا إظهارًا للقوة."
         : "Look for the green lights on top of the Mas'aa — men are encouraged to jog between them in every round. This is Sunnah: the Prophet ﷺ instructed the Companions to hasten here to show their strength."
     }
 }

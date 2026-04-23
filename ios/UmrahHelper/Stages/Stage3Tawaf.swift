@@ -3,6 +3,7 @@ import SwiftUI
 struct Stage3Tawaf: View {
     let state: UmrahState
     @Environment(\.appTextScale) private var ts
+    @State private var maqamChecked = false
 
     private var lapDuas: [Dua] {
         guard state.tawafStarted, state.currentLap >= 1, state.currentLap <= 7 else { return [] }
@@ -73,6 +74,9 @@ struct Stage3Tawaf: View {
     @ViewBuilder
     private var activeTawafSection: some View {
         let S = state.strings
+        let lapReady = state.yemeniCornerChecked && state.blackStonePassChecked
+
+        // 1. Counter
         VStack(spacing: 8) {
             Text(S.currentLapLabel)
                 .font(.system(size: 10 * CGFloat(ts), weight: .regular))
@@ -106,6 +110,7 @@ struct Stage3Tawaf: View {
         .overlay(Rectangle().stroke(Color.parchmentDark, lineWidth: 1))
         .padding(.bottom, 20)
 
+        // 2. Yemeni corner instruction + checkbox
         HStack(alignment: .top, spacing: 0) {
             Rectangle().fill(Color.gold).frame(width: 2)
             VStack(alignment: .leading, spacing: 6) {
@@ -122,18 +127,39 @@ struct Stage3Tawaf: View {
             }
             .padding(.leading, 12)
         }
-        .padding(.bottom, 20)
+        .padding(.bottom, 10)
 
+        ChecklistItem(label: S.checkYemeniCorner,
+                      checked: state.yemeniCornerChecked) { state.setYemeniCornerChecked($0) }
+            .padding(.bottom, 16)
+
+        // 3. Black Stone checkpoint + checkbox
         HStack(alignment: .top, spacing: 0) {
-            Rectangle().fill(Color.parchmentDark).frame(width: 2)
-            Text(S.tawafAdhkarNote)
-                .font(.system(size: 12 * CGFloat(ts)))
-                .foregroundColor(.muted)
-                .lineSpacing(3)
-                .padding(.leading, 12)
+            Rectangle().fill(Color.gold).frame(width: 2)
+            VStack(alignment: .leading, spacing: 6) {
+                Text(S.blackStonePassTitle)
+                    .font(.system(size: 9 * CGFloat(ts), weight: .regular))
+                    .foregroundColor(.muted)
+                    .tracking(2)
+                Text(S.blackStonePassBody)
+                    .font(.system(size: 12 * CGFloat(ts)))
+                    .foregroundColor(.inkLight)
+                    .lineSpacing(3)
+                Text("الله أكبر")
+                    .font(.system(size: 18 * CGFloat(ts)))
+                    .foregroundColor(.ink)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .environment(\.layoutDirection, .rightToLeft)
+            }
+            .padding(.leading, 12)
         }
-        .padding(.bottom, 16)
+        .padding(.bottom, 10)
 
+        ChecklistItem(label: S.checkBlackStonePass,
+                      checked: state.blackStonePassChecked) { state.setBlackStonePassChecked($0) }
+            .padding(.bottom, 20)
+
+        // 4. Recommended dhikr for this lap
         if !lapDuas.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
                 Text("\(S.recommendedDhikrPrefix) \(S.numeral(state.currentLap))")
@@ -145,23 +171,26 @@ struct Stage3Tawaf: View {
                              meaning: dua.meaning, source: dua.source, compact: true)
                 }
             }
-            .padding(.bottom, 20)
+            .padding(.bottom, 16)
         }
+
+        // 5. General adhkar note
+        HStack(alignment: .top, spacing: 0) {
+            Rectangle().fill(Color.parchmentDark).frame(width: 2)
+            Text(S.tawafAdhkarNote)
+                .font(.system(size: 12 * CGFloat(ts)))
+                .foregroundColor(.muted)
+                .lineSpacing(3)
+                .padding(.leading, 12)
+        }
+        .padding(.bottom, 16)
 
         Rectangle().fill(Color.parchmentDark).frame(height: 1).padding(.bottom, 16)
 
-        VStack(spacing: 10) {
-            (Text(S.completeLapPromptPre) +
-             Text("الله أكبر").font(.system(size: 14 * CGFloat(ts))) +
-             Text(S.completeLapPromptPost))
-                .font(.system(size: 12 * CGFloat(ts)))
-                .foregroundColor(.muted)
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity, alignment: .center)
-
-            Button(S.completeLapButton(state.currentLap)) { state.completeLap() }
-                .primaryButton()
-        }
+        Button(S.completeLapButton(state.currentLap)) { state.completeLap() }
+            .primaryButton()
+            .opacity(lapReady ? 1.0 : 0.35)
+            .disabled(!lapReady)
     }
 
     private var lapDots: some View {
@@ -206,7 +235,17 @@ struct Stage3Tawaf: View {
         Text(S.maqamTitle)
             .font(.system(size: 15, weight: .semibold, design: .serif))
             .foregroundColor(.ink)
-            .padding(.bottom, 10)
+            .padding(.bottom, 4)
+
+        HStack(alignment: .top, spacing: 0) {
+            Rectangle().fill(Color.parchmentDark).frame(width: 2)
+            Text(S.maqamSunnahNote)
+                .font(.system(size: 12 * CGFloat(ts)))
+                .foregroundColor(.muted)
+                .lineSpacing(3)
+                .padding(.leading, 12)
+        }
+        .padding(.bottom, 10)
 
         DuaBlock(arabic: maqamIbrahimAyah.arabic, transliteration: maqamIbrahimAyah.transliteration,
                  meaning: maqamIbrahimAyah.meaning, source: maqamIbrahimAyah.source)
@@ -223,6 +262,9 @@ struct Stage3Tawaf: View {
             raka_row(S.raka2Pre, surah: S.raka2Surah)
         }
         .padding(.bottom, 12)
+
+        ChecklistItem(label: S.checkMaqam, checked: maqamChecked) { maqamChecked = $0 }
+            .padding(.bottom, 12)
 
         Text(S.zamzamText)
             .font(.system(size: 13 * CGFloat(ts)))
