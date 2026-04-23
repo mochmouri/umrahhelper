@@ -74,10 +74,7 @@ export function Stage4Sai() {
                 {S.atCurrentEndpoint}
               </p>
               <p className="font-sans text-sm text-ink-light mb-3 leading-relaxed">
-                {state.isArabic
-                  ? `${S.endpointDhikrBody}${S.endpointLabels[completedRounds - 1]}`
-                  : `${S.endpointLabels[completedRounds - 1]}${S.endpointDhikrBody}`
-                }
+                {`${S.endpointLabels[completedRounds - 1]}${S.endpointDhikrBody}`}
               </p>
               <DuaBlock {...safaDhikr} compact />
             </div>
@@ -92,10 +89,10 @@ export function Stage4Sai() {
             >
               {state.isArabic ? (
                 <>
-                  <span className="font-serif text-2xl text-muted">/ ٧</span>
                   <span className="font-serif text-7xl text-ink leading-none">
                     {['١','٢','٣','٤','٥','٦','٧'][currentRound - 1] ?? currentRound}
                   </span>
+                  <span className="font-serif text-2xl text-muted">/ ٧</span>
                 </>
               ) : (
                 <>

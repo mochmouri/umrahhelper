@@ -132,10 +132,10 @@ export function Stage3Tawaf() {
             >
               {state.isArabic ? (
                 <>
-                  <span className="font-serif text-2xl text-muted leading-none">/ ٧</span>
                   <span className="font-serif text-7xl text-ink leading-none">
                     {['١','٢','٣','٤','٥','٦','٧'][currentLap - 1] ?? currentLap}
                   </span>
+                  <span className="font-serif text-2xl text-muted leading-none">/ ٧</span>
                 </>
               ) : (
                 <>

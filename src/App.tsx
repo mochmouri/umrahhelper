@@ -8,28 +8,27 @@ import { Stage2AtMiqat } from './stages/Stage2AtMiqat'
 import { Stage3Tawaf } from './stages/Stage3Tawaf'
 import { Stage4Sai } from './stages/Stage4Sai'
 import { Stage5Tahleel } from './stages/Stage5Tahleel'
+import { AdhkarView } from './stages/AdhkarView'
+import { HistoryView } from './views/HistoryView'
 import { getStrings } from './data/strings'
 
 const MAX_STAGE = 5
 const TEXT_SCALE_STEPS = [0.85, 1.0, 1.2]
+type Tab = 'guide' | 'history' | 'adhkar'
 
 function AppInner() {
   const { state, dispatch, goToStage } = useUmrah()
   const S = getStrings(state.isArabic)
   const [showBackConfirm, setShowBackConfirm] = useState(false)
+  const [currentTab, setCurrentTab] = useState<Tab>('guide')
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  // Scroll key encodes all navigation events
   const scrollKey = `${state.stage}-${state.currentLap}-${state.currentRound}-${state.tawafStarted ? 1 : 0}-${state.currentLap === 8 ? 1 : 0}-${state.saiStarted ? 1 : 0}-${state.currentRound === 8 ? 1 : 0}`
 
-  // Scroll to top whenever scrollKey changes
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = 0
-    }
+    if (scrollRef.current) scrollRef.current.scrollTop = 0
   }, [scrollKey])
 
-  // Apply dark mode class to html element
   useEffect(() => {
     if (state.isDarkMode) {
       document.documentElement.classList.add('dark')
@@ -38,11 +37,15 @@ function AppInner() {
     }
   }, [state.isDarkMode])
 
-  // Apply RTL direction
   useEffect(() => {
     document.documentElement.dir = state.isArabic ? 'rtl' : 'ltr'
     document.documentElement.lang = state.isArabic ? 'ar' : 'en'
   }, [state.isArabic])
+
+  // Fix: set root font size so rem-based Tailwind classes scale
+  useEffect(() => {
+    document.documentElement.style.fontSize = `${state.textScale * 100}%`
+  }, [state.textScale])
 
   const cycleTextScale = () => {
     const idx = TEXT_SCALE_STEPS.findIndex(s => Math.abs(s - state.textScale) < 0.05)
@@ -67,18 +70,17 @@ function AppInner() {
     setShowBackConfirm(false)
   }
 
-  // Keyboard navigation
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (currentTab !== 'guide') return
       const isRTL = state.isArabic
       if (e.key === 'ArrowRight') isRTL ? navigatePrev() : navigateNext()
       if (e.key === 'ArrowLeft') isRTL ? navigateNext() : navigatePrev()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [navigateNext, navigatePrev, state.isArabic])
+  }, [navigateNext, navigatePrev, state.isArabic, currentTab])
 
-  // Swipe navigation
   useSwipe({
     onSwipeLeft: state.isArabic ? navigatePrev : navigateNext,
     onSwipeRight: state.isArabic ? navigateNext : navigatePrev,
@@ -88,11 +90,27 @@ function AppInner() {
   const ts = state.textScale
   const overlayClass = state.isArabic ? 'left-2' : 'right-2'
 
-  return (
+  const tabBar = (
     <div
-      className="min-h-dvh bg-parchment"
-      style={{ fontSize: `${ts}rem` }}
+      className="fixed bottom-0 inset-x-0 z-40 flex border-t border-parchment-dark bg-parchment"
+      dir={state.isArabic ? 'rtl' : 'ltr'}
     >
+      {(['guide', 'history', 'adhkar'] as Tab[]).map(tab => (
+        <button
+          key={tab}
+          onClick={() => setCurrentTab(tab)}
+          className={`flex-1 py-3 font-sans text-xs tracking-wide transition-colors ${
+            currentTab === tab ? 'text-ink border-t-2 border-ink -mt-px' : 'text-muted hover:text-ink'
+          }`}
+        >
+          {tab === 'guide' ? S.tabGuide : tab === 'history' ? S.tabHistory : S.tabAdhkar}
+        </button>
+      ))}
+    </div>
+  )
+
+  return (
+    <div className="min-h-dvh bg-parchment">
       {/* Overlay controls */}
       <div className={`fixed top-2 ${overlayClass} z-50 flex gap-1`}>
         <button
@@ -116,33 +134,39 @@ function AppInner() {
         </button>
       </div>
 
-      {stage === 0 ? (
-        <Stage0Welcome />
-      ) : (
-        <div className="flex flex-col min-h-dvh">
-          <ProgressBar />
-          <div
-            ref={scrollRef}
-            className="flex-1 overflow-y-auto"
-          >
-            {stage === 1 && <Stage1BeforeMiqat />}
-            {stage === 2 && <Stage2AtMiqat />}
-            {stage === 3 && <Stage3Tawaf />}
-            {stage === 4 && <Stage4Sai />}
-            {stage === 5 && <Stage5Tahleel />}
+      {/* Tab content */}
+      {currentTab === 'history' && <HistoryView />}
+      {currentTab === 'adhkar' && <AdhkarView />}
+      {currentTab === 'guide' && (
+        stage === 0 ? (
+          // Welcome screen — no back button, just tab bar
+          <div className="pb-14">
+            <Stage0Welcome />
           </div>
-
-          {/* Back button */}
-          <div className="text-center py-3 border-t border-parchment-dark bg-parchment">
-            <button
-              onClick={navigatePrev}
-              className="font-sans text-xs text-muted hover:text-ink transition-colors py-1 px-3"
-            >
-              {S.backButton}
-            </button>
+        ) : (
+          <div className="flex flex-col min-h-dvh">
+            <ProgressBar />
+            <div ref={scrollRef} className="flex-1 overflow-y-auto">
+              {stage === 1 && <Stage1BeforeMiqat />}
+              {stage === 2 && <Stage2AtMiqat />}
+              {stage === 3 && <Stage3Tawaf />}
+              {stage === 4 && <Stage4Sai />}
+              {stage === 5 && <Stage5Tahleel />}
+            </div>
+            {/* Back button sits above the tab bar */}
+            <div className="text-center py-3 border-t border-parchment-dark bg-parchment pb-[calc(0.75rem+3.5rem)]">
+              <button
+                onClick={navigatePrev}
+                className="font-sans text-xs text-muted hover:text-ink transition-colors py-1 px-3"
+              >
+                {S.backButton}
+              </button>
+            </div>
           </div>
-        </div>
+        )
       )}
+
+      {tabBar}
 
       {/* Back confirm dialog */}
       {showBackConfirm && (

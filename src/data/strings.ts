@@ -168,6 +168,9 @@ export interface Strings {
   // Adhkar tab
   adhkarNavTitle: string
   adhkarSubtitle: string
+
+  // Share
+  shareCopied: string
 }
 
 export function getStrings(isArabic: boolean): Strings {
@@ -241,7 +244,7 @@ export function getStrings(isArabic: boolean): Strings {
     stage1BodyText: isArabic
       ? 'بعد أن تغتسل وتُعدّ ثيابك، توجّه إلى الميقات, ستُعلن نيّتك وتبدأ التلبية من هناك.'
       : 'Once you have made Ghusl and prepared your garments, proceed to the Miqat. You will make your Niyyah and begin reciting the Talbiyah there.',
-    continueToMiqat: isArabic ? 'متابعة إلى الميقات ←' : 'CONTINUE TO MIQAT →',
+    continueToMiqat: isArabic ? 'متابعة إلى الميقات →' : 'CONTINUE TO MIQAT →',
 
     stage2Number: isArabic ? 'المرحلة ٢' : 'Stage 2',
     stage2Title: isArabic ? 'عند الميقات' : 'At the Miqat',
@@ -267,7 +270,7 @@ export function getStrings(isArabic: boolean): Strings {
     mosquePost: isArabic
       ? '. قل هذا الدعاء عند الدخول. وحين ترى الكعبة للمرة الأولى، قِف وادعُ, فهذه لحظة إجابة الدعاء.'
       : ". Say this dua as you step inside. When you first see the Ka'bah, pause — this is a moment when duas are answered.",
-    proceedToTawaf: isArabic ? 'متابعة إلى الطواف ←' : 'PROCEED TO TAWAF →',
+    proceedToTawaf: isArabic ? 'متابعة إلى الطواف →' : 'PROCEED TO TAWAF →',
 
     stage3Number: isArabic ? 'المرحلة ٣' : 'Stage 3',
     stage3Title: isArabic ? 'الطواف' : 'Tawaf',
@@ -334,7 +337,7 @@ export function getStrings(isArabic: boolean): Strings {
     zamzamText: isArabic
       ? 'ثم اشرب من ماء زمزم. استقبل القبلة وادعُ الله. هذا من السنة النبوية.'
       : 'Then drink from Zamzam. Face the Ka\'bah and make dua. This is Sunnah.',
-    proceedToSai: isArabic ? 'متابعة إلى السعي ←' : "PROCEED TO SAʿI →",
+    proceedToSai: isArabic ? 'متابعة إلى السعي →' : "PROCEED TO SAʿI →",
 
     stage4Number: isArabic ? 'المرحلة ٤' : 'Stage 4',
     stage4Title: isArabic ? 'السعي' : 'Saʿi',
@@ -366,7 +369,7 @@ export function getStrings(isArabic: boolean): Strings {
     saiCompleteMessage: isArabic ? 'اكتمل السعي — تقبّل الله.' : "Saʿi complete — may Allah accept it.",
     saiTimesTitle: isArabic ? 'أوقات السعي' : "Saʿi times",
     roundLabel: (i: number) => isArabic ? `الشوط ${n(i + 1)}` : `Round ${i + 1}`,
-    proceedToTahleel: isArabic ? 'متابعة إلى التحلّل ←' : 'PROCEED TO TAHLEEL →',
+    proceedToTahleel: isArabic ? 'متابعة إلى التحلّل →' : 'PROCEED TO TAHLEEL →',
     saiAdhkarNote: isArabic
       ? 'يمكنك تلاوة القرآن الكريم، أو الدعاء، أو قول أي ذكر تشاء وأنت تسعى.'
       : "You may recite Quran, make personal du'a, or say any dhikr you wish while completing each round.",
@@ -377,7 +380,7 @@ export function getStrings(isArabic: boolean): Strings {
     stage5Number: isArabic ? 'المرحلة ٥' : 'Stage 5',
     stage5Title: isArabic ? 'التحلّل' : 'Tahleel',
     stage5Subtitle: isArabic
-      ? 'المرحلة الأخيرة — قصّ الشعر — هكذا يتم التحليل من الإحرام.'
+      ? 'المرحلة الأخيرة — قصّ الشعر — هكذا يتم التحلل من الإحرام.'
       : 'The final act — cutting the hair — marks the end of Ihram.',
     hairCuttingTitle: isArabic ? 'قصّ الشعر' : 'Hair cutting',
     menLabel: isArabic ? 'رجال' : 'Men',
@@ -425,11 +428,13 @@ export function getStrings(isArabic: boolean): Strings {
     deleteConfirm: isArabic ? 'حذف' : 'Delete',
     cancelButton2: isArabic ? 'إلغاء' : 'Cancel',
 
-    backButton: isArabic ? '→ المرحلة السابقة' : '← Previous section',
+    backButton: isArabic ? '← المرحلة السابقة' : '← Previous section',
 
     adhkarNavTitle: isArabic ? 'الأذكار' : 'Adhkar',
     adhkarSubtitle: isArabic
       ? 'أذكار مأثورة من جوامع الدعاء يمكن ترديدها خلال الطواف والسعي'
       : "Supplications to recite during Tawaf and Sa'i",
+
+    shareCopied: isArabic ? 'تم النسخ إلى الحافظة' : 'Copied to clipboard',
   }
 }

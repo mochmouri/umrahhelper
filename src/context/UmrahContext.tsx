@@ -3,6 +3,16 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react'
 // Stages: 0=Welcome, 1=BeforeMiqat, 2=AtMiqat, 3=Tawaf, 4=Sai, 5=Tahleel
 export type Stage = 0 | 1 | 2 | 3 | 4 | 5
 
+export interface UmrahSession {
+  id: string
+  completedAt: number
+  umrahStartTime: number
+  tawafStartTime: number
+  lapTimes: number[]
+  saiStartTime: number
+  roundTimes: number[]
+}
+
 export interface UmrahState {
   stage: Stage
   talbiyahStarted: boolean
@@ -22,6 +32,7 @@ export interface UmrahState {
   roundTimes: number[]    // timestamp on each round completion
   currentRound: number    // 0 = not started, 1–7 = active round, 8 = all done
   umrahStartTime: number | null
+  history: UmrahSession[]
   // UI preferences
   isArabic: boolean
   isDarkMode: boolean
@@ -42,6 +53,8 @@ export type Action =
   | { type: 'SET_DARK_MODE'; payload: boolean }
   | { type: 'SET_TEXT_SCALE'; payload: number }
   | { type: 'RESET' }
+  | { type: 'SAVE_AND_RESET' }
+  | { type: 'DELETE_HISTORY'; payload: string }
 
 const initialState: UmrahState = {
   stage: 0,
@@ -58,6 +71,7 @@ const initialState: UmrahState = {
   roundTimes: [],
   currentRound: 0,
   umrahStartTime: null,
+  history: [],
   isArabic: false,
   isDarkMode: false,
   textScale: 1.0,
@@ -126,10 +140,34 @@ function reducer(state: UmrahState, action: Action): UmrahState {
     case 'RESET':
       return {
         ...initialState,
+        history: state.history,
         isArabic: state.isArabic,
         isDarkMode: state.isDarkMode,
         textScale: state.textScale,
       }
+    case 'SAVE_AND_RESET': {
+      const session: UmrahSession | null =
+        state.umrahStartTime && state.tawafStartTime && state.saiStartTime
+          ? {
+              id: `${Date.now()}`,
+              completedAt: Date.now(),
+              umrahStartTime: state.umrahStartTime,
+              tawafStartTime: state.tawafStartTime,
+              lapTimes: state.lapTimes,
+              saiStartTime: state.saiStartTime,
+              roundTimes: state.roundTimes,
+            }
+          : null
+      return {
+        ...initialState,
+        history: session ? [session, ...state.history] : state.history,
+        isArabic: state.isArabic,
+        isDarkMode: state.isDarkMode,
+        textScale: state.textScale,
+      }
+    }
+    case 'DELETE_HISTORY':
+      return { ...state, history: state.history.filter(s => s.id !== action.payload) }
     default:
       return state
   }
@@ -157,6 +195,7 @@ export function UmrahProvider({ children }: { children: React.ReactNode }) {
           ...parsed,
           yemeniCornerChecked: parsed.yemeniCornerChecked ?? false,
           blackStonePassChecked: parsed.blackStonePassChecked ?? false,
+          history: parsed.history ?? [],
           isArabic: parsed.isArabic ?? false,
           isDarkMode: parsed.isDarkMode ?? false,
           textScale: parsed.textScale ?? 1.0,
@@ -202,6 +241,34 @@ export function formatDuration(ms: number): string {
 export interface LapMetric {
   label: string
   duration: number
+}
+
+export function buildShareText(session: UmrahSession): string {
+  const tawafDurations = session.lapTimes.map((t, i) => {
+    const prev = i === 0 ? session.tawafStartTime : session.lapTimes[i - 1]
+    return t - prev
+  })
+  const saiDurations = session.roundTimes.map((t, i) => {
+    const prev = i === 0 ? session.saiStartTime : session.roundTimes[i - 1]
+    return t - prev
+  })
+  const tawafTotal = tawafDurations.reduce((a, b) => a + b, 0)
+  const saiTotal = saiDurations.reduce((a, b) => a + b, 0)
+  const umrahTotal = session.roundTimes[6] - session.umrahStartTime
+
+  const laps = tawafDurations.map((d, i) => `  Lap ${i + 1}: ${formatDuration(d)}`).join('\n')
+  const rounds = saiDurations.map((d, i) => `  Round ${i + 1}: ${formatDuration(d)}`).join('\n')
+
+  return [
+    `🕋 Umrah — ${formatDuration(umrahTotal)}`,
+    `Tawaf: ${formatDuration(tawafTotal)} | Saʿi: ${formatDuration(saiTotal)}`,
+    '',
+    'Tawaf laps:',
+    laps,
+    '',
+    "Saʿi rounds:",
+    rounds,
+  ].join('\n')
 }
 
 export function getTawafMetrics(state: UmrahState): {
