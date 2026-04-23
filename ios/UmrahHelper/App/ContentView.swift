@@ -63,7 +63,7 @@ struct ContentView: View {
                 }
             }
         }
-        .overlay(alignment: .topTrailing) {
+        .overlay(alignment: state.isArabic ? .topLeading : .topTrailing) {
             HStack(spacing: 6) {
                 Button {
                     let steps: [Double] = [0.85, 1.0, 1.2]
@@ -98,7 +98,7 @@ struct ContentView: View {
                 .buttonStyle(.plain)
             }
             .padding(.top, 8)
-            .padding(.trailing, 12)
+            .padding(state.isArabic ? .leading : .trailing, 12)
         }
         .gesture(
             DragGesture(minimumDistance: 50)

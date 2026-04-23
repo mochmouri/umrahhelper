@@ -283,9 +283,14 @@ struct AppStrings {
     var adhkarNavTitle: String  { isArabic ? "الأذكار"                                          : "Adhkar" }
     var adhkarSubtitle: String  { isArabic ? "أذكار مأثورة من جوامع الدعاء يمكن ترديدها خلال الطواف والسعي"    : "Supplications to recite during Tawaf and Sa'i" }
 
+    var saiAdhkarNote: String { isArabic
+        ? "يمكنك تلاوة القرآن الكريم، أو الدعاء، أو قول أي ذكر تشاء وأنت تسعى."
+        : "You may recite Quran, make personal du'a, or say any dhikr you wish while completing each round."
+    }
+
     // MARK: - Sa'i jogging note
     var saiJoggingNote: String  { isArabic
-        ? "ابحث عن الأضواء الخضراء على سقف المسعى — يُستحب للرجال الهرولة بينها في كل شوط. هذه سنة نبوية: أمر النبي ﷺ أصحابه بالإسراع هنا إظهارًا للقوة."
+        ? "ابحث عن الأضواء الخضراء على سقف المسعى. يُستحب للرجال الهرولة بينها في كل شوط. هذه سنة نبوية: أمر النبي ﷺ أصحابه بالإسراع هنا إظهارًا للقوة."
         : "Look for the green lights on top of the Mas'aa — men are encouraged to jog between them in every round. This is Sunnah: the Prophet ﷺ instructed the Companions to hasten here to show their strength."
     }
 }

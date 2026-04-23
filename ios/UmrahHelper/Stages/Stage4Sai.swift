@@ -63,6 +63,29 @@ struct Stage4Sai: View {
     @ViewBuilder
     private var activeSection: some View {
         let S = state.strings
+
+        // 1. Endpoint dhikr (at Safa or Marwa) — shown after completing rounds 1–6
+        if showEndpointDhikr {
+            HStack(alignment: .top, spacing: 0) {
+                Rectangle().fill(Color.gold).frame(width: 2)
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(S.atCurrentEndpoint)
+                        .font(.system(size: 9 * CGFloat(ts)))
+                        .foregroundColor(.muted)
+                        .tracking(2)
+                    Text("\(S.endpointLabels[state.roundTimes.count - 1])\(S.endpointDhikrBody)")
+                        .font(.system(size: 12 * CGFloat(ts)))
+                        .foregroundColor(.inkLight)
+                        .lineSpacing(3)
+                    DuaBlock(arabic: safaDhikr.arabic, transliteration: safaDhikr.transliteration,
+                             meaning: safaDhikr.meaning, compact: true)
+                }
+                .padding(.leading, 12)
+            }
+            .padding(.bottom, 20)
+        }
+
+        // 2. Round counter
         VStack(spacing: 8) {
             Text(S.roundCounterLabel)
                 .font(.system(size: 10 * CGFloat(ts), weight: .regular))
@@ -100,28 +123,20 @@ struct Stage4Sai: View {
         .overlay(Rectangle().stroke(Color.parchmentDark, lineWidth: 1))
         .padding(.bottom, 20)
 
+        // 3. Green lights / jogging reminder
         GoldBorderNote(text: S.saiJoggingNote)
             .padding(.bottom, 16)
 
-        if showEndpointDhikr {
-            HStack(alignment: .top, spacing: 0) {
-                Rectangle().fill(Color.gold).frame(width: 2)
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(S.atCurrentEndpoint)
-                        .font(.system(size: 9 * CGFloat(ts)))
-                        .foregroundColor(.muted)
-                        .tracking(2)
-                    Text("\(S.endpointLabels[state.roundTimes.count - 1])\(S.endpointDhikrBody)")
-                        .font(.system(size: 12 * CGFloat(ts)))
-                        .foregroundColor(.inkLight)
-                        .lineSpacing(3)
-                    DuaBlock(arabic: safaDhikr.arabic, transliteration: safaDhikr.transliteration,
-                             meaning: safaDhikr.meaning, compact: true)
-                }
+        // 4. General adhkar note
+        HStack(alignment: .top, spacing: 0) {
+            Rectangle().fill(Color.parchmentDark).frame(width: 2)
+            Text(S.saiAdhkarNote)
+                .font(.system(size: 12 * CGFloat(ts)))
+                .foregroundColor(.muted)
+                .lineSpacing(3)
                 .padding(.leading, 12)
-            }
-            .padding(.bottom, 20)
         }
+        .padding(.bottom, 16)
 
         Rectangle().fill(Color.parchmentDark).frame(height: 1).padding(.bottom, 16)
 
