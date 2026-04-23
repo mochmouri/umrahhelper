@@ -84,7 +84,9 @@ struct Stage4Sai: View {
                         .font(.system(size: 9 * CGFloat(ts)))
                         .foregroundColor(.muted)
                         .tracking(2)
-                    Text("\(S.endpointLabels[state.roundTimes.count - 1])\(S.endpointDhikrBody)")
+                    Text(state.isArabic
+                        ? "\(S.endpointDhikrBody)\(S.endpointLabels[state.roundTimes.count - 1])"
+                        : "\(S.endpointLabels[state.roundTimes.count - 1])\(S.endpointDhikrBody)")
                         .font(.system(size: 12 * CGFloat(ts)))
                         .foregroundColor(.inkLight)
                         .lineSpacing(3)

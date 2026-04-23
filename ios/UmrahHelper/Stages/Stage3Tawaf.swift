@@ -4,6 +4,7 @@ struct Stage3Tawaf: View {
     let state: UmrahState
     @Environment(\.appTextScale) private var ts
     @State private var maqamChecked = false
+    @State private var showLapDhikr = false
 
     private var lapDuas: [Dua] {
         guard state.tawafStarted, state.currentLap >= 1, state.currentLap <= 7 else { return [] }
@@ -26,6 +27,9 @@ struct Stage3Tawaf: View {
         .padding(.horizontal, 24)
         .padding(.vertical, 24)
         .padding(.bottom, 16)
+        .onChange(of: state.currentLap) { _, _ in
+            withAnimation(.easeInOut(duration: 0.2)) { showLapDhikr = false }
+        }
     }
 
     // MARK: — Pre-checklist
@@ -93,6 +97,11 @@ struct Stage3Tawaf: View {
                     .foregroundColor(.ink)
                     .environment(\.layoutDirection, .rightToLeft)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                if !state.isArabic {
+                    Text("Allahu Akbar")
+                        .font(.system(size: 12 * CGFloat(ts), weight: .regular).italic())
+                        .foregroundColor(.muted)
+                }
             }
             .padding(.leading, 12)
         }
@@ -159,31 +168,56 @@ struct Stage3Tawaf: View {
                       checked: state.yemeniCornerChecked) { state.setYemeniCornerChecked($0) }
             .padding(.bottom, 16)
 
-        // 3. Recommended dhikr for this lap
+        // 3. Recommended dhikr — collapsible
         if !lapDuas.isEmpty {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("\(S.recommendedDhikrPrefix) \(S.numeral(state.currentLap))")
-                    .font(.system(size: 9 * CGFloat(ts), weight: .regular))
-                    .foregroundColor(.muted)
-                    .tracking(2)
-                ForEach(Array(lapDuas.enumerated()), id: \.offset) { _, dua in
-                    DuaBlock(arabic: dua.arabic, transliteration: dua.transliteration,
-                             meaning: dua.meaning, source: dua.source, compact: true)
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) { showLapDhikr.toggle() }
+            } label: {
+                HStack {
+                    Text(showLapDhikr ? S.hideDhikr : S.showDhikr(lapDuas.count))
+                        .font(.system(size: 11 * CGFloat(ts), weight: .regular))
+                        .foregroundColor(.muted)
+                        .tracking(1)
+                    Spacer()
+                    Image(systemName: showLapDhikr ? "chevron.up" : "chevron.down")
+                        .font(.system(size: 10))
+                        .foregroundColor(.muted)
                 }
+            }
+            .buttonStyle(.plain)
+            .padding(.bottom, showLapDhikr ? 10 : 16)
+
+            if showLapDhikr {
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(Array(lapDuas.enumerated()), id: \.offset) { _, dua in
+                        DuaBlock(arabic: dua.arabic, transliteration: dua.transliteration,
+                                 meaning: dua.meaning, source: dua.source, compact: true)
+                    }
+                }
+                .padding(.bottom, 10)
+
+                HStack(alignment: .top, spacing: 0) {
+                    Rectangle().fill(Color.parchmentDark).frame(width: 2)
+                    Text(S.tawafAdhkarNote)
+                        .font(.system(size: 12 * CGFloat(ts)))
+                        .foregroundColor(.muted)
+                        .lineSpacing(3)
+                        .padding(.leading, 12)
+                }
+                .padding(.bottom, 16)
+            }
+        } else {
+            // No lap-specific duas — still show the general adhkar note
+            HStack(alignment: .top, spacing: 0) {
+                Rectangle().fill(Color.parchmentDark).frame(width: 2)
+                Text(S.tawafAdhkarNote)
+                    .font(.system(size: 12 * CGFloat(ts)))
+                    .foregroundColor(.muted)
+                    .lineSpacing(3)
+                    .padding(.leading, 12)
             }
             .padding(.bottom, 16)
         }
-
-        // 5. General adhkar note
-        HStack(alignment: .top, spacing: 0) {
-            Rectangle().fill(Color.parchmentDark).frame(width: 2)
-            Text(S.tawafAdhkarNote)
-                .font(.system(size: 12 * CGFloat(ts)))
-                .foregroundColor(.muted)
-                .lineSpacing(3)
-                .padding(.leading, 12)
-        }
-        .padding(.bottom, 16)
 
         Rectangle().fill(Color.parchmentDark).frame(height: 1).padding(.bottom, 16)
 

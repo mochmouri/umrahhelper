@@ -5,6 +5,12 @@ struct ContentView: View {
     @State private var showingBackConfirm = false
     @State private var selectedTab = 0
 
+    private var scrollKey: String {
+        "\(state.stage)-\(state.currentLap)-\(state.currentRound)" +
+        "-\(state.tawafStarted ? 1 : 0)-\(state.tawafComplete ? 1 : 0)" +
+        "-\(state.saiStarted ? 1 : 0)-\(state.saiComplete ? 1 : 0)"
+    }
+
     var body: some View {
         TabView(selection: $selectedTab) {
             guideTab
@@ -47,7 +53,7 @@ struct ContentView: View {
                             .frame(maxWidth: 480)
                             .frame(maxWidth: .infinity)
                     }
-                    .id(state.stage)
+                    .id(scrollKey)
 
                     if state.stage > 0 {
                         Button(state.strings.backButton) {

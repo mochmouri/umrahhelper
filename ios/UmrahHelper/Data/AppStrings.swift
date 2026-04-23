@@ -151,10 +151,15 @@ struct AppStrings {
         : "When you return to the Black Stone, raise your right hand and say:"
     }
     var checkBlackStonePass: String { isArabic
-        ? "مررتُ بالحجر الأسود ورفعتُ يمناي (أو استلمته)"
-        : "I have passed the Black Stone and raised my right hand (or kissed it)"
+        ? "مررتُ بالحجر الأسود وقبلته (أو رفعتُ يمناي باتجاهه)"
+        : "I have passed the Black Stone and kissed it (or raised my hand towards it)"
     }
     var recommendedDhikrPrefix: String { isArabic ? "الأذكار المستحبة — الشوط" : "RECOMMENDED DHIKR — LAP" }
+    func showDhikr(_ n: Int) -> String {
+        isArabic ? "عرض الأذكار المستحبة (\(numeral(n)) دعاء)"
+                 : "Show recommended dhikr (\(n) \(n == 1 ? "prayer" : "prayers"))"
+    }
+    var hideDhikr: String { isArabic ? "إخفاء الأذكار" : "Hide dhikr" }
     var completeLapPromptPre: String   { isArabic ? "عند الحجر الأسود، ارفع يدك وقل "     : "At the Black Stone, raise your hand and say " }
     var completeLapPromptPost: String  { isArabic ? "، ثم اضغط عند إتمام الشوط."           : ", then tap when you have completed the circuit." }
     func completeLapButton(_ n: Int) -> String { isArabic ? "إتمام الشوط \(numeral(n))" : "COMPLETE LAP \(n)" }
