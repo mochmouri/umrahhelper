@@ -70,13 +70,14 @@ struct Stage4Sai: View {
                 .textCase(.uppercase)
 
             HStack(alignment: .lastTextBaseline, spacing: 8) {
-                Text("\(state.currentRound)")
+                Text(S.numeral(state.currentRound))
                     .font(.system(size: 72, weight: .light, design: .serif))
                     .foregroundColor(.ink)
-                Text("/ 7")
+                Text("/ \(S.numeral(7))")
                     .font(.system(size: 22, weight: .light, design: .serif))
                     .foregroundColor(.muted)
             }
+            .environment(\.layoutDirection, .leftToRight)
 
             Text(S.roundLabels[state.currentRound - 1])
                 .font(.system(size: 13, weight: .medium))

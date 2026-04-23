@@ -145,6 +145,18 @@ struct AppStrings {
     var completeLapPromptPost: String  { isArabic ? "، ثم اضغط عند إتمام الشوط."           : ", then tap when you have completed the circuit." }
     func completeLapButton(_ n: Int) -> String { isArabic ? "إتمام الشوط \(n)" : "COMPLETE LAP \(n)" }
 
+    var tawafAdhkarNote: String { isArabic
+        ? "هذه أذكار مستحبة. يمكنك أيضًا تلاوة القرآن الكريم، أو الدعاء، أو أي ذكر تشاء."
+        : "These are recommended adhkar. You may also recite Quran, make personal du'a, or say any dhikr you wish."
+    }
+
+    // Converts an integer to Eastern Arabic numerals when isArabic, Western otherwise
+    func numeral(_ n: Int) -> String {
+        guard isArabic else { return "\(n)" }
+        let eastern = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"]
+        return String(n).compactMap { c in c.wholeNumberValue.map { eastern[$0] } }.joined()
+    }
+
     var tawafCompleteMessage: String { isArabic ? "اكتمل الطواف — تقبّل الله." : "Tawaf complete — may Allah accept it." }
     var tawafTimesTitle: String      { isArabic ? "أوقات الطواف"                : "Tawaf times" }
     func lapLabel(_ i: Int) -> String { isArabic ? "الشوط \(i + 1)" : "Lap \(i + 1)" }

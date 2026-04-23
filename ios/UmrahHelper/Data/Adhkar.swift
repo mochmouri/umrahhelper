@@ -37,12 +37,6 @@ let adhkarPool: [Dua] = [
         meaning: "O Allah, I ask You for steadfastness in all matters and determination to follow the right path. I ask You for gratitude for Your blessings and for excellence in worship. I ask You for a sound heart and a truthful tongue."
     ),
     Dua(
-        arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
-        transliteration: "Rabbanā ātinā fi d-dunyā ḥasanatan wa fi l-ākhirati ḥasanatan wa qinā 'adhāba n-nār.",
-        meaning: "Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.",
-        source: "Quran 2:201"
-    ),
-    Dua(
         arabic: "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي وَاحْلُلْ عُقْدَةً مِّن لِّسَانِي",
         transliteration: "Rabbi shraḥ lī ṣadrī wa yassir lī amrī wa-ḥlul 'uqdatan min lisānī.",
         meaning: "My Lord, expand my chest, ease my affairs, and untie the knot from my tongue.",

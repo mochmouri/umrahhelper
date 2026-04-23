@@ -80,13 +80,14 @@ struct Stage3Tawaf: View {
                 .textCase(.uppercase)
 
             HStack(alignment: .lastTextBaseline, spacing: 8) {
-                Text("\(state.currentLap)")
+                Text(S.numeral(state.currentLap))
                     .font(.system(size: 72, weight: .light, design: .serif))
                     .foregroundColor(.ink)
-                Text("/ 7")
+                Text("/ \(S.numeral(7))")
                     .font(.system(size: 22, weight: .light, design: .serif))
                     .foregroundColor(.muted)
             }
+            .environment(\.layoutDirection, .leftToRight)
 
             lapDots
         }
@@ -113,9 +114,19 @@ struct Stage3Tawaf: View {
         }
         .padding(.bottom, 20)
 
+        HStack(alignment: .top, spacing: 0) {
+            Rectangle().fill(Color.parchmentDark).frame(width: 2)
+            Text(S.tawafAdhkarNote)
+                .font(.system(size: 12))
+                .foregroundColor(.muted)
+                .lineSpacing(3)
+                .padding(.leading, 12)
+        }
+        .padding(.bottom, 16)
+
         if !lapDuas.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
-                Text("\(S.recommendedDhikrPrefix) \(state.currentLap)")
+                Text("\(S.recommendedDhikrPrefix) \(S.numeral(state.currentLap))")
                     .font(.system(size: 9, weight: .regular))
                     .foregroundColor(.muted)
                     .tracking(2)
