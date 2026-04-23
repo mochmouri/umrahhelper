@@ -6,6 +6,7 @@ struct SessionDetailView: View {
     @AppStorage("isArabic") private var isArabic = false
     private var S: AppStrings { AppStrings(isArabic: isArabic) }
 
+    @Environment(\.appTextScale) private var ts
     @State private var shareImage: UIImage? = nil
     @State private var showShare = false
 
@@ -97,9 +98,9 @@ struct SessionDetailView: View {
 
     private func summaryRow(_ label: String, value: String) -> some View {
         HStack {
-            Text(label).font(.system(size: 13)).foregroundColor(.muted)
+            Text(label).font(.system(size: 13 * CGFloat(ts))).foregroundColor(.muted)
             Spacer()
-            Text(value).font(.system(size: 13).monospacedDigit()).foregroundColor(.inkLight)
+            Text(value).font(.system(size: 13 * CGFloat(ts)).monospacedDigit()).foregroundColor(.inkLight)
         }
         .padding(.vertical, 8)
     }

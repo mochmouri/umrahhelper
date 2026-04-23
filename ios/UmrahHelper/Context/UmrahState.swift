@@ -9,6 +9,9 @@ final class UmrahState {
     var isDarkMode: Bool = false {
         didSet { UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode") }
     }
+    var textScale: Double = 1.0 {
+        didSet { UserDefaults.standard.set(textScale, forKey: "textScale") }
+    }
     var strings: AppStrings { AppStrings(isArabic: isArabic) }
 
     var stage: Int = 0
@@ -32,8 +35,10 @@ final class UmrahState {
     var saiComplete: Bool { currentRound == 8 }
 
     init() {
-        isArabic  = UserDefaults.standard.bool(forKey: "isArabic")
+        isArabic   = UserDefaults.standard.bool(forKey: "isArabic")
         isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        let ts     = UserDefaults.standard.double(forKey: "textScale")
+        textScale  = ts > 0 ? ts : 1.0
         load()
     }
 

@@ -7,9 +7,11 @@ struct DuaBlock: View {
     var source: String? = nil
     var compact: Bool = false
 
-    private var arabicSize: CGFloat { compact ? 18 : 22 }
-    private var transSize: CGFloat { compact ? 11 : 12 }
-    private var meaningSize: CGFloat { compact ? 12 : 13 }
+    @Environment(\.appTextScale) private var ts
+
+    private var arabicSize: CGFloat  { (compact ? 18 : 22) * CGFloat(ts) }
+    private var transSize: CGFloat   { (compact ? 11 : 12) * CGFloat(ts) }
+    private var meaningSize: CGFloat { (compact ? 12 : 13) * CGFloat(ts) }
     private var spacing: CGFloat { compact ? 8 : 12 }
     private var padding: CGFloat { compact ? 12 : 16 }
 
@@ -35,7 +37,7 @@ struct DuaBlock: View {
 
             if let source {
                 Text(source)
-                    .font(.system(size: 10))
+                    .font(.system(size: 10 * CGFloat(ts)))
                     .foregroundColor(.muted)
             }
         }

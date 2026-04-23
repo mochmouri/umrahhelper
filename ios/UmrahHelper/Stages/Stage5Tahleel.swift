@@ -4,6 +4,7 @@ import SwiftData
 struct Stage5Tahleel: View {
     let state: UmrahState
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.appTextScale) private var ts
     @State private var showResetConfirm = false
     @State private var shareImage: UIImage? = nil
     @State private var showShare = false
@@ -42,16 +43,16 @@ struct Stage5Tahleel: View {
 
             VStack(spacing: 12) {
                 Text("الله يتقبل")
-                    .font(.system(size: 40))
+                    .font(.system(size: 40 * CGFloat(ts)))
                     .foregroundColor(.ink)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .environment(\.layoutDirection, .rightToLeft)
                 Text(S.congratsSubtitle)
-                    .font(.system(size: 15, weight: .regular, design: .serif))
+                    .font(.system(size: 15 * CGFloat(ts), weight: .regular, design: .serif))
                     .italic()
                     .foregroundColor(.inkLight)
                 Text(S.congratsBody)
-                    .font(.system(size: 13))
+                    .font(.system(size: 13 * CGFloat(ts)))
                     .foregroundColor(.muted)
                     .multilineTextAlignment(.center)
                     .lineSpacing(3)
@@ -106,7 +107,7 @@ struct Stage5Tahleel: View {
     private func summarySection(total: TimeInterval) -> some View {
         let S = state.strings
         Text(S.summaryTitle)
-            .font(.system(size: 15, weight: .semibold, design: .serif))
+            .font(.system(size: 15 * CGFloat(ts), weight: .semibold, design: .serif))
             .foregroundColor(.ink)
             .padding(.bottom, 12)
 
@@ -121,11 +122,11 @@ struct Stage5Tahleel: View {
             }
             HStack {
                 Text(S.totalUmrahLabel)
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.system(size: 13 * CGFloat(ts), weight: .semibold))
                     .foregroundColor(.ink)
                 Spacer()
                 Text(state.formatDuration(total))
-                    .font(.system(size: 13, weight: .semibold).monospacedDigit())
+                    .font(.system(size: 13 * CGFloat(ts), weight: .semibold).monospacedDigit())
                     .foregroundColor(.ink)
             }
             .padding(.vertical, 10)
@@ -147,9 +148,9 @@ struct Stage5Tahleel: View {
 
     private func summaryRow(label: String, value: String) -> some View {
         HStack {
-            Text(label).font(.system(size: 13)).foregroundColor(.muted)
+            Text(label).font(.system(size: 13 * CGFloat(ts))).foregroundColor(.muted)
             Spacer()
-            Text(value).font(.system(size: 13).monospacedDigit()).foregroundColor(.inkLight)
+            Text(value).font(.system(size: 13 * CGFloat(ts)).monospacedDigit()).foregroundColor(.inkLight)
         }
         .padding(.vertical, 8)
     }
@@ -157,16 +158,16 @@ struct Stage5Tahleel: View {
     private func genderRow(symbol: String, label: String, text: String) -> some View {
         HStack(alignment: .top, spacing: 12) {
             Text(symbol)
-                .font(.system(size: 16, weight: .light, design: .serif))
+                .font(.system(size: 16 * CGFloat(ts), weight: .light, design: .serif))
                 .foregroundColor(.gold)
                 .frame(width: 20)
                 .padding(.top, 1)
             VStack(alignment: .leading, spacing: 4) {
                 Text(label)
-                    .font(.system(size: 13, weight: .medium))
+                    .font(.system(size: 13 * CGFloat(ts), weight: .medium))
                     .foregroundColor(.ink)
                 Text(text)
-                    .font(.system(size: 13))
+                    .font(.system(size: 13 * CGFloat(ts)))
                     .foregroundColor(.inkLight)
                     .lineSpacing(3)
             }

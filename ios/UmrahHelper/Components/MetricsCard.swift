@@ -8,22 +8,24 @@ struct MetricsCard: View {
     @AppStorage("isArabic") private var isArabic = false
     private var S: AppStrings { AppStrings(isArabic: isArabic) }
 
+    @Environment(\.appTextScale) private var ts
+
     var body: some View {
         if let m = metrics {
             VStack(alignment: .leading, spacing: 0) {
                 Text(title)
-                    .font(.system(size: 13, weight: .semibold, design: .serif))
+                    .font(.system(size: 13 * CGFloat(ts), weight: .semibold, design: .serif))
                     .foregroundColor(.ink)
                     .padding(.bottom, 12)
 
                 ForEach(Array(m.durations.enumerated()), id: \.offset) { i, dur in
                     HStack {
                         Text(rowLabel(i))
-                            .font(.system(size: 12))
+                            .font(.system(size: 12 * CGFloat(ts)))
                             .foregroundColor(.muted)
                         Spacer()
                         Text(format(dur))
-                            .font(.system(size: 12).monospacedDigit())
+                            .font(.system(size: 12 * CGFloat(ts)).monospacedDigit())
                             .foregroundColor(.inkLight)
                     }
                     .padding(.vertical, 5)
@@ -37,22 +39,22 @@ struct MetricsCard: View {
 
                 HStack {
                     Text(S.averageLabel)
-                        .font(.system(size: 12))
+                        .font(.system(size: 12 * CGFloat(ts)))
                         .foregroundColor(.muted)
                     Spacer()
                     Text(format(m.average))
-                        .font(.system(size: 12).monospacedDigit())
+                        .font(.system(size: 12 * CGFloat(ts)).monospacedDigit())
                         .foregroundColor(.inkLight)
                 }
                 .padding(.vertical, 5)
 
                 HStack {
                     Text(S.totalLabel)
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.system(size: 13 * CGFloat(ts), weight: .semibold))
                         .foregroundColor(.ink)
                     Spacer()
                     Text(format(m.total))
-                        .font(.system(size: 13, weight: .semibold).monospacedDigit())
+                        .font(.system(size: 13 * CGFloat(ts), weight: .semibold).monospacedDigit())
                         .foregroundColor(.ink)
                 }
                 .padding(.vertical, 5)

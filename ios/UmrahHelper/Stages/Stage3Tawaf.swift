@@ -2,6 +2,7 @@ import SwiftUI
 
 struct Stage3Tawaf: View {
     let state: UmrahState
+    @Environment(\.appTextScale) private var ts
 
     private var lapDuas: [Dua] {
         guard state.tawafStarted, state.currentLap >= 1, state.currentLap <= 7 else { return [] }
@@ -74,7 +75,7 @@ struct Stage3Tawaf: View {
         let S = state.strings
         VStack(spacing: 8) {
             Text(S.currentLapLabel)
-                .font(.system(size: 10, weight: .regular))
+                .font(.system(size: 10 * CGFloat(ts), weight: .regular))
                 .foregroundColor(.muted)
                 .tracking(2)
                 .textCase(.uppercase)
@@ -82,17 +83,17 @@ struct Stage3Tawaf: View {
             HStack(alignment: .lastTextBaseline, spacing: 8) {
                 if state.isArabic {
                     Text("\(S.numeral(7)) /")
-                        .font(.system(size: 22, weight: .light, design: .serif))
+                        .font(.system(size: 22 * CGFloat(ts), weight: .light, design: .serif))
                         .foregroundColor(.muted)
                     Text(S.numeral(state.currentLap))
-                        .font(.system(size: 72, weight: .light, design: .serif))
+                        .font(.system(size: 72 * CGFloat(ts), weight: .light, design: .serif))
                         .foregroundColor(.ink)
                 } else {
                     Text("\(state.currentLap)")
-                        .font(.system(size: 72, weight: .light, design: .serif))
+                        .font(.system(size: 72 * CGFloat(ts), weight: .light, design: .serif))
                         .foregroundColor(.ink)
                     Text("/ 7")
-                        .font(.system(size: 22, weight: .light, design: .serif))
+                        .font(.system(size: 22 * CGFloat(ts), weight: .light, design: .serif))
                         .foregroundColor(.muted)
                 }
             }
@@ -109,11 +110,11 @@ struct Stage3Tawaf: View {
             Rectangle().fill(Color.gold).frame(width: 2)
             VStack(alignment: .leading, spacing: 6) {
                 Text(S.yemeniCornerTitle)
-                    .font(.system(size: 9, weight: .regular))
+                    .font(.system(size: 9 * CGFloat(ts), weight: .regular))
                     .foregroundColor(.muted)
                     .tracking(2)
                 Text(S.yemeniCornerBody)
-                    .font(.system(size: 12))
+                    .font(.system(size: 12 * CGFloat(ts)))
                     .foregroundColor(.inkLight)
                     .lineSpacing(3)
                 DuaBlock(arabic: yemeniCornerDua.arabic, transliteration: yemeniCornerDua.transliteration,
@@ -126,7 +127,7 @@ struct Stage3Tawaf: View {
         HStack(alignment: .top, spacing: 0) {
             Rectangle().fill(Color.parchmentDark).frame(width: 2)
             Text(S.tawafAdhkarNote)
-                .font(.system(size: 12))
+                .font(.system(size: 12 * CGFloat(ts)))
                 .foregroundColor(.muted)
                 .lineSpacing(3)
                 .padding(.leading, 12)
@@ -136,7 +137,7 @@ struct Stage3Tawaf: View {
         if !lapDuas.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
                 Text("\(S.recommendedDhikrPrefix) \(S.numeral(state.currentLap))")
-                    .font(.system(size: 9, weight: .regular))
+                    .font(.system(size: 9 * CGFloat(ts), weight: .regular))
                     .foregroundColor(.muted)
                     .tracking(2)
                 ForEach(Array(lapDuas.enumerated()), id: \.offset) { _, dua in
@@ -151,9 +152,9 @@ struct Stage3Tawaf: View {
 
         VStack(spacing: 10) {
             (Text(S.completeLapPromptPre) +
-             Text("الله أكبر").font(.system(size: 14)) +
+             Text("الله أكبر").font(.system(size: 14 * CGFloat(ts))) +
              Text(S.completeLapPromptPost))
-                .font(.system(size: 12))
+                .font(.system(size: 12 * CGFloat(ts)))
                 .foregroundColor(.muted)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: .center)
@@ -212,7 +213,7 @@ struct Stage3Tawaf: View {
             .padding(.bottom, 12)
 
         Text(S.maqamBody)
-            .font(.system(size: 13))
+            .font(.system(size: 13 * CGFloat(ts)))
             .foregroundColor(.inkLight)
             .lineSpacing(3)
             .padding(.bottom, 10)
@@ -224,7 +225,7 @@ struct Stage3Tawaf: View {
         .padding(.bottom, 12)
 
         Text(S.zamzamText)
-            .font(.system(size: 13))
+            .font(.system(size: 13 * CGFloat(ts)))
             .foregroundColor(.inkLight)
             .lineSpacing(3)
             .padding(.bottom, 24)
@@ -235,9 +236,9 @@ struct Stage3Tawaf: View {
 
     private func raka_row(_ prefix: String, surah: String) -> some View {
         HStack(alignment: .top, spacing: 8) {
-            Text("·").foregroundColor(.gold).font(.system(size: 14))
-            (Text(prefix + " ").font(.system(size: 13)).foregroundColor(.inkLight) +
-             Text(surah).font(.system(size: 13, weight: .medium)).foregroundColor(.ink))
+            Text("·").foregroundColor(.gold).font(.system(size: 14 * CGFloat(ts)))
+            (Text(prefix + " ").font(.system(size: 13 * CGFloat(ts))).foregroundColor(.inkLight) +
+             Text(surah).font(.system(size: 13 * CGFloat(ts), weight: .medium)).foregroundColor(.ink))
         }
     }
 }

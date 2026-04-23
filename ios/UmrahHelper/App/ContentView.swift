@@ -27,6 +27,7 @@ struct ContentView: View {
         }
         .tint(Color.gold)
         .preferredColorScheme(state.isDarkMode ? .dark : .light)
+        .environment(\.appTextScale, state.textScale)
     }
 
     private var guideTab: some View {
@@ -51,6 +52,19 @@ struct ContentView: View {
         }
         .overlay(alignment: .topTrailing) {
             HStack(spacing: 6) {
+                Button {
+                    let steps: [Double] = [0.85, 1.0, 1.2]
+                    let idx = steps.firstIndex(where: { abs($0 - state.textScale) < 0.05 }) ?? 1
+                    state.textScale = steps[(idx + 1) % steps.count]
+                } label: {
+                    Text("Aa")
+                        .font(.system(size: state.textScale < 0.95 ? 9 : state.textScale > 1.1 ? 14 : 11))
+                        .foregroundColor(.muted)
+                        .frame(width: 32, height: 28)
+                        .background(Color.parchmentDark.opacity(0.6))
+                }
+                .buttonStyle(.plain)
+
                 Button { state.isDarkMode.toggle() } label: {
                     Image(systemName: state.isDarkMode ? "sun.max" : "moon")
                         .font(.system(size: 12))

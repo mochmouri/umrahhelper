@@ -41,7 +41,7 @@ struct AppStrings {
     var stage1Title: String    { isArabic ? "قبل الميقات" : "Before Miqat" }
     var stage1Subtitle: String { isArabic ? "أعدّ جسدك وثيابك ونيّتك." : "Prepare your body, your garments, and your intention." }
     var saudiaNote: String     { isArabic
-        ? "تسافر على الخطوط السعودية؟ سيُعلن طاقم الطائرة عند اقترابكم من الميقات. كن مستعدًا بثياب الإحرام قبل الصعود إلى الطائرة، أو على الأقل قبل الإعلان."
+        ? "هل أنت على الخطوط السعودية؟ سيُعلن طاقم الطائرة عند اقترابكم من الميقات. كن مستعدًا بثياب الإحرام قبل الصعود إلى الطائرة، أو على الأقل قبل الإعلان."
         : "Travelling on Saudia Airlines? The cabin crew will announce when you are crossing the Miqat. Be ready in Ihram clothing before boarding, or at least before the announcement."
     }
     var dosAndDontsTitle: String { isArabic ? "المسموح والممنوع" : "Do's & Don'ts" }
@@ -73,7 +73,7 @@ struct AppStrings {
         ("No hunting or disturbing wildlife. However, killing harmful animals (like snakes/scorpions) is allowed.", false),
     ]}
     var stage1BodyText: String   { isArabic
-        ? "بعد أن تغتسل وتُعدّ ثيابك، توجّه إلى الميقات. ستُعلن نيّتك وتبدأ التلبية هناك."
+        ? "بعد أن تغتسل وتُعدّ ثيابك، توجّه إلى الميقات, ستُعلن نيّتك وتبدأ التلبية من هناك."
         : "Once you have made Ghusl and prepared your garments, proceed to the Miqat. You will make your Niyyah and begin reciting the Talbiyah there."
     }
     var continueToMiqat: String  { isArabic ? "متابعة إلى الميقات ←" : "CONTINUE TO MIQAT →" }
@@ -81,25 +81,25 @@ struct AppStrings {
     // MARK: - Stage 2
     var stage2Number: String   { isArabic ? "المرحلة ٢"   : "Stage 2" }
     var stage2Title: String    { isArabic ? "عند الميقات"  : "At the Miqat" }
-    var stage2Subtitle: String { isArabic ? "لحظة النيّة تبدأ أحكام الإحرام." : "The moment you make Niyyah, Ihram begins." }
+    var stage2Subtitle: String { isArabic ? "بعد النيّة تبدأ أحكام الإحرام." : "The moment you make Niyyah, Ihram begins." }
 
     var niyyahTitle: String { isArabic ? "النيّة" : "Niyyah — The Intention" }
     var niyyahBody: String  { isArabic
-        ? "استقبل القبلة إن أمكن، وارتدِ ثياب الإحرام إن لم تكن قد لبستها، ثم اعقد النيّة في قلبك وانطق بها."
-        : "Face the Qibla (if possible), put on your Ihram garments if not already wearing them, and make this intention with your heart. Say it aloud."
+        ? "استقبل القبلة إن أمكن، وارتدِ ثياب الإحرام إن لم تكن قد لبستها، ثم اعقد النيّة في قلبك أوانطق بها."
+        : "Face the Qibla (if possible), put on your Ihram garments if not already wearing them, and make this intention with your heart or say it aloud."
     }
     // Arabic: one string. English: split around the italic word.
-    var niyyahNoteArabic: String { "لهذه الصيغة من النيّة فائدة خاصة: إذا حال مانعٌ دون إتمام العمرة — كالمرض أو العجز المالي أو الحيض أو أي طارئ آخر — جاز للمُحرِم التحلّل دون أن يلزمه هدي الإحصار ولا فدية." }
+    var niyyahNoteArabic: String { "لهذه الصيغة من النيّة فائدة خاصة: إذا حال مانعٌ من إتمام العمرة — كالمرض أو العجز المالي أو الحيض أو أي طارئ آخر — جاز للمُحرِم التحلّل دون أن يلزمه هدي الإحصار أو فدية." }
     var niyyahNotePre: String    { "There are several forms of declaring your intention. The benefit of this particular form is that if an obstacle prevents completion — such as illness, lack of funds, menstruation for women, or any other emergency — the person in Ihram may exit their Ihram and is not required to offer the sacrifice due for being prevented (" }
     var niyyahNoteItalic: String { "hady al-iḥṣār" }
     var niyyahNotePost: String   { "), nor any expiatory sacrifice." }
 
     var talbiyahTitle: String      { isArabic ? "التلبية" : "Talbiyah" }
     var talbiyahBody: String       { isArabic
-        ? "ابدأ التلبية فور النيّة. واستمرّ في ترديدها — بصوت عالٍ للرجال، وبصوت خافت للنساء — حتى تبدأ الطواف."
+        ? "ابدأ التلبية فور الإحرام. واستمرّ في ترديدها — بصوت عالٍ للرجال، وبصوت خافت للنساء — حتى تبدأ بالطواف."
         : "Begin reciting the Talbiyah immediately after Niyyah. Continue reciting it — loudly for men, softly for women — until you begin Tawaf."
     }
-    var talbiyahStarted: String    { isArabic ? "✓  بدأتُ التلبية"    : "✓  I have started reciting" }
+    var talbiyahStarted: String    { isArabic ? "✓  بدأتُ بالتلبية"    : "✓  I have started reciting" }
     var talbiyahMarkStarted: String { isArabic ? "سجّل البداية"        : "Mark as started" }
     var talbiyahReminder: String   { isArabic ? "سجّل بداية التلبية قبل المتابعة." : "Mark the Talbiyah as started before proceeding." }
 
@@ -107,7 +107,7 @@ struct AppStrings {
     var mosquePre: String   { isArabic ? "ادخل بقدمك "        : "Enter with your " }
     var mosqueBold: String  { isArabic ? "اليمنى أولًا"        : "right foot first" }
     var mosquePost: String  { isArabic
-        ? ". قل هذا الدعاء عند الدخول. وحين ترى الكعبة للمرة الأولى، قِف — فهذه لحظة إجابة الدعاء."
+        ? ". قل هذا الدعاء عند الدخول. وحين ترى الكعبة للمرة الأولى، قِف وادعُ, فهذه لحظة إجابة الدعاء."
         : ". Say this dua as you step inside. When you first see the Ka'bah, pause — this is a moment when duas are answered."
     }
     var proceedToTawaf: String { isArabic ? "متابعة إلى الطواف ←" : "PROCEED TO TAWAF →" }
@@ -122,11 +122,11 @@ struct AppStrings {
     var beforeYouBegin: String    { isArabic ? "قبل البدء"           : "Before You Begin" }
     var checkWudu: String         { isArabic ? "أنا على طهارة (وضوء)" : "I am in a state of Wudu'" }
     var checkBlackStone: String   { isArabic
-        ? "حدّدتُ ركن الحجر الأسود (الأضواء الخضراء على اليمين)"
+        ? "حدّدتُ ركن الحجر الأسود (يجب أن تكون الأضواء الخضراء على يمينك)"
         : "I have located the Black Stone corner (there should be green lights to your right)"
     }
     var checkRaisedHand: String   { isArabic
-        ? "استلمتُ الحجر الأسود (إن أمكن) أو رفعتُ يمناي ناحيته"
+        ? "استلمتُ الحجر الأسود (إن أمكن) أو رفعتُ يمناي ناحيته (يحب أن يكون الحجر على يسارك)"
         : "I have kissed the Black Stone (if possible) or raised my right hand towards it"
     }
     var blackStoneDuaTitle: String { isArabic ? "دعاء الحجر الأسود" : "Dua at the Black Stone" }
@@ -147,7 +147,7 @@ struct AppStrings {
     func completeLapButton(_ n: Int) -> String { isArabic ? "إتمام الشوط \(n)" : "COMPLETE LAP \(n)" }
 
     var tawafAdhkarNote: String { isArabic
-        ? "هذه أذكار مستحبة. يمكنك أيضًا تلاوة القرآن الكريم، أو الدعاء، أو أي ذكر تشاء."
+        ? "هذه أذكار مستحبة. يمكنك أيضًا تلاوة القرآن الكريم، أو الدعاء، أو قول أي ذكر تشاء."
         : "These are recommended adhkar. You may also recite Quran, make personal du'a, or say any dhikr you wish."
     }
 
@@ -164,7 +164,7 @@ struct AppStrings {
 
     var maqamTitle: String  { isArabic ? "مقام إبراهيم" : "Maqam Ibrahim" }
     var maqamBody: String   { isArabic
-        ? "صلِّ ركعتين خلف مقام إبراهيم — أو في أي مكان خلفه إن كان مزدحمًا."
+        ? "صلِّ ركعتين خلف مقام إبراهيم أو في أي مكان خلفه إن كان مزدحمًا."
         : "Pray two raka'ah behind Maqam Ibrahim — or anywhere behind it if it is crowded."
     }
     var raka1Pre: String    { isArabic ? "الركعة الأولى: الفاتحة، ثم"  : "First raka'ah: Al-Fatiha, then" }
@@ -216,18 +216,18 @@ struct AppStrings {
     var stage5Number: String   { isArabic ? "المرحلة ٥"  : "Stage 5" }
     var stage5Title: String    { isArabic ? "التحلّل"     : "Tahleel" }
     var stage5Subtitle: String { isArabic
-        ? "الفعل الأخير — قصّ الشعر — يُعلم انتهاء الإحرام."
+        ? "المرحلة الأخيرة — قصّ الشعر — هكذا يتم التحليل من الإحرام."
         : "The final act — cutting the hair — marks the end of Ihram."
     }
     var hairCuttingTitle: String { isArabic ? "قصّ الشعر" : "Hair cutting" }
     var menLabel: String         { isArabic ? "رجال"       : "Men" }
     var menText: String          { isArabic
-        ? "الحدّ الأدنى هو قصّ مقدار رأس الأصبع من شعر الرأس كله. والأفضل حلق الرأس كله (الحلق)، وهو أفضل من التقصير."
+        ? "الحدّ الأدنى هو قصّ مقدار رأس الأصبع من أنحاء الرأس كله, والأفضل حلق الرأس كله."
         : "The minimum is to cut a fingertip's length of hair from all parts of the head. The preferable act is to shave all the hair off (Halq). This is more virtuous than trimming (Taqseer)."
     }
     var womenLabel: String { isArabic ? "نساء" : "Women" }
     var womenText: String  { isArabic
-        ? "اجمعي خصلةً من الشعر واقطعي منها بمقدار رأس الأصبع. ولا يجوز الحلق."
+        ? "اجمعي خصلةً من الشعر واقطعي منها بمقدار رأس الأصبع, ولا يجوز الحلق."
         : "Gather a lock of hair and cut a fingertip's length from its end. Do not shave."
     }
     var ihramLiftedNote: String  { isArabic
@@ -273,11 +273,11 @@ struct AppStrings {
 
     // MARK: - Adhkar tab
     var adhkarNavTitle: String  { isArabic ? "الأذكار"                                          : "Adhkar" }
-    var adhkarSubtitle: String  { isArabic ? "أذكار مأثورة يمكن ترديدها خلال الطواف والسعي"    : "Supplications to recite during Tawaf and Sa'i" }
+    var adhkarSubtitle: String  { isArabic ? "أذكار مأثورة من جوامع الدعاء يمكن ترديدها خلال الطواف والسعي"    : "Supplications to recite during Tawaf and Sa'i" }
 
     // MARK: - Sa'i jogging note
     var saiJoggingNote: String  { isArabic
-        ? "ابحث عن الأضواء الخضراء على جدران المسعى — يُستحب للرجال الهرولة بينها في كل شوط. هذه سنة نبوية: أمر النبي ﷺ أصحابه بالإسراع هنا إظهارًا للقوة."
-        : "Look for the green lights on the walls of the Mas'aa — men are encouraged to jog between them in every round. This is Sunnah: the Prophet ﷺ instructed the Companions to hasten here to show their strength."
+        ? "ابحث عن الأضواء الخضراء على سقف المسعى — يُستحب للرجال الهرولة بينها في كل شوط. هذه سنة نبوية: أمر النبي ﷺ أصحابه بالإسراع هنا إظهارًا للقوة."
+        : "Look for the green lights on top of the Mas'aa — men are encouraged to jog between them in every round. This is Sunnah: the Prophet ﷺ instructed the Companions to hasten here to show their strength."
     }
 }

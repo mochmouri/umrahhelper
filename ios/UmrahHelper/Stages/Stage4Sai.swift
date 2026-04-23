@@ -2,6 +2,7 @@ import SwiftUI
 
 struct Stage4Sai: View {
     let state: UmrahState
+    @Environment(\.appTextScale) private var ts
 
     private var showEndpointDhikr: Bool {
         let c = state.roundTimes.count
@@ -64,7 +65,7 @@ struct Stage4Sai: View {
         let S = state.strings
         VStack(spacing: 8) {
             Text(S.roundCounterLabel)
-                .font(.system(size: 10, weight: .regular))
+                .font(.system(size: 10 * CGFloat(ts), weight: .regular))
                 .foregroundColor(.muted)
                 .tracking(2)
                 .textCase(.uppercase)
@@ -72,24 +73,24 @@ struct Stage4Sai: View {
             HStack(alignment: .lastTextBaseline, spacing: 8) {
                 if state.isArabic {
                     Text("\(S.numeral(7)) /")
-                        .font(.system(size: 22, weight: .light, design: .serif))
+                        .font(.system(size: 22 * CGFloat(ts), weight: .light, design: .serif))
                         .foregroundColor(.muted)
                     Text(S.numeral(state.currentRound))
-                        .font(.system(size: 72, weight: .light, design: .serif))
+                        .font(.system(size: 72 * CGFloat(ts), weight: .light, design: .serif))
                         .foregroundColor(.ink)
                 } else {
                     Text("\(state.currentRound)")
-                        .font(.system(size: 72, weight: .light, design: .serif))
+                        .font(.system(size: 72 * CGFloat(ts), weight: .light, design: .serif))
                         .foregroundColor(.ink)
                     Text("/ 7")
-                        .font(.system(size: 22, weight: .light, design: .serif))
+                        .font(.system(size: 22 * CGFloat(ts), weight: .light, design: .serif))
                         .foregroundColor(.muted)
                 }
             }
             .environment(\.layoutDirection, .leftToRight)
 
             Text(S.roundLabels[state.currentRound - 1])
-                .font(.system(size: 13, weight: .medium))
+                .font(.system(size: 13 * CGFloat(ts), weight: .medium))
                 .foregroundColor(.inkLight)
 
             roundDots
@@ -107,11 +108,11 @@ struct Stage4Sai: View {
                 Rectangle().fill(Color.gold).frame(width: 2)
                 VStack(alignment: .leading, spacing: 6) {
                     Text(S.atCurrentEndpoint)
-                        .font(.system(size: 9))
+                        .font(.system(size: 9 * CGFloat(ts)))
                         .foregroundColor(.muted)
                         .tracking(2)
                     Text("\(S.endpointLabels[state.roundTimes.count - 1])\(S.endpointDhikrBody)")
-                        .font(.system(size: 12))
+                        .font(.system(size: 12 * CGFloat(ts)))
                         .foregroundColor(.inkLight)
                         .lineSpacing(3)
                     DuaBlock(arabic: safaDhikr.arabic, transliteration: safaDhikr.transliteration,

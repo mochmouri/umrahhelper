@@ -3,6 +3,7 @@ import SwiftUI
 struct AdhkarView: View {
     @AppStorage("isArabic") private var isArabic = false
     private var S: AppStrings { AppStrings(isArabic: isArabic) }
+    @Environment(\.appTextScale) private var ts
 
     var body: some View {
         NavigationStack {
@@ -12,7 +13,7 @@ struct AdhkarView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
                         Text(S.adhkarSubtitle)
-                            .font(.system(size: 13))
+                            .font(.system(size: 13 * CGFloat(ts)))
                             .foregroundColor(.muted)
                             .lineSpacing(3)
                             .frame(maxWidth: .infinity, alignment: .leading)

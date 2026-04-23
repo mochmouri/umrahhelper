@@ -1,6 +1,18 @@
 import SwiftUI
 import UIKit
 
+// MARK: - Text scale environment key
+
+private struct AppTextScaleKey: EnvironmentKey {
+    static let defaultValue: Double = 1.0
+}
+extension EnvironmentValues {
+    var appTextScale: Double {
+        get { self[AppTextScaleKey.self] }
+        set { self[AppTextScaleKey.self] = newValue }
+    }
+}
+
 extension Color {
     // All colours are adaptive: light → parchment palette, dark → warm dark palette
     static let parchment = Color(UIColor { tc in
@@ -77,17 +89,19 @@ struct StageHeader: View {
     let title: String
     let subtitle: String
 
+    @Environment(\.appTextScale) private var ts
+
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(number.uppercased())
-                .font(.system(size: 10, weight: .regular))
+                .font(.system(size: 10 * CGFloat(ts), weight: .regular))
                 .foregroundColor(.gold)
                 .tracking(3)
             Text(title)
-                .font(.system(size: 22, weight: .semibold, design: .serif))
+                .font(.system(size: 22 * CGFloat(ts), weight: .semibold, design: .serif))
                 .foregroundColor(.ink)
             Text(subtitle)
-                .font(.system(size: 13))
+                .font(.system(size: 13 * CGFloat(ts)))
                 .foregroundColor(.muted)
                 .lineSpacing(3)
         }
@@ -99,11 +113,13 @@ struct StageHeader: View {
 struct GoldBorderNote: View {
     let text: String
 
+    @Environment(\.appTextScale) private var ts
+
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
             Rectangle().fill(Color.gold).frame(width: 2)
             Text(text)
-                .font(.system(size: 13))
+                .font(.system(size: 13 * CGFloat(ts)))
                 .foregroundColor(.inkLight)
                 .lineSpacing(3)
                 .padding(.leading, 12)
