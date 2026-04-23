@@ -156,8 +156,11 @@ struct AppStrings {
     }
     var recommendedDhikrPrefix: String { isArabic ? "الأذكار المستحبة — الشوط" : "RECOMMENDED DHIKR — LAP" }
     func showDhikr(_ n: Int) -> String {
-        isArabic ? "عرض الأذكار المستحبة (\(numeral(n)) دعاء)"
-                 : "Show recommended dhikr (\(n) \(n == 1 ? "prayer" : "prayers"))"
+        if isArabic {
+            let arabic = n == 2 ? "دعائين" : "\(numeral(n)) دعاء"
+            return "عرض الأذكار المستحبة (\(arabic))"
+        }
+        return "Show recommended dhikr (\(n) \(n == 1 ? "prayer" : "prayers"))"
     }
     var hideDhikr: String { isArabic ? "إخفاء الأذكار" : "Hide dhikr" }
     var completeLapPromptPre: String   { isArabic ? "عند الحجر الأسود، ارفع يدك وقل "     : "At the Black Stone, raise your hand and say " }
