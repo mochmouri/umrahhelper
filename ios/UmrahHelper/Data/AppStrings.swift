@@ -245,6 +245,7 @@ struct AppStrings {
     var totalUmrahLabel: String  { isArabic ? "إجمالي العمرة"   : "Total Umrah" }
     var tawafLapBreakdown: String  { isArabic ? "الطواف — تفاصيل الأشواط" : "Tawaf — lap breakdown" }
     var saiRoundBreakdown: String  { isArabic ? "السعي — تفاصيل الأشواط"  : "Saʿi — round breakdown" }
+    var shareSummary: String     { isArabic ? "مشاركة الملخّص"  : "SHARE SUMMARY" }
     var startOverButton: String  { isArabic ? "البدء من جديد"   : "START OVER" }
     var startOverTitle: String   { isArabic ? "البدء من جديد؟"  : "Start over?" }
     var startOverMessage: String { isArabic

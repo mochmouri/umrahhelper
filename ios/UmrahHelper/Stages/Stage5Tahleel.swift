@@ -5,6 +5,8 @@ struct Stage5Tahleel: View {
     let state: UmrahState
     @Environment(\.modelContext) private var modelContext
     @State private var showResetConfirm = false
+    @State private var shareImage: UIImage? = nil
+    @State private var showShare = false
 
     private var tawafTotal: TimeInterval? { state.tawafMetrics()?.total }
     private var saiTotal: TimeInterval? { state.saiMetrics()?.total }
@@ -42,7 +44,7 @@ struct Stage5Tahleel: View {
                 Text("الله يتقبل")
                     .font(.system(size: 40))
                     .foregroundColor(.ink)
-                    .frame(maxWidth: .infinity, alignment: .center)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
                     .environment(\.layoutDirection, .rightToLeft)
                 Text(S.congratsSubtitle)
                     .font(.system(size: 15, weight: .regular, design: .serif))
@@ -62,6 +64,22 @@ struct Stage5Tahleel: View {
                     .padding(.bottom, 24)
             }
 
+            if umrahTotal != nil {
+                Button(S.shareSummary) {
+                    let tawaf = state.formatDuration(tawafTotal ?? 0)
+                    let sai   = state.formatDuration(saiTotal ?? 0)
+                    let total = state.formatDuration(umrahTotal ?? 0)
+                    shareImage = renderSummaryCard(
+                        date: Date(),
+                        tawaf: tawaf, sai: sai, total: total,
+                        isArabic: state.isArabic
+                    )
+                    showShare = shareImage != nil
+                }
+                .primaryButton()
+                .padding(.bottom, 12)
+            }
+
             Button(S.startOverButton) { showResetConfirm = true }
                 .ghostButton()
         }
@@ -69,6 +87,11 @@ struct Stage5Tahleel: View {
         .padding(.vertical, 24)
         .padding(.bottom, 16)
         .onAppear { saveSessionIfNeeded() }
+        .sheet(isPresented: $showShare) {
+            if let img = shareImage {
+                ShareSheet(items: [img])
+            }
+        }
         .alert(state.strings.startOverTitle, isPresented: $showResetConfirm) {
             Button(state.strings.resetButton, role: .destructive) {
                 state.reset()

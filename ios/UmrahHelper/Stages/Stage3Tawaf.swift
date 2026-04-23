@@ -80,12 +80,21 @@ struct Stage3Tawaf: View {
                 .textCase(.uppercase)
 
             HStack(alignment: .lastTextBaseline, spacing: 8) {
-                Text(S.numeral(state.currentLap))
-                    .font(.system(size: 72, weight: .light, design: .serif))
-                    .foregroundColor(.ink)
-                Text("/ \(S.numeral(7))")
-                    .font(.system(size: 22, weight: .light, design: .serif))
-                    .foregroundColor(.muted)
+                if state.isArabic {
+                    Text("\(S.numeral(7)) /")
+                        .font(.system(size: 22, weight: .light, design: .serif))
+                        .foregroundColor(.muted)
+                    Text(S.numeral(state.currentLap))
+                        .font(.system(size: 72, weight: .light, design: .serif))
+                        .foregroundColor(.ink)
+                } else {
+                    Text("\(state.currentLap)")
+                        .font(.system(size: 72, weight: .light, design: .serif))
+                        .foregroundColor(.ink)
+                    Text("/ 7")
+                        .font(.system(size: 22, weight: .light, design: .serif))
+                        .foregroundColor(.muted)
+                }
             }
             .environment(\.layoutDirection, .leftToRight)
 

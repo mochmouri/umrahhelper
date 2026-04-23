@@ -6,6 +6,9 @@ struct SessionDetailView: View {
     @AppStorage("isArabic") private var isArabic = false
     private var S: AppStrings { AppStrings(isArabic: isArabic) }
 
+    @State private var shareImage: UIImage? = nil
+    @State private var showShare = false
+
     var body: some View {
         ZStack {
             Color.parchment.ignoresSafeArea()
@@ -66,6 +69,29 @@ struct SessionDetailView: View {
         .navigationTitle(S.sessionTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(Color.parchment, for: .navigationBar)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    shareImage = renderSummaryCard(
+                        date: session.date,
+                        tawaf: session.formatDuration(session.tawafTotal),
+                        sai:   session.formatDuration(session.saiTotal),
+                        total: session.formatDuration(session.totalDuration),
+                        isArabic: isArabic
+                    )
+                    showShare = shareImage != nil
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                        .font(.system(size: 14))
+                        .foregroundColor(.muted)
+                }
+            }
+        }
+        .sheet(isPresented: $showShare) {
+            if let img = shareImage {
+                ShareSheet(items: [img])
+            }
+        }
         .environment(\.layoutDirection, isArabic ? .rightToLeft : .leftToRight)
     }
 
