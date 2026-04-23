@@ -89,10 +89,10 @@ export function Stage4Sai() {
             >
               {state.isArabic ? (
                 <>
+                  <span className="font-serif text-2xl text-muted">٧ /</span>
                   <span className="font-serif text-7xl text-ink leading-none">
                     {['١','٢','٣','٤','٥','٦','٧'][currentRound - 1] ?? currentRound}
                   </span>
-                  <span className="font-serif text-2xl text-muted">/ ٧</span>
                 </>
               ) : (
                 <>

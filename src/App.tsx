@@ -27,6 +27,7 @@ function AppInner() {
 
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = 0
+    window.scrollTo(0, 0)
   }, [scrollKey])
 
   useEffect(() => {
