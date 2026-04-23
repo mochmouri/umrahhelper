@@ -1,44 +1,47 @@
 import { useUmrah } from '../context/UmrahContext'
 import { DuaBlock } from '../components/DuaBlock'
 import { niyyah, talbiyah, enteringMosque } from '../data/duas'
+import { getStrings } from '../data/strings'
 
 export function Stage2AtMiqat() {
   const { state, dispatch, goToStage } = useUmrah()
+  const S = getStrings(state.isArabic)
 
   return (
-    <div className="min-h-dvh bg-parchment px-6 pt-28 pb-24 max-w-[480px] mx-auto">
-
+    <div
+      className="min-h-dvh bg-parchment px-6 pt-6 pb-24 max-w-[480px] mx-auto"
+      dir={state.isArabic ? 'rtl' : 'ltr'}
+    >
       <header className="mb-8">
-        <p className="font-sans text-xs text-gold uppercase tracking-widest mb-1">Stage 2</p>
-        <h2 className="font-serif text-2xl text-ink">At the Miqat</h2>
-        <p className="font-sans text-sm text-muted mt-1 leading-relaxed">
-          The moment you make Niyyah, Ihram begins.
-        </p>
+        <p className="font-sans text-xs text-gold uppercase tracking-widest mb-1">{S.stage2Number}</p>
+        <h2 className="font-serif text-2xl text-ink">{S.stage2Title}</h2>
+        <p className="font-sans text-sm text-muted mt-1 leading-relaxed">{S.stage2Subtitle}</p>
       </header>
 
       {/* Niyyah */}
       <section className="mb-8">
-        <h3 className="font-serif text-base font-semibold text-ink mb-1">Niyyah — The Intention</h3>
-        <p className="font-sans text-sm text-muted mb-4 leading-relaxed">
-          Face the Qibla (if possible), put on your Ihram garments if not already wearing them, and make this intention with your heart. Say it aloud.
-        </p>
+        <h3 className="font-serif text-base font-semibold text-ink mb-1">{S.niyyahTitle}</h3>
+        <p className="font-sans text-sm text-muted mb-4 leading-relaxed">{S.niyyahBody}</p>
         <DuaBlock {...niyyah} />
-        <div className="mt-4 border-l-2 border-parchment-dark pl-4">
-          <p className="font-sans text-xs text-muted leading-relaxed">
-            There are several forms of declaring your intention. The benefit of this particular form is that if an obstacle prevents completion — such as illness, lack of funds, menstruation for women, or any other emergency — the person in Ihram may exit their Ihram and is not required to offer the sacrifice due for being prevented (<span className="italic">hady al-iḥṣār</span>), nor any expiatory sacrifice.
-          </p>
+        <div
+          className="mt-4 border-parchment-dark"
+          style={{ borderInlineStartWidth: '2px', borderInlineStartStyle: 'solid', paddingInlineStart: '1rem' }}
+        >
+          {state.isArabic ? (
+            <p className="font-sans text-xs text-muted leading-relaxed">{S.niyyahNoteArabic}</p>
+          ) : (
+            <p className="font-sans text-xs text-muted leading-relaxed">
+              {S.niyyahNotePre}<span className="italic">{S.niyyahNoteItalic}</span>{S.niyyahNotePost}
+            </p>
+          )}
         </div>
       </section>
 
       {/* Talbiyah */}
       <section className="mb-8">
-        <h3 className="font-serif text-base font-semibold text-ink mb-1">Talbiyah</h3>
-        <p className="font-sans text-sm text-muted mb-4 leading-relaxed">
-          Begin reciting the Talbiyah immediately after Niyyah. Continue reciting it — loudly for men, softly for women — until you begin Tawaf.
-        </p>
+        <h3 className="font-serif text-base font-semibold text-ink mb-1">{S.talbiyahTitle}</h3>
+        <p className="font-sans text-sm text-muted mb-4 leading-relaxed">{S.talbiyahBody}</p>
         <DuaBlock {...talbiyah} />
-
-        {/* Toggle */}
         <button
           onClick={() =>
             dispatch({ type: 'SET_TALBIYAH_STARTED', payload: !state.talbiyahStarted })
@@ -49,15 +52,15 @@ export function Stage2AtMiqat() {
               : 'border-parchment-dark text-ink-light bg-transparent hover:border-ink-light'
           }`}
         >
-          {state.talbiyahStarted ? '✓ I have started reciting' : 'Mark as started'}
+          {state.talbiyahStarted ? S.talbiyahStarted : S.talbiyahMarkStarted}
         </button>
       </section>
 
       {/* Entering the Mosque */}
       <section className="mb-8">
-        <h3 className="font-serif text-base font-semibold text-ink mb-1">Entering Al-Masjid Al-Haraam</h3>
+        <h3 className="font-serif text-base font-semibold text-ink mb-1">{S.mosqueTitle}</h3>
         <p className="font-sans text-sm text-muted mb-4 leading-relaxed">
-          Enter with your <span className="text-ink font-medium">right foot first</span>. Say this dua as you step inside. When you first see the Ka'bah, pause — this is a moment when duas are answered.
+          {S.mosquePre}<span className="text-ink font-medium">{S.mosqueBold}</span>{S.mosquePost}
         </p>
         <DuaBlock {...enteringMosque} />
       </section>
@@ -70,9 +73,7 @@ export function Stage2AtMiqat() {
       </div>
 
       {!state.talbiyahStarted && (
-        <p className="font-sans text-xs text-muted text-center mb-4">
-          Mark the Talbiyah as started before proceeding.
-        </p>
+        <p className="font-sans text-xs text-muted text-center mb-4">{S.talbiyahReminder}</p>
       )}
 
       <button
@@ -84,9 +85,8 @@ export function Stage2AtMiqat() {
         }`}
         disabled={!state.talbiyahStarted}
       >
-        Proceed to Tawaf →
+        {S.proceedToTawaf}
       </button>
-
     </div>
   )
 }

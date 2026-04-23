@@ -15,11 +15,17 @@ export interface UmrahState {
   tawafStartTime: number | null
   lapTimes: number[]      // timestamp on each lap completion (length = laps done)
   currentLap: number      // 0 = not started, 1–7 = active lap, 8 = all done
+  yemeniCornerChecked: boolean
+  blackStonePassChecked: boolean
   saiStarted: boolean
   saiStartTime: number | null
   roundTimes: number[]    // timestamp on each round completion
   currentRound: number    // 0 = not started, 1–7 = active round, 8 = all done
   umrahStartTime: number | null
+  // UI preferences
+  isArabic: boolean
+  isDarkMode: boolean
+  textScale: number       // 0.85 | 1.0 | 1.2
 }
 
 export type Action =
@@ -28,8 +34,13 @@ export type Action =
   | { type: 'SET_TAWAF_CHECKLIST'; payload: Partial<UmrahState['tawafChecklist']> }
   | { type: 'START_TAWAF' }
   | { type: 'COMPLETE_LAP' }
+  | { type: 'SET_YEMENI_CORNER_CHECKED'; payload: boolean }
+  | { type: 'SET_BLACK_STONE_PASS_CHECKED'; payload: boolean }
   | { type: 'START_SAI' }
   | { type: 'COMPLETE_ROUND' }
+  | { type: 'SET_ARABIC'; payload: boolean }
+  | { type: 'SET_DARK_MODE'; payload: boolean }
+  | { type: 'SET_TEXT_SCALE'; payload: number }
   | { type: 'RESET' }
 
 const initialState: UmrahState = {
@@ -40,11 +51,16 @@ const initialState: UmrahState = {
   tawafStartTime: null,
   lapTimes: [],
   currentLap: 0,
+  yemeniCornerChecked: false,
+  blackStonePassChecked: false,
   saiStarted: false,
   saiStartTime: null,
   roundTimes: [],
   currentRound: 0,
   umrahStartTime: null,
+  isArabic: false,
+  isDarkMode: false,
+  textScale: 1.0,
 }
 
 function reducer(state: UmrahState, action: Action): UmrahState {
@@ -69,6 +85,8 @@ function reducer(state: UmrahState, action: Action): UmrahState {
         tawafStarted: true,
         tawafStartTime: Date.now(),
         currentLap: 1,
+        yemeniCornerChecked: false,
+        blackStonePassChecked: false,
       }
     case 'COMPLETE_LAP': {
       const lapTimes = [...state.lapTimes, Date.now()]
@@ -76,8 +94,14 @@ function reducer(state: UmrahState, action: Action): UmrahState {
         ...state,
         lapTimes,
         currentLap: Math.min(state.currentLap + 1, 8),
+        yemeniCornerChecked: false,
+        blackStonePassChecked: false,
       }
     }
+    case 'SET_YEMENI_CORNER_CHECKED':
+      return { ...state, yemeniCornerChecked: action.payload }
+    case 'SET_BLACK_STONE_PASS_CHECKED':
+      return { ...state, blackStonePassChecked: action.payload }
     case 'START_SAI':
       return {
         ...state,
@@ -93,8 +117,19 @@ function reducer(state: UmrahState, action: Action): UmrahState {
         currentRound: Math.min(state.currentRound + 1, 8),
       }
     }
+    case 'SET_ARABIC':
+      return { ...state, isArabic: action.payload }
+    case 'SET_DARK_MODE':
+      return { ...state, isDarkMode: action.payload }
+    case 'SET_TEXT_SCALE':
+      return { ...state, textScale: action.payload }
     case 'RESET':
-      return { ...initialState }
+      return {
+        ...initialState,
+        isArabic: state.isArabic,
+        isDarkMode: state.isDarkMode,
+        textScale: state.textScale,
+      }
     default:
       return state
   }
@@ -108,13 +143,26 @@ interface UmrahContextType {
 
 const UmrahContext = createContext<UmrahContextType | null>(null)
 
-const STORAGE_KEY = 'umrah-guide-v1'
+const STORAGE_KEY = 'umrah-guide-v2'
 
 export function UmrahProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState, (init) => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY)
-      return saved ? (JSON.parse(saved) as UmrahState) : init
+      if (saved) {
+        const parsed = JSON.parse(saved) as UmrahState
+        // Migrate missing fields from older saves
+        return {
+          ...init,
+          ...parsed,
+          yemeniCornerChecked: parsed.yemeniCornerChecked ?? false,
+          blackStonePassChecked: parsed.blackStonePassChecked ?? false,
+          isArabic: parsed.isArabic ?? false,
+          isDarkMode: parsed.isDarkMode ?? false,
+          textScale: parsed.textScale ?? 1.0,
+        }
+      }
+      return init
     } catch {
       return init
     }

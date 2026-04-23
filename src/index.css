@@ -29,6 +29,11 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  html.dark {
+    background-color: #1A1714;
+    color: #F0EDE8;
+  }
+
   body {
     margin: 0;
     font-family: "DM Sans", system-ui, sans-serif;
@@ -38,4 +43,13 @@
   #root {
     min-height: 100dvh;
   }
+}
+
+/* Dark mode overrides */
+html.dark {
+  --color-parchment: #1A1714;
+  --color-parchment-dark: #2A2520;
+  --color-ink: #F0EDE8;
+  --color-ink-light: #C8C0B4;
+  --color-muted: #8A7A6A;
 }

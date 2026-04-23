@@ -1,15 +1,15 @@
 import { useUmrah } from '../context/UmrahContext'
-
-const STAGE_LABELS = ['Before Miqat', 'At Miqat', 'Tawaf', 'Saʿi', 'Tahleel']
+import { getStrings } from '../data/strings'
 
 export function ProgressBar() {
   const { state } = useUmrah()
+  const S = getStrings(state.isArabic)
   if (state.stage === 0) return null
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-parchment border-b border-parchment-dark">
+    <div className="sticky top-0 z-40 bg-parchment border-b border-parchment-dark">
       <div className="max-w-[480px] mx-auto px-5 py-3 flex gap-1.5 items-center">
-        {STAGE_LABELS.map((label, i) => {
+        {S.stageLabels.map((label, i) => {
           const s = i + 1
           const active = state.stage === s
           const done = state.stage > s

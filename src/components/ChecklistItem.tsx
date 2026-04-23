@@ -28,7 +28,7 @@ export function ChecklistItem({ label, checked, onChange }: ChecklistItemProps) 
         )}
       </button>
       <span
-        className={`font-sans text-sm leading-relaxed pt-0.5 transition-colors ${
+        className={`font-sans text-sm leading-relaxed pt-0.5 transition-colors flex-1 ${
           checked ? 'text-muted line-through' : 'text-ink'
         }`}
       >

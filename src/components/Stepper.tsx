@@ -1,27 +1,23 @@
 import type { Stage } from '../context/UmrahContext'
 
-const STEPS: { label: string; stage: Stage }[] = [
-  { label: 'Before Miqat', stage: 1 },
-  { label: 'At Miqat', stage: 2 },
-  { label: 'Tawaf', stage: 3 },
-  { label: 'Saʿi', stage: 4 },
-  { label: 'Tahleel', stage: 5 },
-]
+const STAGES: Stage[] = [1, 2, 3, 4, 5]
 
 interface StepperProps {
   currentStage: number
   onStepClick: (stage: Stage) => void
+  labels: string[]
 }
 
-export function Stepper({ currentStage, onStepClick }: StepperProps) {
+export function Stepper({ currentStage, onStepClick, labels }: StepperProps) {
   return (
     <div className="flex items-center w-full">
-      {STEPS.map(({ label, stage }, i) => {
+      {STAGES.map((stage, i) => {
+        const label = labels[i] ?? String(stage)
         const done = currentStage > stage
         const active = currentStage === stage
 
         return (
-          <div key={label} className="flex items-center flex-1 min-w-0">
+          <div key={stage} className="flex items-center flex-1 min-w-0">
             <button
               onClick={() => onStepClick(stage)}
               className="flex flex-col items-center gap-1.5 w-full"
@@ -39,7 +35,7 @@ export function Stepper({ currentStage, onStepClick }: StepperProps) {
                 {label}
               </span>
             </button>
-            {i < STEPS.length - 1 && (
+            {i < STAGES.length - 1 && (
               <div
                 className={`h-px flex-shrink-0 w-3 transition-colors ${
                   done ? 'bg-gold' : 'bg-parchment-dark'

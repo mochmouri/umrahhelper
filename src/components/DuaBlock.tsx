@@ -7,21 +7,39 @@ interface DuaBlockProps extends Dua {
 export function DuaBlock({ arabic, transliteration, meaning, source, compact = false }: DuaBlockProps) {
   return (
     <div className={`space-y-3 ${compact ? 'py-3' : 'py-5'} border-b border-parchment-dark last:border-0`}>
+      {/* Arabic: always right-aligned, RTL */}
       <p
         lang="ar"
-        className={`font-arabic leading-loose text-ink text-right ${compact ? 'text-xl' : 'text-2xl'}`}
         dir="rtl"
+        className={`font-arabic leading-loose text-ink text-right w-full ${compact ? 'text-xl' : 'text-2xl'}`}
+        style={{ textAlign: 'right', direction: 'rtl', unicodeBidi: 'isolate' }}
       >
         {arabic}
       </p>
-      <p className="font-sans text-xs text-muted italic leading-relaxed">
+      {/* Transliteration: always left-to-right */}
+      <p
+        dir="ltr"
+        className="font-sans text-xs text-muted italic leading-relaxed text-left"
+        style={{ textAlign: 'left', direction: 'ltr', unicodeBidi: 'isolate' }}
+      >
         {transliteration}
       </p>
-      <p className="font-sans text-sm text-ink-light leading-relaxed">
+      {/* Meaning: always left-to-right */}
+      <p
+        dir="ltr"
+        className="font-sans text-sm text-ink-light leading-relaxed text-left"
+        style={{ textAlign: 'left', direction: 'ltr', unicodeBidi: 'isolate' }}
+      >
         {meaning}
       </p>
       {source && (
-        <p className="font-sans text-xs text-muted">— {source}</p>
+        <p
+          dir="ltr"
+          className="font-sans text-xs text-muted text-left"
+          style={{ textAlign: 'left', direction: 'ltr', unicodeBidi: 'isolate' }}
+        >
+          — {source}
+        </p>
       )}
     </div>
   )

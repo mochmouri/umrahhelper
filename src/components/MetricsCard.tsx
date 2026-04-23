@@ -5,9 +5,11 @@ interface MetricsCardProps {
   metrics: LapMetric[]
   total: number
   average: number
+  averageLabel?: string
+  totalLabel?: string
 }
 
-export function MetricsCard({ title, metrics, total, average }: MetricsCardProps) {
+export function MetricsCard({ title, metrics, total, average, averageLabel = 'Average', totalLabel = 'Total' }: MetricsCardProps) {
   if (metrics.length === 0) return null
 
   return (
@@ -23,11 +25,11 @@ export function MetricsCard({ title, metrics, total, average }: MetricsCardProps
       </div>
       <div className="border-t border-parchment-dark pt-3 space-y-1.5">
         <div className="flex justify-between font-sans text-sm">
-          <span className="text-muted">Average</span>
+          <span className="text-muted">{averageLabel}</span>
           <span className="text-ink tabular-nums">{formatDuration(average)}</span>
         </div>
         <div className="flex justify-between font-sans text-sm font-semibold">
-          <span className="text-ink">Total</span>
+          <span className="text-ink">{totalLabel}</span>
           <span className="text-ink tabular-nums">{formatDuration(total)}</span>
         </div>
       </div>

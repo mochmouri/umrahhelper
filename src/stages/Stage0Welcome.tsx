@@ -1,34 +1,39 @@
 import { useUmrah, type Stage } from '../context/UmrahContext'
 import { Stepper } from '../components/Stepper'
+import { getStrings } from '../data/strings'
 
 export function Stage0Welcome() {
   const { state, goToStage } = useUmrah()
+  const S = getStrings(state.isArabic)
 
   const handleStepClick = (stage: Stage) => {
     if (stage <= state.stage + 1) {
       goToStage(stage)
     } else {
-      if (window.confirm(`You haven't reached this step yet. Jump ahead anyway?`)) {
+      if (window.confirm(S.jumpAheadMessage)) {
         goToStage(stage)
       }
     }
   }
 
   return (
-    <div className="min-h-dvh bg-parchment flex flex-col items-center justify-center px-6 py-16">
+    <div
+      className="min-h-dvh bg-parchment flex flex-col items-center justify-center px-6 py-16"
+      dir={state.isArabic ? 'rtl' : 'ltr'}
+    >
       <div className="w-full max-w-[480px] mx-auto space-y-8 text-center">
 
-        {/* Arabic title */}
+        {/* Arabic title — always centered */}
         <div className="space-y-2">
           <h1
             lang="ar"
             dir="rtl"
-            className="font-arabic text-5xl leading-loose text-ink"
+            className="font-arabic text-5xl leading-loose text-ink text-center"
           >
             دَلِيلُ الْعُمْرَة
           </h1>
           <p className="font-serif text-lg italic text-ink-light">
-            A step-by-step companion for your Umrah
+            {S.welcomeSubtitle}
           </p>
         </div>
 
@@ -40,8 +45,11 @@ export function Stage0Welcome() {
         </div>
 
         {/* Description */}
-        <p className="font-sans text-sm text-ink-light leading-relaxed text-left">
-          Umrah is the lesser pilgrimage to Makkah — a voluntary act of worship that may be performed at any time of the year. Though shorter than Hajj, it carries immense spiritual weight and is a profound opportunity for renewal and closeness to Allah. This guide walks you through each step, from putting on Ihram to the final cut of the hair, so your heart can remain in worship rather than in logistics.
+        <p
+          className="font-sans text-sm text-ink-light leading-relaxed"
+          style={{ textAlign: state.isArabic ? 'right' : 'left' }}
+        >
+          {S.welcomeBody}
         </p>
 
         {/* Begin button */}
@@ -49,13 +57,13 @@ export function Stage0Welcome() {
           onClick={() => goToStage(1)}
           className="w-full py-3.5 bg-ink text-parchment font-sans text-sm tracking-widest uppercase hover:bg-ink-light transition-colors"
         >
-          Begin
+          {S.beginButton}
         </button>
 
         {/* Stepper */}
         <div className="pt-2">
-          <p className="font-sans text-xs text-muted mb-4 text-center">or jump to a step</p>
-          <Stepper currentStage={state.stage} onStepClick={handleStepClick} />
+          <p className="font-sans text-xs text-muted mb-4 text-center">{S.orJumpToStep}</p>
+          <Stepper currentStage={state.stage} onStepClick={handleStepClick} labels={S.stageLabels} />
         </div>
 
       </div>
