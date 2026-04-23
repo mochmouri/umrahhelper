@@ -269,7 +269,15 @@ struct AppStrings {
     var totalPill: String { isArabic ? "المجموع" : "Total" }
 
     // MARK: - Session Detail
-    var sessionTitle: String { isArabic ? "الجلسة" : "Session" }
+    var sessionTitle: String    { isArabic ? "الجلسة"            : "Session" }
+    var deleteEntry: String     { isArabic ? "حذف"               : "Delete" }
+    var deleteTitle: String     { isArabic ? "حذف هذه العمرة؟"   : "Delete this entry?" }
+    var deleteMessage: String   { isArabic ? "لا يمكن التراجع عن هذا الإجراء." : "This cannot be undone." }
+    var deleteConfirm: String   { isArabic ? "حذف"               : "Delete" }
+    var cancelButton2: String   { isArabic ? "إلغاء"             : "Cancel" }
+
+    // MARK: - Back navigation
+    var backButton: String      { isArabic ? "→ المرحلة السابقة" : "← Previous section" }
 
     // MARK: - Adhkar tab
     var adhkarNavTitle: String  { isArabic ? "الأذكار"                                          : "Adhkar" }

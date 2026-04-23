@@ -6,9 +6,12 @@ struct SessionDetailView: View {
     @AppStorage("isArabic") private var isArabic = false
     private var S: AppStrings { AppStrings(isArabic: isArabic) }
 
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.appTextScale) private var ts
     @State private var shareImage: UIImage? = nil
     @State private var showShare = false
+    @State private var showDeleteConfirm = false
 
     var body: some View {
         ZStack {
@@ -72,19 +75,26 @@ struct SessionDetailView: View {
         .toolbarBackground(Color.parchment, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    shareImage = renderSummaryCard(
-                        date: session.date,
-                        tawaf: session.formatDuration(session.tawafTotal),
-                        sai:   session.formatDuration(session.saiTotal),
-                        total: session.formatDuration(session.totalDuration),
-                        isArabic: isArabic
-                    )
-                    showShare = shareImage != nil
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                        .font(.system(size: 14))
-                        .foregroundColor(.muted)
+                HStack(spacing: 16) {
+                    Button {
+                        shareImage = renderSummaryCard(
+                            date: session.date,
+                            tawaf: session.formatDuration(session.tawafTotal),
+                            sai:   session.formatDuration(session.saiTotal),
+                            total: session.formatDuration(session.totalDuration),
+                            isArabic: isArabic
+                        )
+                        showShare = shareImage != nil
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                            .font(.system(size: 14))
+                            .foregroundColor(.muted)
+                    }
+                    Button { showDeleteConfirm = true } label: {
+                        Image(systemName: "trash")
+                            .font(.system(size: 14))
+                            .foregroundColor(.redSoft)
+                    }
                 }
             }
         }
@@ -92,6 +102,15 @@ struct SessionDetailView: View {
             if let img = shareImage {
                 ShareSheet(items: [img])
             }
+        }
+        .alert(S.deleteTitle, isPresented: $showDeleteConfirm) {
+            Button(S.deleteConfirm, role: .destructive) {
+                modelContext.delete(session)
+                dismiss()
+            }
+            Button(S.cancelButton2, role: .cancel) {}
+        } message: {
+            Text(S.deleteMessage)
         }
         .environment(\.layoutDirection, isArabic ? .rightToLeft : .leftToRight)
     }

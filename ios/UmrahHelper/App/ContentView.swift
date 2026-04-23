@@ -47,6 +47,19 @@ struct ContentView: View {
                             .frame(maxWidth: 480)
                             .frame(maxWidth: .infinity)
                     }
+
+                    if state.stage > 0 {
+                        Button(state.strings.backButton) {
+                            if state.stage > 1 {
+                                showingBackConfirm = true
+                            } else {
+                                withAnimation(.easeInOut(duration: 0.2)) { state.goBack() }
+                            }
+                        }
+                        .font(.system(size: 12))
+                        .foregroundColor(.muted)
+                        .padding(.vertical, 12)
+                    }
                 }
             }
         }

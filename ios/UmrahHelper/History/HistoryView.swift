@@ -35,7 +35,7 @@ struct HistoryView: View {
                             .listRowBackground(Color.parchment)
                         }
                         .onDelete { offsets in
-                            offsets.forEach { modelContext.delete(sessions[$0]) }
+                            sessionToDelete = sessions[offsets.first!]
                         }
                     }
                     .listStyle(.plain)
@@ -45,6 +45,18 @@ struct HistoryView: View {
             .navigationTitle(S.historyTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Color.parchment, for: .navigationBar)
+            .alert(S.deleteTitle, isPresented: Binding(
+                get: { sessionToDelete != nil },
+                set: { if !$0 { sessionToDelete = nil } }
+            )) {
+                Button(S.deleteConfirm, role: .destructive) {
+                    if let s = sessionToDelete { modelContext.delete(s) }
+                    sessionToDelete = nil
+                }
+                Button(S.cancelButton2, role: .cancel) { sessionToDelete = nil }
+            } message: {
+                Text(S.deleteMessage)
+            }
         }
         .environment(\.layoutDirection, isArabic ? .rightToLeft : .leftToRight)
     }
