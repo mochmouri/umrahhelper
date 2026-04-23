@@ -18,8 +18,15 @@ struct ContentView: View {
                     Label(state.strings.tabHistory, systemImage: "clock")
                 }
                 .tag(1)
+
+            AdhkarView()
+                .tabItem {
+                    Label(state.strings.tabAdhkar, systemImage: "text.book.closed")
+                }
+                .tag(2)
         }
         .tint(Color.gold)
+        .preferredColorScheme(state.isDarkMode ? .dark : .light)
     }
 
     private var guideTab: some View {
@@ -43,15 +50,26 @@ struct ContentView: View {
             }
         }
         .overlay(alignment: .topTrailing) {
-            Button { state.isArabic.toggle() } label: {
-                Text(state.isArabic ? "EN" : "عربي")
-                    .font(.system(size: 11))
-                    .foregroundColor(.muted)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 6)
-                    .background(Color.parchmentDark.opacity(0.6))
+            HStack(spacing: 6) {
+                Button { state.isDarkMode.toggle() } label: {
+                    Image(systemName: state.isDarkMode ? "sun.max" : "moon")
+                        .font(.system(size: 12))
+                        .foregroundColor(.muted)
+                        .frame(width: 32, height: 28)
+                        .background(Color.parchmentDark.opacity(0.6))
+                }
+                .buttonStyle(.plain)
+
+                Button { state.isArabic.toggle() } label: {
+                    Text(state.isArabic ? "EN" : "عربي")
+                        .font(.system(size: 11))
+                        .foregroundColor(.muted)
+                        .padding(.horizontal, 10)
+                        .frame(height: 28)
+                        .background(Color.parchmentDark.opacity(0.6))
+                }
+                .buttonStyle(.plain)
             }
-            .buttonStyle(.plain)
             .padding(.top, 8)
             .padding(.trailing, 12)
         }

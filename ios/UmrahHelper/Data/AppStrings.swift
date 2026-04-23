@@ -6,6 +6,7 @@ struct AppStrings {
     // MARK: - Tabs
     var tabGuide: String    { isArabic ? "الدليل"  : "Guide" }
     var tabHistory: String  { isArabic ? "السجل"   : "History" }
+    var tabAdhkar: String   { isArabic ? "الأذكار" : "Adhkar" }
 
     // MARK: - Stage 0 — Welcome
     var welcomeSubtitle: String { isArabic
@@ -268,4 +269,14 @@ struct AppStrings {
 
     // MARK: - Session Detail
     var sessionTitle: String { isArabic ? "الجلسة" : "Session" }
+
+    // MARK: - Adhkar tab
+    var adhkarNavTitle: String  { isArabic ? "الأذكار"                                          : "Adhkar" }
+    var adhkarSubtitle: String  { isArabic ? "أذكار مأثورة يمكن ترديدها خلال الطواف والسعي"    : "Supplications to recite during Tawaf and Sa'i" }
+
+    // MARK: - Sa'i jogging note
+    var saiJoggingNote: String  { isArabic
+        ? "ابحث عن الأضواء الخضراء على جدران المسعى — يُستحب للرجال الهرولة بينها في كل شوط. هذه سنة نبوية: أمر النبي ﷺ أصحابه بالإسراع هنا إظهارًا للقوة."
+        : "Look for the green lights on the walls of the Mas'aa — men are encouraged to jog between them in every round. This is Sunnah: the Prophet ﷺ instructed the Companions to hasten here to show their strength."
+    }
 }

@@ -90,6 +90,9 @@ struct Stage4Sai: View {
         .overlay(Rectangle().stroke(Color.parchmentDark, lineWidth: 1))
         .padding(.bottom, 20)
 
+        GoldBorderNote(text: S.saiJoggingNote)
+            .padding(.bottom, 16)
+
         if showEndpointDhikr {
             HStack(alignment: .top, spacing: 0) {
                 Rectangle().fill(Color.gold).frame(width: 2)
