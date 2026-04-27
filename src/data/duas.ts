@@ -65,6 +65,15 @@ export const safaDhikr: Dua = {
     'There is no god but Allah alone, with no partner. To Him belongs all sovereignty and all praise, and He has power over all things. There is no god but Allah — He fulfilled His promise, gave victory to His servant, and defeated the confederates alone.',
 }
 
+export const greenLightsDua: Dua = {
+  arabic:
+    'رَبِّ اغْفِرْ وَارْحَمْ وَتَجَاوَزْ عَمَّا تَعْلَمْ إِنَّكَ تَعْلَمُ مَا لَا نَعْلَمْ إِنَّكَ أَنْتَ اللهُ الْأَعَزُّ الْأَكْرَمُ',
+  transliteration:
+    "Rabbi-ghfir warḥam wa tajāwaz 'ammā ta'lam, innaka ta'lamu mā lā na'lam, innaka anta-llāhu l-a'azzu l-akram.",
+  meaning:
+    'O my Lord! Forgive us, and have mercy upon us, and pardon our sins that You only know. Indeed, You know what we do not know. Indeed, You are Allah, the Most Honoured and Noble.',
+}
+
 export const yemeniCornerDua: Dua = {
   arabic:
     'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',

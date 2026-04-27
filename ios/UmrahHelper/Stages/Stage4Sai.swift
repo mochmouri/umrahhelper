@@ -136,9 +136,23 @@ struct Stage4Sai: View {
         .overlay(Rectangle().stroke(Color.parchmentDark, lineWidth: 1))
         .padding(.bottom, 20)
 
-        // 3. Green lights / jogging reminder
-        GoldBorderNote(text: S.saiJoggingNote)
-            .padding(.bottom, 16)
+        // 3. Green lights / jogging reminder + dua
+        HStack(alignment: .top, spacing: 0) {
+            Rectangle().fill(Color.gold).frame(width: 2)
+            VStack(alignment: .leading, spacing: 10) {
+                Text(S.saiJoggingNote)
+                    .font(.system(size: 13 * CGFloat(ts)))
+                    .foregroundColor(.inkLight)
+                    .lineSpacing(3)
+                    .padding(.vertical, 2)
+                DuaBlock(arabic: greenLightsDua.arabic,
+                         transliteration: greenLightsDua.transliteration,
+                         meaning: greenLightsDua.meaning,
+                         compact: true)
+            }
+            .padding(.leading, 12)
+        }
+        .padding(.bottom, 16)
 
         // 4. General adhkar note
         HStack(alignment: .top, spacing: 0) {

@@ -1,7 +1,7 @@
 import { useUmrah, getSaiMetrics } from '../context/UmrahContext'
 import { DuaBlock } from '../components/DuaBlock'
 import { MetricsCard } from '../components/MetricsCard'
-import { safaAyah, safaDhikr } from '../data/duas'
+import { safaAyah, safaDhikr, greenLightsDua } from '../data/duas'
 import { getStrings } from '../data/strings'
 
 export function Stage4Sai() {
@@ -115,9 +115,10 @@ export function Stage4Sai() {
             </div>
           </div>
 
-          {/* 3. Green lights / jogging note */}
-          <div className="border border-gold/40 bg-gold/5 px-4 py-3">
+          {/* 3. Green lights / jogging note + dua */}
+          <div className="border border-gold/40 bg-gold/5 px-4 py-3 space-y-3">
             <p className="font-sans text-xs text-ink-light leading-relaxed">{S.saiJoggingNote}</p>
+            <DuaBlock {...greenLightsDua} compact />
           </div>
 
           {/* 4. General adhkar note */}
