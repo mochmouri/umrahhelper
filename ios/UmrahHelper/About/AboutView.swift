@@ -1,9 +1,9 @@
 import SwiftUI
 
 // ── Replace these with your real URLs ────────────────────────────────────────
-private let donationURL   = URL(string: "https://donate.stripe.com/YOUR_LINK_HERE")!
+private let donationURL   = URL(string: "https://buy.stripe.com/eVq9AT6003aAbj2fCs1oI00")!
 private let appURL        = URL(string: "https://mochmouri.github.io/umrahhelper/")!
-private let formspreeURL  = URL(string: "https://formspree.io/f/YOUR_FORM_ID")!
+private let formspreeURL  = URL(string: "https://formspree.io/f/xrerwzle")!
 // ─────────────────────────────────────────────────────────────────────────────
 
 enum MessageType: String, CaseIterable {

@@ -3,9 +3,9 @@ import { useUmrah } from '../context/UmrahContext'
 import { getStrings } from '../data/strings'
 
 // ── Replace these with your real URLs ────────────────────────────────────────
-const DONATION_URL = 'https://donate.stripe.com/YOUR_LINK_HERE'
+const DONATION_URL = 'https://buy.stripe.com/eVq9AT6003aAbj2fCs1oI00'
 const APP_URL = 'https://mochmouri.github.io/umrahhelper/'
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xrerwzle'
 // ─────────────────────────────────────────────────────────────────────────────
 
 type MessageType = 'question' | 'correction' | 'general'
