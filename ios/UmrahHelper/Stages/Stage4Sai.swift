@@ -65,8 +65,11 @@ struct Stage4Sai: View {
                  meaning: safaDhikr.meaning)
             .padding(.bottom, 20)
 
-        Button(S.beginSai) { state.startSai() }
-            .primaryButton()
+        Button {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            state.startSai()
+        } label: { Text(S.beginSai) }
+        .primaryButton()
     }
 
     // MARK: — Active
@@ -167,8 +170,11 @@ struct Stage4Sai: View {
 
         Rectangle().fill(Color.parchmentDark).frame(height: 1).padding(.bottom, 16)
 
-        Button(S.completeRoundButton(state.currentRound)) { state.completeRound() }
-            .primaryButton()
+        Button {
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            state.completeRound()
+        } label: { Text(S.completeRoundButton(state.currentRound)) }
+        .primaryButton()
     }
 
     private var roundDots: some View {

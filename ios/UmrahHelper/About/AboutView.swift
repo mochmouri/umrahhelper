@@ -35,6 +35,20 @@ struct AboutView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
 
+                // ── Intro ─────────────────────────────────────────────────
+                Text(S.aboutIntroTitle)
+                    .font(.system(size: 20 * CGFloat(ts), weight: .semibold, design: .serif))
+                    .foregroundColor(.ink)
+                    .padding(.bottom, 10)
+
+                Text(S.aboutIntroBody)
+                    .font(.system(size: 13 * CGFloat(ts)))
+                    .foregroundColor(.inkLight)
+                    .lineSpacing(3)
+                    .padding(.bottom, 32)
+
+                divider
+
                 // ── Free / Donate ──────────────────────────────────────────
                 Text(S.aboutFreeTitle)
                     .font(.system(size: 20 * CGFloat(ts), weight: .semibold, design: .serif))

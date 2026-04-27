@@ -19,6 +19,7 @@ export const talbiyah: Dua = {
     "Labbayka Llāhumma labbayk, labbayka lā sharīka laka labbayk, inna l-ḥamda wa-n-ni'mata laka wa-l-mulk, lā sharīka lak.",
   meaning:
     'Here I am, O Allah, here I am. Here I am — You have no partner — here I am. Verily all praise, grace and sovereignty belong to You. You have no partner.',
+  source: 'Bukhari & Muslim',
 }
 
 export const enteringMosque: Dua = {
@@ -63,6 +64,7 @@ export const safaDhikr: Dua = {
     "Lā ilāha illallāhu waḥdahu lā sharīka lah, lahu l-mulku wa lahu l-ḥamdu wa huwa 'alā kulli shay'in qadīr. Lā ilāha illallāh, anjaza wa'dah, wa naṣara 'abdah, wa hazama l-aḥzāba waḥdah.",
   meaning:
     'There is no god but Allah alone, with no partner. To Him belongs all sovereignty and all praise, and He has power over all things. There is no god but Allah — He fulfilled His promise, gave victory to His servant, and defeated the confederates alone.',
+  source: 'Muslim',
 }
 
 export const greenLightsDua: Dua = {

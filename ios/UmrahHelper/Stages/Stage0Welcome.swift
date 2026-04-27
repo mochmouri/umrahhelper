@@ -34,6 +34,12 @@ struct Stage0Welcome: View {
                         .lineSpacing(4)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
+                    Text(S.welcomeTrustNote)
+                        .font(.system(size: 11))
+                        .foregroundColor(.muted)
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity, alignment: .center)
+
                     Button(S.beginButton) {
                         state.startUmrah()
                     }

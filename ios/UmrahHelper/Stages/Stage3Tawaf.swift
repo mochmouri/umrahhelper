@@ -67,8 +67,11 @@ struct Stage3Tawaf: View {
                          meaning: blackStoneDua.meaning)
                     .padding(.bottom, 20)
 
-                Button(S.beginTawaf) { state.startTawaf() }
-                    .primaryButton()
+                Button {
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                    state.startTawaf()
+                } label: { Text(S.beginTawaf) }
+                .primaryButton()
             }
         }
     }
@@ -229,10 +232,15 @@ struct Stage3Tawaf: View {
                 .padding(.bottom, 10)
         }
 
-        Button(S.completeLapButton(state.currentLap)) { state.completeLap() }
-            .primaryButton()
-            .opacity(lapReady ? 1.0 : 0.35)
-            .disabled(!lapReady)
+        Button {
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            state.completeLap()
+        } label: {
+            Text(S.completeLapButton(state.currentLap))
+        }
+        .primaryButton()
+        .opacity(lapReady ? 1.0 : 0.35)
+        .disabled(!lapReady)
     }
 
     private var lapDots: some View {

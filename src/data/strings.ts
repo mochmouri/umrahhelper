@@ -20,6 +20,7 @@ export interface Strings {
   // Stage 0
   welcomeSubtitle: string
   welcomeBody: string
+  welcomeTrustNote: string
   beginButton: string
   orJumpToStep: string
   stageLabels: string[]
@@ -177,6 +178,8 @@ export interface Strings {
 
   // About tab
   tabAbout: string
+  aboutIntroTitle: string
+  aboutIntroBody: string
   aboutFreeTitle: string
   aboutFreeBody: string
   aboutDonateButton: string
@@ -214,7 +217,10 @@ export function getStrings(isArabic: boolean): Strings {
       : 'A step-by-step companion for your Umrah',
     welcomeBody: isArabic
       ? 'العمرة هي الحجّ الأصغر إلى مكة المكرمة؛ وهي عبادة تطوّعية يمكن أداؤها في أي وقت من العام. وعلى الرغم من أنها أقصر من الحج، إلا أنها تحمل ثقلًا روحيًا عظيمًا، وفرصةً نفيسة للتجديد والتقرّب إلى الله. يرشدك هذا الدليل خلال كل خطوة — من لبس الإحرام حتى قصّ الشعر — ليبقى قلبك في العبادة لا في اللوجستيات.'
-      : "Umrah is the lesser pilgrimage to Makkah; it is a voluntary act of worship that may be performed at any time of the year. Though shorter than Hajj, it carries immense spiritual weight and is a profound opportunity for renewal and closeness to Allah. This guide walks you through each step, from putting on Ihram to the final cut of the hair, so your heart can remain in worship rather than in logistics.",
+      : "Umrah is the lesser pilgrimage to Makkah — a voluntary act of worship that may be performed at any time of the year. Though shorter than Hajj, it carries immense spiritual weight and is a profound opportunity for renewal and closeness to Allah. This guide walks you through every step, from putting on Ihram to the final cut of the hair, so your heart can remain in worship rather than in logistics.",
+    welcomeTrustNote: isArabic
+      ? 'يعمل دون اتصال بالإنترنت · بلا تسجيل · لا نجمع أي بيانات'
+      : 'Works offline · No sign-up · No data collected',
     beginButton: isArabic ? 'ابدأ' : 'BEGIN',
     orJumpToStep: isArabic ? 'أو انتقل إلى خطوة' : 'or jump to a step',
     stageLabels: isArabic
@@ -470,10 +476,14 @@ export function getStrings(isArabic: boolean): Strings {
     shareCopied: isArabic ? 'تم النسخ إلى الحافظة' : 'Copied to clipboard',
 
     tabAbout: isArabic ? 'عن التطبيق' : 'About',
-    aboutFreeTitle: isArabic ? 'هذا التطبيق مجاني' : 'This app is free',
+    aboutIntroTitle: isArabic ? 'عن هذا التطبيق' : 'About this app',
+    aboutIntroBody: isArabic
+      ? 'هذا التطبيق من عمل مسلم يرغب في البقاء مجهول الهوية، دافعه الوحيد مساعدة إخوانه وأخواته المسلمين على أداء عمرتهم بيُسر وطمأنينة. لا نجمع أي بيانات، ولا يتطلب التطبيق أي تسجيل، ويعمل بالكامل دون اتصال بالإنترنت — لأن آخر ما تحتاج إليه وأنت في الحرم أن تقلق بشأن الإشارة. نسأل الله أن يتقبّل منّا ومنكم.'
+      : 'This app is the work of an individual Muslim who wishes to remain anonymous, motivated simply by a desire to help fellow Muslims have a clear, calm, and focused Umrah. There is no data collected, no account required, and it works fully offline — because the last thing you need while standing in the Haram is to worry about your signal. May Allah accept from all of us.',
+    aboutFreeTitle: isArabic ? 'هذا التطبيق مجاني' : 'Free, always',
     aboutFreeBody: isArabic
       ? 'هذا التطبيق مجاني وسيبقى كذلك ما دام قائمًا. إن أعانك على أداء عمرتك، يمكنك دعم تطويره من هنا:'
-      : 'This app is free and always will be as long as we run it. If it helped your Umrah, you can support its development here:',
+      : 'This app is free and always will be. If it helped your Umrah, you are welcome to support its development:',
     aboutDonateButton: isArabic ? 'ادعم التطبيق' : 'Support the app',
     aboutShareTitle: isArabic ? 'شارك التطبيق' : 'Share the app',
     aboutShareBody: isArabic

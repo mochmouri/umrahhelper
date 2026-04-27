@@ -69,6 +69,18 @@ export function AboutView() {
       dir={state.isArabic ? 'rtl' : 'ltr'}
     >
 
+      {/* ── Intro ── */}
+      <section className="mb-10">
+        <h2 className="font-serif text-xl text-ink mb-3">{S.aboutIntroTitle}</h2>
+        <p className="font-sans text-sm text-ink-light leading-relaxed">{S.aboutIntroBody}</p>
+      </section>
+
+      <div className="flex items-center gap-3 mb-10">
+        <div className="flex-1 h-px bg-parchment-dark" />
+        <span className="text-gold">✦</span>
+        <div className="flex-1 h-px bg-parchment-dark" />
+      </div>
+
       {/* ── Free / Donation ── */}
       <section className="mb-10">
         <h2 className="font-serif text-xl text-ink mb-3">{S.aboutFreeTitle}</h2>
