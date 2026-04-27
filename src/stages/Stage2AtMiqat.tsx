@@ -73,7 +73,7 @@ export function Stage2AtMiqat() {
       </div>
 
       {!state.talbiyahStarted && (
-        <p className="font-sans text-xs text-muted text-center mb-4">{S.talbiyahReminder}</p>
+        <p className="font-sans text-xs text-muted text-center mb-3 italic">{S.talbiyahHint}</p>
       )}
 
       <button

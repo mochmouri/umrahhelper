@@ -56,7 +56,6 @@ export interface Strings {
   talbiyahBody: string
   talbiyahStarted: string
   talbiyahMarkStarted: string
-  talbiyahReminder: string
   mosqueTitle: string
   mosquePre: string
   mosqueBold: string
@@ -162,6 +161,10 @@ export interface Strings {
   deleteConfirm: string
   cancelButton2: string
 
+  // Proceed hints (shown when button is disabled)
+  lapHint: string
+  talbiyahHint: string
+
   // Back navigation
   backButton: string
 
@@ -263,7 +266,6 @@ export function getStrings(isArabic: boolean): Strings {
       : 'Begin reciting the Talbiyah immediately after Niyyah. Continue reciting it — loudly for men, softly for women — until you begin Tawaf.',
     talbiyahStarted: isArabic ? '✓  بدأتُ بالتلبية' : '✓  I have started reciting',
     talbiyahMarkStarted: isArabic ? 'سجّل البداية' : 'Mark as started',
-    talbiyahReminder: isArabic ? 'سجّل بداية التلبية قبل المتابعة.' : 'Mark the Talbiyah as started before proceeding.',
     mosqueTitle: isArabic ? 'دخول المسجد الحرام' : 'Entering Al-Masjid Al-Haraam',
     mosquePre: isArabic ? 'ادخل بقدمك ' : 'Enter with your ',
     mosqueBold: isArabic ? 'اليمنى أولًا' : 'right foot first',
@@ -427,6 +429,13 @@ export function getStrings(isArabic: boolean): Strings {
     deleteMessage: isArabic ? 'لا يمكن التراجع عن هذا الإجراء.' : 'This cannot be undone.',
     deleteConfirm: isArabic ? 'حذف' : 'Delete',
     cancelButton2: isArabic ? 'إلغاء' : 'Cancel',
+
+    lapHint: isArabic
+      ? 'ضع علامة على نقطتَي التفتيش أعلاه للمتابعة'
+      : 'Tick both checkpoints above to continue',
+    talbiyahHint: isArabic
+      ? 'سجّل بداية التلبية للمتابعة'
+      : 'Mark the Talbiyah as started to continue',
 
     backButton: isArabic ? '← المرحلة السابقة' : '← Previous section',
 
