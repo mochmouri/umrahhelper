@@ -21,7 +21,7 @@ enum SendState { case idle, sending, success, error }
 
 struct AboutView: View {
     @Environment(\.appTextScale) private var ts
-    @State private var state = UmrahState()
+    let state: UmrahState
 
     @State private var showShareSheet = false
     @State private var msgType: MessageType = .general

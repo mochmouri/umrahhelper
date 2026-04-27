@@ -18,7 +18,7 @@ struct DuaBlock: View {
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             Text(arabic)
-                .font(.system(size: arabicSize))
+                .font(.custom("Amiri-Regular", size: arabicSize))
                 .foregroundColor(.ink)
                 .environment(\.layoutDirection, .rightToLeft)
                 .frame(maxWidth: .infinity, alignment: .leading)

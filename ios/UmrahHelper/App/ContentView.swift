@@ -31,7 +31,7 @@ struct ContentView: View {
                 }
                 .tag(2)
 
-            AboutView()
+            AboutView(state: state)
                 .tabItem {
                     Label(state.strings.tabAbout, systemImage: "info.circle")
                 }
