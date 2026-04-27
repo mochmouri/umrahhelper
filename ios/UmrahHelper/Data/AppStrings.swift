@@ -330,4 +330,34 @@ struct AppStrings {
         ? "ابحث عن الأضواء الخضراء على سقف المسعى. يُستحب للرجال الهرولة بينها في كل شوط. هذه سنة نبوية فقد أمر النبي ﷺ أصحابه بالإسراع هنا إظهارًا للقوة."
         : "Look for the green lights on top of the Mas'aa — men are encouraged to jog between them in every round. This is Sunnah: the Prophet ﷺ instructed the Companions to hasten here to show their strength."
     }
+
+    // MARK: - About tab
+    var tabAbout: String          { isArabic ? "عن التطبيق" : "About" }
+    var aboutFreeTitle: String    { isArabic ? "هذا التطبيق مجاني" : "This app is free" }
+    var aboutFreeBody: String     { isArabic
+        ? "هذا التطبيق مجاني وسيبقى كذلك ما دام قائمًا. إن أعانك على أداء عمرتك، يمكنك دعم تطويره من هنا:"
+        : "This app is free and always will be as long as we run it. If it helped your Umrah, you can support its development here:"
+    }
+    var aboutDonateButton: String { isArabic ? "ادعم التطبيق" : "Support the app" }
+    var aboutShareTitle: String   { isArabic ? "شارك التطبيق" : "Share the app" }
+    var aboutShareBody: String    { isArabic
+        ? "هل تعرف شخصًا يخطط لأداء العمرة؟ شاركه التطبيق."
+        : "Know someone planning Umrah? Share the app with them."
+    }
+    var aboutShareButton: String  { isArabic ? "مشاركة" : "Share" }
+    var aboutContactTitle: String { isArabic ? "تواصل معنا" : "Get in touch" }
+    var aboutContactBody: String  { isArabic
+        ? "لديك سؤال أو تصحيح أو ملاحظة؟ يسعدنا سماعك."
+        : "Have a question, correction, or concern? We'd love to hear from you."
+    }
+    var aboutTypeQuestion: String   { isArabic ? "سؤال"     : "Question" }
+    var aboutTypeCorrection: String { isArabic ? "تصحيح"    : "Correction" }
+    var aboutTypeGeneral: String    { isArabic ? "عام"       : "General" }
+    var aboutContactName: String    { isArabic ? "الاسم (اختياري)"              : "Name (optional)" }
+    var aboutContactEmail: String   { isArabic ? "البريد الإلكتروني (اختياري)" : "Email (optional)" }
+    var aboutContactMessage: String { isArabic ? "رسالتك"   : "Message" }
+    var aboutContactSend: String    { isArabic ? "إرسال"    : "Send" }
+    var aboutContactSending: String { isArabic ? "جارٍ الإرسال…" : "Sending…" }
+    var aboutContactSuccess: String { isArabic ? "شكرًا! وصلتنا رسالتك." : "Thank you — your message has been received." }
+    var aboutContactError: String   { isArabic ? "حدث خطأ. يرجى المحاولة مرة أخرى." : "Something went wrong. Please try again." }
 }

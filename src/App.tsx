@@ -10,11 +10,12 @@ import { Stage4Sai } from './stages/Stage4Sai'
 import { Stage5Tahleel } from './stages/Stage5Tahleel'
 import { AdhkarView } from './stages/AdhkarView'
 import { HistoryView } from './views/HistoryView'
+import { AboutView } from './views/AboutView'
 import { getStrings } from './data/strings'
 
 const MAX_STAGE = 5
 const TEXT_SCALE_STEPS = [0.85, 1.0, 1.2]
-type Tab = 'guide' | 'history' | 'adhkar'
+type Tab = 'guide' | 'history' | 'adhkar' | 'about'
 
 function AppInner() {
   const { state, dispatch, goToStage } = useUmrah()
@@ -95,7 +96,7 @@ function AppInner() {
       className="fixed bottom-0 inset-x-0 z-40 flex border-t border-parchment-dark bg-parchment"
       dir={state.isArabic ? 'rtl' : 'ltr'}
     >
-      {(['guide', 'history', 'adhkar'] as Tab[]).map(tab => (
+      {(['guide', 'history', 'adhkar', 'about'] as Tab[]).map(tab => (
         <button
           key={tab}
           onClick={() => setCurrentTab(tab)}
@@ -103,7 +104,7 @@ function AppInner() {
             currentTab === tab ? 'text-ink border-t-2 border-ink -mt-px' : 'text-muted hover:text-ink'
           }`}
         >
-          {tab === 'guide' ? S.tabGuide : tab === 'history' ? S.tabHistory : S.tabAdhkar}
+          {tab === 'guide' ? S.tabGuide : tab === 'history' ? S.tabHistory : tab === 'adhkar' ? S.tabAdhkar : S.tabAbout}
         </button>
       ))}
     </div>
@@ -137,6 +138,7 @@ function AppInner() {
       {/* Tab content */}
       {currentTab === 'history' && <HistoryView />}
       {currentTab === 'adhkar' && <AdhkarView />}
+      {currentTab === 'about' && <AboutView />}
       {currentTab === 'guide' && (
         stage === 0 ? (
           // Welcome screen — no back button, just tab bar

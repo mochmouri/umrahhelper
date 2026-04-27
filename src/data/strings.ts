@@ -174,6 +174,29 @@ export interface Strings {
 
   // Share
   shareCopied: string
+
+  // About tab
+  tabAbout: string
+  aboutFreeTitle: string
+  aboutFreeBody: string
+  aboutDonateButton: string
+  aboutShareTitle: string
+  aboutShareBody: string
+  aboutShareButton: string
+  aboutShareCopied: string
+  aboutContactTitle: string
+  aboutContactBody: string
+  aboutContactType: string
+  aboutTypeQuestion: string
+  aboutTypeCorrection: string
+  aboutTypeGeneral: string
+  aboutContactName: string
+  aboutContactEmail: string
+  aboutContactMessage: string
+  aboutContactSend: string
+  aboutContactSending: string
+  aboutContactSuccess: string
+  aboutContactError: string
 }
 
 export function getStrings(isArabic: boolean): Strings {
@@ -445,5 +468,37 @@ export function getStrings(isArabic: boolean): Strings {
       : "Supplications to recite during Tawaf and Sa'i",
 
     shareCopied: isArabic ? 'تم النسخ إلى الحافظة' : 'Copied to clipboard',
+
+    tabAbout: isArabic ? 'عن التطبيق' : 'About',
+    aboutFreeTitle: isArabic ? 'هذا التطبيق مجاني' : 'This app is free',
+    aboutFreeBody: isArabic
+      ? 'هذا التطبيق مجاني وسيبقى كذلك ما دام قائمًا. إن أعانك على أداء عمرتك، يمكنك دعم تطويره من هنا:'
+      : 'This app is free and always will be as long as we run it. If it helped your Umrah, you can support its development here:',
+    aboutDonateButton: isArabic ? 'ادعم التطبيق' : 'Support the app',
+    aboutShareTitle: isArabic ? 'شارك التطبيق' : 'Share the app',
+    aboutShareBody: isArabic
+      ? 'هل تعرف شخصًا يخطط لأداء العمرة؟ شاركه التطبيق.'
+      : 'Know someone planning Umrah? Share the app with them.',
+    aboutShareButton: isArabic ? 'مشاركة' : 'Share',
+    aboutShareCopied: isArabic ? 'تم نسخ الرابط' : 'Link copied',
+    aboutContactTitle: isArabic ? 'تواصل معنا' : 'Get in touch',
+    aboutContactBody: isArabic
+      ? 'لديك سؤال أو تصحيح أو ملاحظة؟ يسعدنا سماعك.'
+      : 'Have a question, correction, or concern? We\'d love to hear from you.',
+    aboutContactType: isArabic ? 'نوع الرسالة' : 'Type',
+    aboutTypeQuestion: isArabic ? 'سؤال' : 'Question',
+    aboutTypeCorrection: isArabic ? 'تصحيح' : 'Correction',
+    aboutTypeGeneral: isArabic ? 'عام' : 'General',
+    aboutContactName: isArabic ? 'الاسم (اختياري)' : 'Name (optional)',
+    aboutContactEmail: isArabic ? 'البريد الإلكتروني (اختياري)' : 'Email (optional)',
+    aboutContactMessage: isArabic ? 'رسالتك' : 'Message',
+    aboutContactSend: isArabic ? 'إرسال' : 'Send',
+    aboutContactSending: isArabic ? 'جارٍ الإرسال…' : 'Sending…',
+    aboutContactSuccess: isArabic
+      ? 'شكرًا! وصلتنا رسالتك.'
+      : 'Thank you — your message has been received.',
+    aboutContactError: isArabic
+      ? 'حدث خطأ. يرجى المحاولة مرة أخرى.'
+      : 'Something went wrong. Please try again.',
   }
 }
