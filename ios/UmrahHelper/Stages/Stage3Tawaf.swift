@@ -221,6 +221,14 @@ struct Stage3Tawaf: View {
 
         Rectangle().fill(Color.parchmentDark).frame(height: 1).padding(.bottom, 16)
 
+        if !lapReady {
+            Text(S.lapHint)
+                .font(.system(size: 11).italic())
+                .foregroundColor(.muted)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.bottom, 10)
+        }
+
         Button(S.completeLapButton(state.currentLap)) { state.completeLap() }
             .primaryButton()
             .opacity(lapReady ? 1.0 : 0.35)

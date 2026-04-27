@@ -166,6 +166,10 @@ struct AppStrings {
     var completeLapPromptPre: String   { isArabic ? "عند الحجر الأسود، ارفع يدك وقل "     : "At the Black Stone, raise your hand and say " }
     var completeLapPromptPost: String  { isArabic ? "، ثم اضغط عند إتمام الشوط."           : ", then tap when you have completed the circuit." }
     func completeLapButton(_ n: Int) -> String { isArabic ? "إتمام الشوط \(numeral(n))" : "COMPLETE LAP \(n)" }
+    var lapHint: String { isArabic
+        ? "ضع علامة على نقطتَي التفتيش أعلاه للمتابعة"
+        : "Tick both checkpoints above to continue"
+    }
 
     var tawafAdhkarNote: String { isArabic
         ? "هذه أذكار مستحبة. يمكنك أيضًا تلاوة القرآن الكريم، أو الدعاء، أو قول أي ذكر تشاء."

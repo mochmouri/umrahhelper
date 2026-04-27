@@ -89,7 +89,7 @@ struct Stage2AtMiqat: View {
 
             if !state.talbiyahStarted {
                 Text(S.talbiyahReminder)
-                    .font(.system(size: 11))
+                    .font(.system(size: 11).italic())
                     .foregroundColor(.muted)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.bottom, 10)
