@@ -339,8 +339,8 @@ struct AppStrings {
     var tabAbout: String          { isArabic ? "عن التطبيق" : "About" }
     var aboutIntroTitle: String   { isArabic ? "عن هذا التطبيق" : "About this app" }
     var aboutIntroBody: String    { isArabic
-        ? "هذا التطبيق من عمل مسلم يرغب في البقاء مجهول الهوية، دافعه الوحيد مساعدة إخوانه وأخواته المسلمين على أداء عمرتهم بيُسر وطمأنينة. لا نجمع أي بيانات، ولا يتطلب التطبيق أي تسجيل، ويعمل بالكامل دون اتصال بالإنترنت — لأن آخر ما تحتاج إليه وأنت في الحرم أن تقلق بشأن الإشارة. نسأل الله أن يتقبّل منّا ومنكم."
-        : "This app is the work of an individual Muslim who wishes to remain anonymous, motivated simply by a desire to help fellow Muslims have a clear, calm, and focused Umrah. There is no data collected, no account required, and it works fully offline — because the last thing you need while standing in the Haram is to worry about your signal. May Allah accept from all of us."
+        ? "هذا التطبيق من عمل مسلم يرغب في البقاء مجهول الهوية، دافعه الوحيد مساعدة إخوانه وأخواته المسلمين على أداء عمرتهم بيُسر وطمأنينة. لا نجمع أي بيانات، ولا يتطلب التطبيق أي تسجيل، ويعمل بالكامل دون اتصال بالإنترنت, لأن آخر ما تحتاج إليه وأنت في الحرم أن تحاول إعادة الإتصال بالشبكة. نسأل الله أن يتقبّل منّا ومنكم."
+        : "This app is the work of an individual Muslim who wishes to remain anonymous, motivated simply by a desire to help fellow Muslims have a clear, calm, and focused Umrah. There is no data collected, no account required, and it works fully offline; because the last thing you need while standing in the Haram is to worry about your signal. May Allah accept from all of us."
     }
     var aboutFreeTitle: String    { isArabic ? "هذا التطبيق مجاني" : "Free, always" }
     var aboutFreeBody: String     { isArabic
