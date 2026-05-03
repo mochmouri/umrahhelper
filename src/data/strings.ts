@@ -331,11 +331,11 @@ export function getStrings(isArabic: boolean): Strings {
       : 'I have passed the Yemeni corner and recited the dua',
     blackStonePassTitle: isArabic ? 'تذكير: الحجر الأسود' : 'BLACK STONE CHECKPOINT',
     blackStonePassBody: isArabic
-      ? 'عند العودة إلى الحجر الأسود، ارفع يمناك وقل:'
-      : 'When you return to the Black Stone, raise your right hand and say:',
+      ? 'عند العودة إلى الحجر الأسود، ارفع يمناك تجاهه وقل:'
+      : 'When you return to the Black Stone, raise your right hand towards it and say:',
     checkBlackStonePass: isArabic
-      ? 'مررتُ بالحجر الأسود وقبلته (أو رفعتُ يمناي باتجاهه)'
-      : 'I have passed the Black Stone and kissed it (or raised my hand towards it)',
+      ? 'مررتُ بالحجر الأسود وقبلته (أو رفعتُ يمناي باتجاهه) وقلت الله أكبر'
+      : 'I have passed the Black Stone and kissed it (or raised my hand towards it) and said "Allahu Akbar"',
     showDhikr: (x: number) => {
       if (isArabic) {
         const arabic = x === 2 ? 'دعائين' : `${n(x)} دعاء`
@@ -416,15 +416,15 @@ export function getStrings(isArabic: boolean): Strings {
     hairCuttingTitle: isArabic ? 'قصّ الشعر' : 'Hair cutting',
     menLabel: isArabic ? 'رجال' : 'Men',
     menText: isArabic
-      ? 'الحدّ الأدنى هو قصّ مقدار رأس الأصبع من أنحاء الرأس كله, والأفضل حلق الرأس كله.'
+      ? 'الحدّ الأدنى هو قصّ مقدار رأس الإصبع من أنحاء الرأس كله, والأفضل حلق الرأس كله.'
       : 'The minimum is to cut a fingertip\'s length of hair from all parts of the head. The preferable act is to shave all the hair off (Halq). This is more virtuous than trimming (Taqseer).',
     womenLabel: isArabic ? 'نساء' : 'Women',
     womenText: isArabic
       ? 'اجمعي خصلةً من الشعر واقطعي منها بمقدار رأس الأصبع, ولا يجوز الحلق.'
       : "Gather a lock of hair and cut a fingertip's length from its end. Do not shave.",
     ihramLiftedNote: isArabic
-      ? 'بعد القصّ، يُرفع الإحرام وتعود جميع المحظورات مباحة.'
-      : 'After cutting, Ihram is lifted. All restrictions are now removed.',
+      ? 'بعد القصّ، يُرفع الإحرام وتعود جميع المحظورات مباحة (الحلال منها طبعًا).'
+      : 'After cutting, Ihram is lifted. All restrictions are now removed (from what was already permitted outside Ihram).',
     congratsSubtitle: isArabic ? 'تقبّل الله عمرتك.' : 'May Allah accept your Umrah.',
     congratsBody: isArabic
       ? 'لقد أتممتَ عمرتك. جعلها الله سببًا للمغفرة والرحمة والقُرب منه.'

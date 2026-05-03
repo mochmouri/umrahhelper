@@ -84,8 +84,8 @@ function AppInner() {
   }, [navigateNext, navigatePrev, state.isArabic, currentTab])
 
   useSwipe({
-    onSwipeLeft: state.isArabic ? navigatePrev : navigateNext,
-    onSwipeRight: state.isArabic ? navigateNext : navigatePrev,
+    onSwipeLeft: currentTab === 'guide' ? (state.isArabic ? navigatePrev : navigateNext) : undefined,
+    onSwipeRight: currentTab === 'guide' ? (state.isArabic ? navigateNext : navigatePrev) : undefined,
   })
 
   const stage = state.stage

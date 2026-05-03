@@ -26,8 +26,8 @@ export function useSwipe({ onSwipeLeft, onSwipeRight, minDelta = 50 }: UseSwipeO
       startXRef.current = null
       startYRef.current = null
 
-      // Ignore if mostly vertical (scrolling)
-      if (Math.abs(dy) > Math.abs(dx)) return
+      // Require gesture to be clearly horizontal (at least 2× more horizontal than vertical)
+      if (Math.abs(dx) < 2 * Math.abs(dy)) return
       if (Math.abs(dx) < minDelta) return
 
       if (dx < 0) onSwipeLeft?.()
