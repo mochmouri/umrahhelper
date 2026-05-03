@@ -216,6 +216,11 @@ export function Stage3Tawaf() {
 
           {/* 5. Complete lap button */}
           <div className="mt-4 border-t border-parchment-dark pt-5">
+            {!lapReady && (
+              <p className="font-sans text-xs text-muted text-center mb-3 italic">
+                {S.lapHint}
+              </p>
+            )}
             <button
               onClick={() => dispatch({ type: 'COMPLETE_LAP' })}
               disabled={!lapReady}

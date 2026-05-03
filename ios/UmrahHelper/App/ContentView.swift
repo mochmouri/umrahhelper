@@ -30,6 +30,12 @@ struct ContentView: View {
                     Label(state.strings.tabAdhkar, systemImage: "text.book.closed")
                 }
                 .tag(2)
+
+            AboutView(state: state)
+                .tabItem {
+                    Label(state.strings.tabAbout, systemImage: "info.circle")
+                }
+                .tag(3)
         }
         .tint(Color.gold)
         .preferredColorScheme(state.isDarkMode ? .dark : .light)

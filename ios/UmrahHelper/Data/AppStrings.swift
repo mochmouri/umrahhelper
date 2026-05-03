@@ -15,7 +15,11 @@ struct AppStrings {
     }
     var welcomeBody: String { isArabic
         ? "العمرة هي الحجّ الأصغر إلى مكة المكرمة؛ وهي عبادة تطوّعية يمكن أداؤها في أي وقت من العام. وعلى الرغم من أنها أقصر من الحج، إلا أنها تحمل ثقلًا روحيًا عظيمًا، وفرصةً نفيسة للتجديد والتقرّب إلى الله. يرشدك هذا الدليل خلال كل خطوة — من لبس الإحرام حتى قصّ الشعر — ليبقى قلبك في العبادة لا في اللوجستيات."
-        : "Umrah is the lesser pilgrimage to Makkah; it is a voluntary act of worship that may be performed at any time of the year. Though shorter than Hajj, it carries immense spiritual weight and is a profound opportunity for renewal and closeness to Allah. This guide walks you through each step, from putting on Ihram to the final cut of the hair, so your heart can remain in worship rather than in logistics."
+        : "Umrah is the lesser pilgrimage to Makkah — a voluntary act of worship that may be performed at any time of the year. Though shorter than Hajj, it carries immense spiritual weight and is a profound opportunity for renewal and closeness to Allah. This guide walks you through every step, from putting on Ihram to the final cut of the hair, so your heart can remain in worship rather than in logistics."
+    }
+    var welcomeTrustNote: String { isArabic
+        ? "يعمل دون اتصال بالإنترنت · بلا تسجيل · لا نجمع أي بيانات"
+        : "Works offline · No sign-up · No data collected"
     }
     var beginButton: String     { isArabic ? "ابدأ"                 : "BEGIN" }
     var orJumpToStep: String    { isArabic ? "أو انتقل إلى خطوة"    : "or jump to a step" }
@@ -166,6 +170,10 @@ struct AppStrings {
     var completeLapPromptPre: String   { isArabic ? "عند الحجر الأسود، ارفع يدك وقل "     : "At the Black Stone, raise your hand and say " }
     var completeLapPromptPost: String  { isArabic ? "، ثم اضغط عند إتمام الشوط."           : ", then tap when you have completed the circuit." }
     func completeLapButton(_ n: Int) -> String { isArabic ? "إتمام الشوط \(numeral(n))" : "COMPLETE LAP \(n)" }
+    var lapHint: String { isArabic
+        ? "ضع علامة على نقطتَي التفتيش أعلاه للمتابعة"
+        : "Tick both checkpoints above to continue"
+    }
 
     var tawafAdhkarNote: String { isArabic
         ? "هذه أذكار مستحبة. يمكنك أيضًا تلاوة القرآن الكريم، أو الدعاء، أو قول أي ذكر تشاء."
@@ -326,4 +334,39 @@ struct AppStrings {
         ? "ابحث عن الأضواء الخضراء على سقف المسعى. يُستحب للرجال الهرولة بينها في كل شوط. هذه سنة نبوية فقد أمر النبي ﷺ أصحابه بالإسراع هنا إظهارًا للقوة."
         : "Look for the green lights on top of the Mas'aa — men are encouraged to jog between them in every round. This is Sunnah: the Prophet ﷺ instructed the Companions to hasten here to show their strength."
     }
+
+    // MARK: - About tab
+    var tabAbout: String          { isArabic ? "عن التطبيق" : "About" }
+    var aboutIntroTitle: String   { isArabic ? "عن هذا التطبيق" : "About this app" }
+    var aboutIntroBody: String    { isArabic
+        ? "هذا التطبيق من عمل مسلم يرغب في البقاء مجهول الهوية، دافعه الوحيد مساعدة إخوانه وأخواته المسلمين على أداء عمرتهم بيُسر وطمأنينة. لا نجمع أي بيانات، ولا يتطلب التطبيق أي تسجيل، ويعمل بالكامل دون اتصال بالإنترنت, لأن آخر ما تحتاج إليه وأنت في الحرم أن تحاول إعادة الإتصال بالشبكة. نسأل الله أن يتقبّل منّا ومنكم."
+        : "This app is the work of an individual Muslim who wishes to remain anonymous, motivated simply by a desire to help fellow Muslims have a clear, calm, and focused Umrah. There is no data collected, no account required, and it works fully offline; because the last thing you need while standing in the Haram is to worry about your signal. May Allah accept from all of us."
+    }
+    var aboutFreeTitle: String    { isArabic ? "هذا التطبيق مجاني" : "Free, always" }
+    var aboutFreeBody: String     { isArabic
+        ? "هذا التطبيق مجاني وسيبقى كذلك ما دام قائمًا. إن أعانك على أداء عمرتك، يمكنك دعم تطويره من هنا:"
+        : "This app is free and always will be. If it helped your Umrah, you are welcome to support its development:"
+    }
+    var aboutDonateButton: String { isArabic ? "ادعم التطبيق" : "Support the app" }
+    var aboutShareTitle: String   { isArabic ? "شارك التطبيق" : "Share the app" }
+    var aboutShareBody: String    { isArabic
+        ? "هل تعرف شخصًا يخطط لأداء العمرة؟ شاركه التطبيق."
+        : "Know someone planning Umrah? Share the app with them."
+    }
+    var aboutShareButton: String  { isArabic ? "مشاركة" : "Share" }
+    var aboutContactTitle: String { isArabic ? "تواصل معنا" : "Get in touch" }
+    var aboutContactBody: String  { isArabic
+        ? "لديك سؤال أو تصحيح أو ملاحظة؟ يسعدنا سماعك."
+        : "Have a question, correction, or concern? We'd love to hear from you."
+    }
+    var aboutTypeQuestion: String   { isArabic ? "سؤال"     : "Question" }
+    var aboutTypeCorrection: String { isArabic ? "تصحيح"    : "Correction" }
+    var aboutTypeGeneral: String    { isArabic ? "عام"       : "General" }
+    var aboutContactName: String    { isArabic ? "الاسم (اختياري)"              : "Name (optional)" }
+    var aboutContactEmail: String   { isArabic ? "البريد الإلكتروني (اختياري)" : "Email (optional)" }
+    var aboutContactMessage: String { isArabic ? "رسالتك"   : "Message" }
+    var aboutContactSend: String    { isArabic ? "إرسال"    : "Send" }
+    var aboutContactSending: String { isArabic ? "جارٍ الإرسال…" : "Sending…" }
+    var aboutContactSuccess: String { isArabic ? "شكرًا! وصلتنا رسالتك." : "Thank you — your message has been received." }
+    var aboutContactError: String   { isArabic ? "حدث خطأ. يرجى المحاولة مرة أخرى." : "Something went wrong. Please try again." }
 }

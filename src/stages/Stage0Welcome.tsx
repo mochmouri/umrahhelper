@@ -52,6 +52,11 @@ export function Stage0Welcome() {
           {S.welcomeBody}
         </p>
 
+        {/* Trust signals */}
+        <p className="font-sans text-xs text-muted tracking-wide text-center">
+          {S.welcomeTrustNote}
+        </p>
+
         {/* Begin button */}
         <button
           onClick={() => goToStage(1)}

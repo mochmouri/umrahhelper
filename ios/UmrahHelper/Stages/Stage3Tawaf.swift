@@ -35,7 +35,7 @@ struct Stage3Tawaf: View {
     // MARK: — Pre-checklist
 
     @ViewBuilder
-    private var rpreChecklistSection: some View {
+    private var preChecklistSection: some View {
         let S = state.strings
         Text(S.beforeYouBegin)
             .font(.system(size: 15, weight: .semibold, design: .serif))
@@ -67,8 +67,11 @@ struct Stage3Tawaf: View {
                          meaning: blackStoneDua.meaning)
                     .padding(.bottom, 20)
 
-                Button(S.beginTawaf) { state.startTawaf() }
-                    .primaryButton()
+                Button {
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                    state.startTawaf()
+                } label: { Text(S.beginTawaf) }
+                .primaryButton()
             }
         }
     }
@@ -221,10 +224,23 @@ struct Stage3Tawaf: View {
 
         Rectangle().fill(Color.parchmentDark).frame(height: 1).padding(.bottom, 16)
 
-        Button(S.completeLapButton(state.currentLap)) { state.completeLap() }
-            .primaryButton()
-            .opacity(lapReady ? 1.0 : 0.35)
-            .disabled(!lapReady)
+        if !lapReady {
+            Text(S.lapHint)
+                .font(.system(size: 11).italic())
+                .foregroundColor(.muted)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.bottom, 10)
+        }
+
+        Button {
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            state.completeLap()
+        } label: {
+            Text(S.completeLapButton(state.currentLap))
+        }
+        .primaryButton()
+        .opacity(lapReady ? 1.0 : 0.35)
+        .disabled(!lapReady)
     }
 
     private var lapDots: some View {

@@ -16,7 +16,8 @@ let niyyah = Dua(
 let talbiyah = Dua(
     arabic: "لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ",
     transliteration: "Labbayka Llāhumma labbayk, labbayka lā sharīka laka labbayk, inna l-ḥamda wa-n-ni'mata laka wa-l-mulk, lā sharīka lak.",
-    meaning: "Here I am, O Allah, here I am. Here I am — You have no partner — here I am. Verily all praise, grace and sovereignty belong to You. You have no partner."
+    meaning: "Here I am, O Allah, here I am. Here I am — You have no partner — here I am. Verily all praise, grace and sovereignty belong to You. You have no partner.",
+    source: "Bukhari & Muslim"
 )
 
 let enteringMosque = Dua(
@@ -48,7 +49,14 @@ let safaAyah = Dua(
 let safaDhikr = Dua(
     arabic: "لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَهَ إِلَّا اللهُ أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ",
     transliteration: "Lā ilāha illallāhu waḥdahu lā sharīka lah, lahu l-mulku wa lahu l-ḥamdu wa huwa 'alā kulli shay'in qadīr. Lā ilāha illallāh, anjaza wa'dah, wa naṣara 'abdah, wa hazama l-aḥzāba waḥdah.",
-    meaning: "There is no god but Allah alone, with no partner. To Him belongs all sovereignty and all praise, and He has power over all things. There is no god but Allah — He fulfilled His promise, gave victory to His servant, and defeated the confederates alone."
+    meaning: "There is no god but Allah alone, with no partner. To Him belongs all sovereignty and all praise, and He has power over all things. There is no god but Allah — He fulfilled His promise, gave victory to His servant, and defeated the confederates alone.",
+    source: "Muslim"
+)
+
+let greenLightsDua = Dua(
+    arabic: "رَبِّ اغْفِرْ وَارْحَمْ وَتَجَاوَزْ عَمَّا تَعْلَمْ إِنَّكَ تَعْلَمُ مَا لَا نَعْلَمْ إِنَّكَ أَنْتَ اللهُ الْأَعَزُّ الْأَكْرَمُ",
+    transliteration: "Rabbi-ghfir warḥam wa tajāwaz 'ammā ta'lam, innaka ta'lamu mā lā na'lam, innaka anta-llāhu l-a'azzu l-akram.",
+    meaning: "O my Lord! Forgive us, and have mercy upon us, and pardon our sins that You only know. Indeed, You know what we do not know. Indeed, You are Allah, the Most Honoured and Noble."
 )
 
 let yemeniCornerDua = Dua(

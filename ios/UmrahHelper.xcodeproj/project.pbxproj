@@ -30,6 +30,9 @@
 		AA000000000000000000B015 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000A015 /* AppStrings.swift */; };
 		AA000000000000000000B016 /* AdhkarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000A016 /* AdhkarView.swift */; };
 		AA000000000000000000B017 /* SummaryShareCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000A017 /* SummaryShareCard.swift */; };
+		AA000000000000000000B018 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000A018 /* AboutView.swift */; };
+		AA000000000000000000B019 /* Amiri-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000A019 /* Amiri-Regular.ttf */; };
+		AA000000000000000000B01A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000A01A /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +60,9 @@
 		AA000000000000000000A015 /* AppStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		AA000000000000000000A016 /* AdhkarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdhkarView.swift; sourceTree = "<group>"; };
 		AA000000000000000000A017 /* SummaryShareCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryShareCard.swift; sourceTree = "<group>"; };
+		AA000000000000000000A018 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		AA000000000000000000A019 /* Amiri-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Amiri-Regular.ttf"; sourceTree = "<group>"; };
+		AA000000000000000000A01A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,8 +93,11 @@
 				AA000000000000000000D005 /* Stages */,
 				AA000000000000000000D006 /* Components */,
 				AA000000000000000000D007 /* History */,
+				AA000000000000000000D008 /* About */,
+				AA000000000000000000D00A /* Resources */,
 				AA000000000000000000A016 /* AdhkarView.swift */,
 				AA000000000000000000A014 /* Assets.xcassets */,
+				AA000000000000000000A01A /* Info.plist */,
 			);
 			path = UmrahHelper;
 			sourceTree = "<group>";
@@ -154,6 +163,22 @@
 				AA000000000000000000A013 /* SessionDetailView.swift */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000D008 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000A018 /* AboutView.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000D00A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000A019 /* Amiri-Regular.ttf */,
+			);
+			path = "Resources/Fonts";
 			sourceTree = "<group>";
 		};
 		AA000000000000000000D009 /* Products */ = {
@@ -223,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA000000000000000000B014 /* Assets.xcassets in Resources */,
+				AA000000000000000000B019 /* Amiri-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +281,7 @@
 				AA000000000000000000B015 /* AppStrings.swift in Sources */,
 				AA000000000000000000B016 /* AdhkarView.swift in Sources */,
 				AA000000000000000000B017 /* SummaryShareCard.swift in Sources */,
+				AA000000000000000000B018 /* AboutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,11 +414,8 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = ANR8H432FG;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Used to save your Umrah summary card to Photos.";
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = UmrahHelper/Info.plist;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mostaphachmouri.umrahhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -411,11 +435,8 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = ANR8H432FG;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Used to save your Umrah summary card to Photos.";
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = UmrahHelper/Info.plist;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mostaphachmouri.umrahhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
